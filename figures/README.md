@@ -1,0 +1,1 @@
+Please store your figures, images and pictures in this directory
