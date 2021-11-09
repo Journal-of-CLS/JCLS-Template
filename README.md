@@ -18,25 +18,6 @@
 ```
 
 ## Format
-For preparing submissions, authors are expected to use the LaTeX template provided by JCLS. For the preparation of the LaTeX document, authors are welcome to use their preferred LaTeX-compatible writing environment. An up to date `TeX Live` or `MiKTeX` installation, including `biblatex` and `LuaLaTeX` should suffice. Alternatively, and on request, we also provide access to an Overleaf instance, a user-friendly, web-based, collaborative editor for LaTeX documents. Please note that when making your submission, all files in the LaTeX project need to be uploaded in the JCLS submission system as a ZIP archive.
-
-## References
-References need to be included in the text using the LaTeX `\cite{}` mechanism as in-text references. Complete bibliographical metadata (including e.g. first names of all authors and editors as well as publication location and publisher for monographs and conference proceedings) need to be provided using the BibTeX file in the LaTeX template. Please make sure the BibTeX file is clean and complete. References and bibliography will be styled automatically.
-
-## Footnotes
-Footnotes can be used for extended and/or commented bibliographical references or additional information (but not for regular, single references or lists of references of up to 3 references). They need to be included in the text using the LaTeX `\footnote{}` mechanism. Footnotes will be layouted automatically.
-
-## Figures
-Figures are included in the ZIP archive when submitting the article to the JCLS system. They need to be provided in a vector format (SVG) or in a high resolution pixel-based format (300dpi or better, as JPEG or PNG).
-
-Figures should not be numbered manually, but using the relevant LaTeX mechanism. They need to each have a caption (using `\caption{}`) placed below the figure.
-
-When submitting figures, please note that all copyright issues need to be resolved by the authors. The journal aims to publish all content, including figures, with a Creative Commons Attribution licence. A brief licence statement (name of creator and CC licence) needs to be included in the captions. Please contact the editors if you plan to use figures from third parties that require a different licence.  
-
-
----
-
-## Format
 For preparing submissions, authors are expected to use the LaTeX template provided by JCLS (be sure to use LuaLaTex compiler). For the preparation of the LaTeX document, authors are welcome to use their preferred LaTeX-compatible writing environment. An up to date TeXLive or MiKTeX installation, including biblatex and LuaLaTeX should suffice. Alternatively, and on request, we also provide access to an Overleaf instance, a user-friendly, web-based, collaborative editor for LaTeX documents. If you want to do so, please send us a request to info@jcls.io. You will then receive a link to your document template in our Overleaf instance.
 
 ## Author metadata
