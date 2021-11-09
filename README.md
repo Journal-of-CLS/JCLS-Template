@@ -2,6 +2,7 @@
 
  Structure of this template:
 
+```
 .
 ├── README.md
 ├── acknowlegements.tex <-- acknowledgements, funding information
@@ -14,7 +15,7 @@
 │   ├── article.tex     <-- metadata provided by the journal editors
 │   └── authors.tex     <-- metadata provided by the authors
 └── references.bib      <-- your biblatex bibliography
-
+```
 
 ## Format
 For preparing submissions, authors are expected to use the LaTeX template provided by JCLS. For the preparation of the LaTeX document, authors are welcome to use their preferred LaTeX-compatible writing environment. An up to date `TeX Live` or `MiKTeX` installation, including `biblatex` and `LuaLaTeX` should suffice. Alternatively, and on request, we also provide access to an Overleaf instance, a user-friendly, web-based, collaborative editor for LaTeX documents. Please note that when making your submission, all files in the LaTeX project need to be uploaded in the JCLS submission system as a ZIP archive.
