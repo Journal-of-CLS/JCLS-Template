@@ -480,7 +480,7 @@
 \newcommand\printwatermark{
   \AddEverypageHook{%
     \ifthenelse{\value{page}>1}%
-      {\backgroundsetup{contents={\getfield{articletype}{}}}}
+      {\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}{}}}}
       {} 
     \BgMaterial
   }
