@@ -478,7 +478,7 @@
 \RequirePackage[contents={}]{background}
 
 \newcommand\printwatermark{
-  \AddEverypageHook{%
+  \AddToHook{shipout/background}{%
     \ifthenelse{\value{page}>1}%
       {\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}{}}}}
       {} 
@@ -487,10 +487,10 @@
 }
 
 \ifcsvoid{@doi}
-    {\AfterEndEnvironment{abstract}{\linenumbers\printwatermark}}
+    {\AddToHook{env/abstract/after}{\linenumbers\printwatermark}}
     {}
 
-\AtEndDocument{
+\AddToHook{enddocument}{
     \printacknowledgements
     \printcontributions
     \printbibliography
