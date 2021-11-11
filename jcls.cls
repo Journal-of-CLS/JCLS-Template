@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2021/11/05 v0.3 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2021/11/05 v0.3}
+\ProvidesClass{jcls}[2021/11/11 v0.4 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2021/11/11 v0.4}
 
 \LoadClass{article}
 
@@ -464,9 +464,8 @@
 %
 	\begin{titlebox}
 		\begin{flushleft}%
-			\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}}%
 			\normalsize\sffamily%
-			{\getfield{articletype} \par}
+			{\getfield{articletype}\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}} \par}
 			{\vspace{-.8\baselineskip}
 			 \LARGE\bfseries \getfield{title} \par}
 			{\Large\getfield{subtitle} \par}
