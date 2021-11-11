@@ -49,86 +49,20 @@
 \RequirePackage{amsmath,amssymb}
 \RequirePackage{setspace}
 	\setstretch{1.25}
-\RequirePackage[dvipsnames,svgnames]{xcolor}
-\RequirePackage{fancyhdr}
-\RequirePackage{academicons}
-\RequirePackage{ccicons}
+
 \RequirePackage{etoolbox}
 \RequirePackage{ifmtarg}
 \RequirePackage{xkeyval}
+
 \RequirePackage[english]{babel}
 \RequirePackage{csquotes}
-\RequirePackage{datetime2}
 \RequirePackage[style=authoryear,backend=biber]{biblatex}
 
-% font
-\RequirePackage{parskip}
-\RequirePackage{unicode-math}
-    \defaultfontfeatures{Scale=MatchLowercase}
-    \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\setmainfont{texgyrepagella}[
-    Extension = .otf,
-    UprightFont = *-regular,
-	BoldFont = *-bold,
-	ItalicFont = *-italic,
-	BoldItalicFont = *-bolditalic]
-\setmathfont{texgyrepagella-math}[
-    Extension = .otf,]
-\setsansfont{FiraSans}[
-    Extension = .otf,
-    UprightFont = *-Regular,
-	BoldFont = *-Bold,
-	ItalicFont = *-Italic,
-	BoldItalicFont = *-BoldItalic]
-\setmonofont{FiraCode}[
-	Extension = .ttf,
-	Path = ./fonts/firacode/,
-	Contextuals = Alternate,
-	UprightFont = *-Regular,
-	BoldFont = *-Bold,]
+\RequirePackage{datetime2}
 
-% \setsansfont{Ubuntu}[
-%     Extension = .ttf,
-%     Path = ./fonts/ubuntu/,
-%     UprightFont = *-R,
-%         BoldFont = *-B,
-%         ItalicFont = *-RI,
-%         BoldItalicFont = *-BI]
-% \setmonofont{UbuntuMono}[
-%         Extension = .ttf,
-%         Path = ./fonts/ubuntu/,
-%         UprightFont = *-R,
-%         BoldFont = *-B,
-%         ItalicFont = *-RI,
-%         BoldItalicFont = *-BI]
-%
+% color
+\RequirePackage[dvipsnames,svgnames]{xcolor}
 
-
-\RequirePackage{microtype}
-\RequirePackage{upquote}
-\RequirePackage{xurl}
-\RequirePackage{bookmark}
-\RequirePackage[paper=a4paper,
-	top=30mm,
-	right=17mm,
-	left=60mm,
-	footskip=17mm,
-	marginparsep=3mm,
-	marginparwidth=40mm,
-	reversemarginpar=true
-]{geometry}
-\RequirePackage{graphicx}
-    \graphicspath{{./figures/}}
-\RequirePackage[Export]{adjustbox}
-\RequirePackage{sidenotes}
-
-\RequirePackage{booktabs}
-\RequirePackage{longtable}
-    \setlength\LTleft{0pt}
-    \setlength\LTright{\fill}
-
-\RequirePackage{listings}
-\RequirePackage[verbatim]{lstfiracode}
 \definecolor{jcls-red}      {RGB} {175, 29,  31}
 \definecolor{jcls-gray}     {RGB} {90,  90,  90}
 \definecolor{orcid-green} 	{RGB} {166, 206, 57}
@@ -149,11 +83,95 @@
 
 \colorlet{backgroundcolor}  {graycolor!10}
 
+% font
+\RequirePackage{ccicons}
+\RequirePackage{academicons}
+\RequirePackage{parskip}
+\RequirePackage{unicode-math}
+\defaultfontfeatures{Scale=MatchLowercase}
+\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+
+\setmainfont{texgyrepagella}[
+	Extension = .otf,
+	UprightFont = *-regular,
+	BoldFont = *-bold,
+	ItalicFont = *-italic,
+	BoldItalicFont = *-bolditalic]
+
+\setmathfont{texgyrepagella-math}[
+	Extension = .otf,]
+
+\setsansfont{FiraSans}[
+	Extension = .otf,
+	UprightFont = *-Regular,
+	BoldFont = *-Bold,
+	ItalicFont = *-Italic,
+	BoldItalicFont = *-BoldItalic]
+
+\setmonofont{FiraCode}[
+	Extension = .ttf,
+	Path = ./fonts/firacode/,
+	Contextuals = Alternate,
+	UprightFont = *-Regular,
+	BoldFont = *-Bold,]
+
+\newfontfamily{\ubuntu}{Ubuntu}[
+    Extension = .ttf,
+    Path = ./fonts/ubuntu/,
+    UprightFont = *-R,
+	BoldFont = *-B,
+	ItalicFont = *-RI,
+	BoldItalicFont = *-BI]
+
+\newfontfamily{\ubuntumono}{UbuntuMono}[
+	Extension = .ttf,
+	Path = ./fonts/ubuntu/,
+	UprightFont = *-R,
+	BoldFont = *-B,
+	ItalicFont = *-RI,
+	BoldItalicFont = *-BI]
+
+
+\RequirePackage{microtype}
+\RequirePackage{upquote}
+\RequirePackage{xurl}
+\RequirePackage{bookmark}
+
+% layout
+\RequirePackage{geometry}
+\geometry{
+	paper=a4paper,
+	top=30mm,
+	right=17mm,
+	left=60mm,
+	footskip=17mm,
+	marginparsep=3mm,
+	marginparwidth=40mm,
+	reversemarginpar=true
+}
+
+
+% graphics
+\RequirePackage{graphicx}
+\graphicspath{{./figures/}}
+\RequirePackage[Export]{adjustbox}
+\RequirePackage{sidenotes}
+
+% tables
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
+\setlength\LTleft{0pt}
+\setlength\LTright{\fill}
+
+% orcid
 \DeclareRobustCommand\orcidlink[1]{\texorpdfstring{%
-    \href{https://orcid.org/#1}{\textcolor{orcid-green}{\aiOrcid}}}{}}
-    
+		\href{https://orcid.org/#1}{\textcolor{orcid-green}{\aiOrcid}}}{}}
+% code
+\RequirePackage{listings}
+\RequirePackage[verbatim]{lstfiracode}
+
 \RequirePackage[right]{lineno}
-     \renewcommand{\linenumberfont}{\ttfamily\small\color{primarycolor}}
+\renewcommand{\linenumberfont}{\ttfamily\small\color{primarycolor}}
 
 \lstset{
 	style=FiraCodeStyle,
@@ -174,108 +192,101 @@
 	tabsize=2
 }
 
-\RequirePackage[small,sf,bf,raggedright,clearempty]{titlesec}
-\titleformat{\section}
-	{\Large\sffamily\bfseries}
-	{\thesection.}{0.5em}{}
-\titleformat{\subsection}
-	{\large\sffamily\bfseries}
-	{\thesubsection.}{0.5em}{}
-\titleformat{\subsubsection}
-	{\large\sffamily\bfseries}
-	{\thesubsubsection.}{0.5em}{}
-
 \RequirePackage{selnolig}
 \RequirePackage{marginfix}
 \RequirePackage{marginnote}
-\renewcommand*{\marginfont}{\sffamily\footnotesize}
-\renewcommand*{\raggedleftmarginnote}{}
+	\renewcommand*{\marginfont}{\sffamily\footnotesize}
+	\renewcommand*{\raggedleftmarginnote}{}
 \RequirePackage{changepage}
 \RequirePackage{ifthen}
-\newlength{\overhang}
-\setlength{\overhang}{\marginparwidth}
-\addtolength{\overhang}{\marginparsep}
+	\newlength{\overhang}
+	\setlength{\overhang}{\marginparwidth}
+	\addtolength{\overhang}{\marginparsep}
 \newenvironment{fullwidth}
-{%
-	\setlength\LTleft{-\overhang}
-	\ifthenelse{\boolean{@twoside}}%
-		{\begin{adjustwidth*}{-\overhang}{}}%
-		{\begin{adjustwidth}{-\overhang}{}}%
-}{%
-	\ifthenelse{\boolean{@twoside}}%
-		{\end{adjustwidth*}}%
-		{\end{adjustwidth}}%
-}
+	{\setlength\LTleft{-\overhang}
+	 \ifthenelse{\boolean{@twoside}}
+		{\begin{adjustwidth*}{-\overhang}{}}
+		{\begin{adjustwidth}{-\overhang}{}}}
+	{\ifthenelse{\boolean{@twoside}}
+		{\end{adjustwidth*}}
+		{\end{adjustwidth}}}
+
 \RequirePackage{pdflscape}
 \RequirePackage{tcolorbox}
-\newtcolorbox{whitebox}{colback=white,arc=0pt,outer arc=0pt,colframe=white}
-\newtcolorbox{graybox}{colback=gray!10,arc=0pt,outer arc=0pt,colframe=gray!10}
+\newtcolorbox{titlebox}{colback=white,arc=0pt,outer arc=0pt,colframe=white}
+\newtcolorbox{abstractbox}{colback=secundarycolor!10,arc=0pt,outer arc=0pt,colframe=secundarycolor!10}
 \RequirePackage[ragged,bottom,norule,multiple]{footmisc}
-\renewcommand{\footnotemargin}{0em}
-\renewcommand*{\thefootnote}{\arabic{footnote}}
-\renewcommand*\@makefntext[1]%
-	{\noindent{\@thefnmark}. #1}
+	\renewcommand{\footnotemargin}{0em}
+	\renewcommand*{\thefootnote}{\arabic{footnote}}
+	\renewcommand*\@makefntext[1]%
+		{\noindent{\@thefnmark}. #1}
 
 \RequirePackage[
-    %format=hang,
-    justification=raggedright,
-    singlelinecheck=off,
-    labelfont=bf,
-    font={normalfont,sf}]{caption}
+	%format=hang,
+	justification=raggedright,
+	singlelinecheck=off,
+	labelfont=bf,
+	font={normalfont,sf}]{caption}
 
-\newcommand\setfield[2]{\csdef{@#1#2}}
-\newcommand\getfield[2]{\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
-\newcommand\printfield[3]{%
-    \ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}%
+\NewDocumentCommand\setfield{mO{}m}%
+	{\csdef{@#1#2}{#3}}
+\NewDocumentCommand\getfield{mO{}}%
+	{\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
+\NewDocumentCommand\printfield{mO{}O{}}{%
+	\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}%
 }
 
-\newcommand\keywords[1]%
-	{\setfield{keywords}{}{#1}}
-\newcommand\datereceived[1]%
-	{\setfield{datereceived}{}{#1}}
-\newcommand\dateaccepted[1]%
-	{\setfield{dateaccepted}{}{#1}}
-	\let\date\relax
-\newcommand\datepublished[1]%
-	{\setfield{datepublished}{}{#1}%
-	 \setfield{date}{}{#1}}
-\newcommand\doi[1]%
-	{\@ifmtarg{#1}
-	    {}
-	    {\setfield{doi}{}{\href{https://doi.org/#1}{doi.org/#1}}}
+\NewDocumentCommand\keywords{m}%
+	{\setfield{keywords}{#1}}
+\NewDocumentCommand\datereceived{m}%
+	{\setfield{datereceived}{#1}}
+\NewDocumentCommand\dateaccepted{m}%
+	{\setfield{dateaccepted}{#1}}
+\let\date\relax
+\NewDocumentCommand\datepublished{m}%
+	{
+		\setfield{datepublished}{#1}%
+		\setfield{date}{#1}
 	}
-\newcommand\shorttitle[1]%
-	{\setfield{shorttitle}{}{#1}}
-\newcommand\howtocite[1]%
-	{\setfield{howtocite}{}{#1}}
-\newcommand\subtitle[1]%
-	{\setfield{subtitle}{}{#1}}
-\newcommand\articletype[1]%
+\NewDocumentCommand\doi{m}%
 	{\@ifmtarg{#1}
-	    {\setfield{articletype}{}{SUBMITTED}}
-	    {\setfield{articletype}{}{#1}}
+		{}
+		{\setfield{doi}{\href{https://doi.org/#1}{doi.org/#1}}}
 	}
-\newcommand\reviewer[1]%
-	{\setfield{reviewer}{}{#1}}
-\newcommand\dataavailability[1]%
-	{\setfield{dataavailability}{}{#1}}
-\newcommand\softwareavailability[1]%
-	{\setfield{softwareavailability}{}{#1}}
-\newcommand\licenses[1]%
-	{\setfield{licenses}{}{#1}}
+\NewDocumentCommand\shorttitle{m}%
+	{\setfield{shorttitle}{#1}}
+\NewDocumentCommand\howtocite{m}%
+	{\setfield{howtocite}{#1}}
+\NewDocumentCommand\subtitle{m}%
+	{\setfield{subtitle}{#1}}
+\NewDocumentCommand\articletype{m}%
+	{\@ifmtarg{#1}
+		{\setfield{articletype}{SUBMITTED}}
+		{\setfield{articletype}{#1}}
+	}
+\NewDocumentCommand\reviewer{m}%
+	{\setfield{reviewer}{#1}}
+\NewDocumentCommand\dataavailability{m}%
+	{\setfield{dataavailability}{#1}}
+\NewDocumentCommand\softwareavailability{m}%
+	{\setfield{softwareavailability}{#1}}
+\NewDocumentCommand\licenses{m}%
+	{\setfield{licenses}{#1}}
 
-\newcommand\sideinfos{}
-\newcommand\sideinfo[2]{%
+\NewDocumentCommand\sideinfos{}{}
+\NewDocumentCommand\sideinfo{mm}{%
 	\gappto\sideinfos{%
-		\marginpar{\raggedright\sffamily\footnotesize\textbf{#1: } \\ #2 \vskip 1.5ex}%
+		\marginpar{\raggedright\sffamily\footnotesize\textbf{#1: } \\ #2 \vspace{1.5ex}}%
 	}
 }
-\newcommand\sideinfofield[2]{
+
+\NewDocumentCommand\sideinfofield{mm}{
 	\ifcsvoid{@#2}
 		{}
 		{\sideinfo{#1}{\csuse{@#2}}}
 }
 
+% authors and affiliations
 \newcounter{authors}
 \newcounter{affiliations}
 \newcounter{counter}
@@ -292,7 +303,7 @@
 	email=,
 	affiliation=,
 	contribution=,
-	}{}
+}{}
 
 \define@key{affiliation}{id}{\csdef{aff@id}{#1}}
 \define@key{affiliation}{group}{\csdef{aff@group}{#1}}
@@ -311,9 +322,9 @@
 	street-address=,
 	country=,
 	country-code=,
-	}{}
+}{}
 
-\renewcommand\author[1]{%
+\RenewDocumentCommand\author{m}{%
 	\begingroup
 	\global\stepcounter{authors}%
 	\setkeys{author}{#1}%
@@ -326,7 +337,7 @@
 	\endgroup
 }
 
-\newcommand\affiliation[1]{%
+\NewDocumentCommand\affiliation{m}{%
 	\begingroup
 	\setkeys{affiliation}{#1}
 	\global\csedef{@department\aff@id}{\expandafter\aff@department}%
@@ -336,69 +347,85 @@
 	\endgroup
 }
 
-\newcommand\printauthor[1]{%
-	\printfield{givennames}{#1}{} \printfield{surname}{#1}{}
-	\ifcsvoid{@orcid#1}{\unskip}{\unskip\,\orcidlink{\csuse{@orcid#1}}}
+\NewDocumentCommand\printauthor{m}{%
+	\printfield{givennames}[#1] \printfield{surname}[#1]
+	\ifcsvoid{@orcid#1}
+		{\unskip}
+		{\unskip\,\orcidlink{\csuse{@orcid#1}}}
 	\ifcsvoid{@affiliation#1}
 		{}
-		{%
-			\ifcsvoid{@affilmarker\csuse{@affiliation#1}}
-				{%
-					\stepcounter{affiliations}%
-					\csedef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
-					\csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}%
-				}{}%
-		}%
-	\unskip\,\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
+		{\ifcsvoid{@affilmarker\csuse{@affiliation#1}}
+			{\stepcounter{affiliations}%
+			 \csedef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
+			 \csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}}
+			{}}%
+		\unskip\,\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
 }
 
-\newcommand\printaffiliation[1]{%
-	\printfield{affilmarker}{#1}{.\;}%
-	\printfield{department}{#1}{, }%
-	\printfield{organization}{#1}{, }%
-	\printfield{streetaddress}{#1}{, }%
-	\printfield{city}{#1}{.}
+\NewDocumentCommand\printaffiliation{m}{%
+	\printfield{affilmarker}[#1][.\;]%
+	\printfield{department}[#1][, ]%
+	\printfield{organization}[#1][, ]%
+	\printfield{streetaddress}[#1][, ]%
+	\printfield{city}[#1][.]%
 }
 
-\newcommand\printcontribution[1]{%
+\NewDocumentCommand\printcontribution{m}{%
 	\ifcsvoid{@contribution#1}
 		{}
-		{\textbf{\printfield{givennames}{#1}{} \printfield{surname}{#1}{}:} \printfield{contribution}{#1}{}}
+		{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
 }
 
-\newcommand\printauthors{
+\NewDocumentCommand\printauthors{}{
 	\setcounter{counter}{0}
 	\@whilenum\value{counter}<\value{authors}\do
 	{\stepcounter{counter}\printauthor{\thecounter}\par}
 }
 
-\newcommand\printaffiliations{
+\NewDocumentCommand\printaffiliations{}{
 	\setcounter{counter}{0}
 	\@whilenum\value{counter}<\value{affiliations}\do
 	{\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
 }
 
-\newcommand\printcontributions{
-    \section{Author contributions}
+\NewDocumentCommand\printcontributions{}{
+	\section{Author contributions}
 	\setcounter{counter}{0}
 	\@whilenum\value{counter}<\value{authors}\do
 	{\stepcounter{counter}\printcontribution{\thecounter}\par}
 }
 
-\newcommand\printacknowledgements{
-    \IfFileExists{acknowledgements.tex}
-        {\section{Acknowledgements}
-         \input{acknowledgements.tex}}
-        {}
+\NewDocumentCommand\printacknowledgements{}{
+	\IfFileExists{acknowledgements.tex}
+		{\section{Acknowledgements}
+		 \input{acknowledgements.tex}}
+		{}
 }
 
-\newcommand\printarticletype{
+\NewDocumentCommand\printdataavailability{}{%
+	\ifcsvoid{@dataavailability}
+		{}
+		{\section{Data availability}
+		 \csuse{@dataavailability}}
+}
+
+\NewDocumentCommand\printsoftwareavailability{}{%
+	 \ifcsvoid{@softwareavailability}
+		{}
+		{\section{Software availability}
+		 \csuse{@softwareavailability}}
+}
+
+\NewDocumentCommand\printarticletype{}{
 	\ifcsvoid{@doi}
-		{\getfield{articletype}{}}
-		{\getfield{doi}{}}
+	{\getfield{articletype}}
+	{\getfield{doi}}
 }
 
-\fancypagestyle{plain}{% 
+% headers and footers
+\RequirePackage{fancyhdr}
+
+\fancypagestyle{plain}{% used for the first page
 	\fancyhf{}% clear all header and footer fields 
 	\fancyhead[L]{}
 	\fancyfoot[L]{}
@@ -410,7 +437,7 @@
 \fancypagestyle{jcls}{% 
 	\fancyhf{}% clear all header and footer fields 
 	\fancyhead[L]{\normalsize\sffamily\MakeUppercase{\@articletype}}
-	\fancyhead[R]{\sffamily\printfield{shorttitle}{}{}}
+	\fancyhead[R]{\sffamily\printfield{shorttitle}}
 	\fancyfoot[L]{\sffamily JCLS, \the\year, \printarticletype}
 	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
@@ -418,44 +445,61 @@
 }
 \pagestyle{jcls}
 
-\def\@maketitle{%
-	\newpage \null%
-	\begin{whitebox}
+% headings
+\RequirePackage[small,sf,bf,raggedright,clearempty]{titlesec}
+\titleformat{\section}
+	{\Large\sffamily\bfseries}
+	{\thesection.}{0.5em}{}
+\titleformat{\subsection}
+	{\large\sffamily\bfseries}
+	{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}
+	{\large\sffamily\bfseries}
+	{\thesubsubsection.}{0.5em}{}
+
+% title and sidebar
+\def\@maketitle{% 
+%
+% title
+%
+	\begin{titlebox}
 		\begin{flushleft}%
+			\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}}%
 			\normalsize\sffamily%
-			{\normalsize\MakeUppercase{\@articletype}\par}
-			\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}}
-			{\Large\bfseries \@title \par}%
-			{\normalsize\bfseries\@subtitle\par}%
-			{\vskip 1.5em%
-				\normalsize\printauthors
-				\vskip 1.5em%
-					{\footnotesize\printaffiliations}
-				\vskip 1em%
-			}
+			{\getfield{articletype} \par}
+			{\vspace{-.8\baselineskip}
+			 \LARGE\bfseries \getfield{title} \par}
+			{\Large\getfield{subtitle} \par}
+			{\vspace{1.5em}%
+			 \normalsize\printauthors
+			 \vspace{\baselineskip}%
+			{\footnotesize\printaffiliations}
+				\vspace{\baselineskip}}
 		\end{flushleft}%
-	\end{whitebox}
+	\end{titlebox}
+%
+% sidebar
+%
 	\marginpar{% OpenAccess Logo
-		\vskip 2ex
-		\adjustbox{width=2em}{\textcolor{white}{\aiOpenAccess}}%
-		\vskip 2ex
-	}    
+			\vspace{2ex}
+			\adjustbox{width=2em}{\textcolor{white}{\aiOpenAccess}}%
+			\vspace{2ex}
+	}
 	\sideinfofield{Citation}{howtocite}
 	\sideinfofield{Date Published}{datepublished}
 	\sideinfofield{Keywords}{keywords}
 	\sideinfofield{Licenses}{licenses}
 	\sideinfofield{Reviewer}{reviewer}
-	\sideinfofield{Data availability}{dataavailability}
-	\sideinfofield{Software availability}{softwareavailability}
+	% \sideinfofield{Data availability}{dataavailability}
+	% \sideinfofield{Software availability}{softwareavailability}
 	\sideinfos%
 }
 
+% abstract
 \renewenvironment{abstract}
-{%
-	\begin{graybox}
-	\sffamily\textbf{\abstractname.}
-}{\end{graybox}}
-
+	{\begin{abstractbox}
+	 \sffamily\textbf{\abstractname.}}
+	{\end{abstractbox}}
 
 \RequirePackage{hyperref}
 \hypersetup{
@@ -463,35 +507,35 @@
 	filecolor=filecolor,
 	linkcolor=linkcolor,
 	urlcolor=urlcolor,
-	citecolor=citecolor,
-}
+	citecolor=citecolor}
 
 \IfFileExists{./metadata/authors.tex}
-    {\input{./metadata/authors.tex}}
-    {}
+	{\input{./metadata/authors.tex}}
+	{}
 
 \IfFileExists{./metadata/article.tex}
-    {\input{./metadata/article.tex}}
-    {}
+	{\input{./metadata/article.tex}}
+	{}
 
+\RequirePackage[contents={},scale=5,color=blue!50]{background}
 
-\RequirePackage[contents={}]{background}
-
-\newcommand\printwatermark{
-  \AddToHook{shipout/background}{%
-    \ifthenelse{\value{page}>1}%
-      {\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}{}}}}
-      {} 
-    \BgMaterial
-  }
+\NewDocumentCommand\printwatermark{}{
+	\AddToHook{shipout/background}{%
+		\ifthenelse{\value{page}>1}%
+			{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
+			{}
+		\BgMaterial
+	}
 }
 
 \ifcsvoid{@doi}
-    {\AddToHook{env/abstract/after}{\linenumbers\printwatermark}}
-    {}
+	{\AddToHook{env/abstract/after}{\linenumbers\printwatermark}}
+	{}
 
 \AddToHook{enddocument}{
-    \printacknowledgements
-    \printcontributions
-    \printbibliography
+	\printdataavailability
+	\printsoftwareavailability
+	\printacknowledgements
+	\printcontributions
+	\printbibliography
 }
