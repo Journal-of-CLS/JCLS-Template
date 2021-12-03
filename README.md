@@ -18,7 +18,7 @@
 ```
 
 ## Format
-For preparing submissions, authors are expected to use the LaTeX template provided by JCLS (be sure to use LuaLaTex compiler). For the preparation of the LaTeX document, authors are welcome to use their preferred LaTeX-compatible writing environment. An up to date TeXLive or MiKTeX installation, including biblatex and LuaLaTeX should suffice. Alternatively, and on request, we also provide access to an Overleaf instance, a user-friendly, web-based, collaborative editor for LaTeX documents. If you want to do so, please send us a request to info@jcls.io. You will then receive a link to your document template in our Overleaf instance.
+For preparing submissions, authors are expected to use the LaTeX template provided by JCLS (be sure to use the LuaLaTex compiler). For the preparation of the LaTeX document, authors are welcome to use their preferred LaTeX-compatible writing environment or an online, collaborative LaTeX editor (e.g., Overleaf). An up-to-date TeXLive or MiKTeX installation, including biblatex and LuaLaTeX should suffice as LaTeX editor.
 
 ## Author metadata
 Author metadata needs to be provided in the file called “metadata/authors.tex” that is part of the LaTeX template. Please follow the instructions provided there. Relevant metadata includes last name, first name, ORCID, affiliation and email address, as well as a description of the author’s contribution to the submitted paper. These authors’ contributions need to be described using the Contributor Roles Taxonomy (CrediT, see https://credit.niso.org). In case you would like to mention additional contributors to your submission who do not, however, qualify as authors, please use the “Acknowledgements” section to do so.
