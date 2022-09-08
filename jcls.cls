@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2021/11/11 v0.4 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2021/11/11 v0.4}
+\ProvidesClass{jcls}[2021/11/11 v0.5 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2022-09-08 v0.5}
 
 \LoadClass{article}
 
@@ -56,7 +56,7 @@
 
 \RequirePackage[english]{babel}
 \RequirePackage{csquotes}
-\RequirePackage[style=authoryear,backend=biber,maxbibnames=99]{biblatex}
+\RequirePackage[style=authoryear,backend=biber]{biblatex}
 
 \RequirePackage{datetime2}
 
@@ -261,7 +261,8 @@
 	{\setfield{subtitle}{#1}}
 \NewDocumentCommand\articletype{m}%
 	{\@ifmtarg{#1}
-		{\setfield{articletype}{SUBMITTED}}
+		{\setfield{articletype}{SUBMITTED
+		}}
 		{\setfield{articletype}{#1}}
 	}
 \NewDocumentCommand\reviewer{m}%
@@ -376,26 +377,26 @@
 		{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
 }
 
-\NewDocumentCommand\printauthors{}{
+\NewDocumentCommand\printauthors{}{%
 	\setcounter{counter}{0}
 	\@whilenum\value{counter}<\value{authors}\do
 	{\stepcounter{counter}\printauthor{\thecounter}\par}
 }
 
-\NewDocumentCommand\printaffiliations{}{
+\NewDocumentCommand\printaffiliations{}{%
 	\setcounter{counter}{0}
 	\@whilenum\value{counter}<\value{affiliations}\do
 	{\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
 }
 
-\NewDocumentCommand\printcontributions{}{
+\NewDocumentCommand\printcontributions{}{%
 	\section{Author contributions}
 	\setcounter{counter}{0}
 	\@whilenum\value{counter}<\value{authors}\do
 	{\stepcounter{counter}\printcontribution{\thecounter}\par}
 }
 
-\NewDocumentCommand\printacknowledgements{}{
+\NewDocumentCommand\printacknowledgements{}{%
 	\IfFileExists{acknowledgements.tex}
 		{\section{Acknowledgements}
 		 \input{acknowledgements.tex}}
@@ -416,7 +417,7 @@
 		 \csuse{@softwareavailability}}
 }
 
-\NewDocumentCommand\printarticletype{}{
+\NewDocumentCommand\printarticletype{}{%
 	\ifcsvoid{@doi}
 	{\getfield{articletype}}
 	{\getfield{doi}}
