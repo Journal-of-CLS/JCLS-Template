@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2021/11/11 v0.5 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2022-09-08 v0.5}
+\ProvidesClass{jcls}[2021/11/11 v0.5.1 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2022-09-08 v0.5.1}
 
 \LoadClass{article}
 
@@ -48,7 +48,7 @@
 
 \RequirePackage{amsmath,amssymb}
 \RequirePackage{setspace}
-	\setstretch{1.25}
+\setstretch{1.25}
 
 \RequirePackage{etoolbox}
 \RequirePackage{ifmtarg}
@@ -116,9 +116,9 @@
 	BoldFont = *-Bold,]
 
 \newfontfamily{\ubuntu}{Ubuntu}[
-    Extension = .ttf,
-    Path = ./fonts/ubuntu/,
-    UprightFont = *-R,
+	Extension = .ttf,
+	Path = ./fonts/ubuntu/,
+	UprightFont = *-R,
 	BoldFont = *-B,
 	ItalicFont = *-RI,
 	BoldItalicFont = *-BI]
@@ -195,31 +195,31 @@
 \RequirePackage{selnolig}
 \RequirePackage{marginfix}
 \RequirePackage{marginnote}
-	\renewcommand*{\marginfont}{\sffamily\footnotesize}
-	\renewcommand*{\raggedleftmarginnote}{}
+\renewcommand*{\marginfont}{\sffamily\footnotesize}
+\renewcommand*{\raggedleftmarginnote}{}
 \RequirePackage{changepage}
 \RequirePackage{ifthen}
-	\newlength{\overhang}
-	\setlength{\overhang}{\marginparwidth}
-	\addtolength{\overhang}{\marginparsep}
+\newlength{\overhang}
+\setlength{\overhang}{\marginparwidth}
+\addtolength{\overhang}{\marginparsep}
 \newenvironment{fullwidth}
-	{\setlength\LTleft{-\overhang}
-	 \ifthenelse{\boolean{@twoside}}
-		{\begin{adjustwidth*}{-\overhang}{}}
-		{\begin{adjustwidth}{-\overhang}{}}}
-	{\ifthenelse{\boolean{@twoside}}
-		{\end{adjustwidth*}}
-		{\end{adjustwidth}}}
+{\setlength\LTleft{-\overhang}
+	\ifthenelse{\boolean{@twoside}}
+	{\begin{adjustwidth*}{-\overhang}{}}
+	{\begin{adjustwidth}{-\overhang}{}}}
+			{\ifthenelse{\boolean{@twoside}}
+			{\end{adjustwidth*}}
+			{\end{adjustwidth}}}
 
 \RequirePackage{pdflscape}
 \RequirePackage{tcolorbox}
 \newtcolorbox{titlebox}{colback=white,arc=0pt,outer arc=0pt,colframe=white}
 \newtcolorbox{abstractbox}{colback=secundarycolor!10,arc=0pt,outer arc=0pt,colframe=secundarycolor!10}
 \RequirePackage[ragged,bottom,norule,multiple]{footmisc}
-	\renewcommand{\footnotemargin}{0em}
-	\renewcommand*{\thefootnote}{\arabic{footnote}}
-	\renewcommand*\@makefntext[1]%
-		{\noindent{\@thefnmark}. #1}
+\renewcommand{\footnotemargin}{0em}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+\renewcommand*\@makefntext[1]%
+{\noindent{\@thefnmark}. #1}
 
 \RequirePackage[
 	%format=hang,
@@ -229,50 +229,52 @@
 	font={normalfont,sf}]{caption}
 
 \NewDocumentCommand\setfield{mO{}m}%
-	{\csdef{@#1#2}{#3}}
+{\csdef{@#1#2}{#3}}
 \NewDocumentCommand\getfield{mO{}}%
-	{\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
+{\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
 \NewDocumentCommand\printfield{mO{}O{}}{%
-	\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}%
+\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}%
 }
 
 \NewDocumentCommand\keywords{m}%
-	{\setfield{keywords}{#1}}
+{\setfield{keywords}{#1}}
 \NewDocumentCommand\datereceived{m}%
-	{\setfield{datereceived}{#1}}
+{\setfield{datereceived}{#1}}
 \NewDocumentCommand\dateaccepted{m}%
-	{\setfield{dateaccepted}{#1}}
+{\setfield{dateaccepted}{#1}}
 \let\date\relax
 \NewDocumentCommand\datepublished{m}%
-	{
-		\setfield{datepublished}{#1}%
-		\setfield{date}{#1}
-	}
+{
+	\setfield{datepublished}{#1}%
+	\setfield{date}{#1}
+}
 \NewDocumentCommand\doi{m}%
-	{\@ifmtarg{#1}
-		{}
-		{\setfield{doi}{\href{https://doi.org/#1}{doi.org/#1}}}
-	}
+{\@ifmtarg{#1}
+	{}
+	{\setfield{doi}{\href{https://doi.org/#1}{doi.org/#1}}}
+}
 \NewDocumentCommand\shorttitle{m}%
-	{\setfield{shorttitle}{#1}}
+{\setfield{shorttitle}{#1}}
 \NewDocumentCommand\howtocite{m}%
-	{\setfield{howtocite}{#1}}
+{\setfield{howtocite}{#1}}
 \NewDocumentCommand\subtitle{m}%
-	{\setfield{subtitle}{#1}}
+{\setfield{subtitle}{#1}}
 \NewDocumentCommand\articletype{m}%
-	{\@ifmtarg{#1}
-		{\setfield{articletype}{SUBMITTED
+{\@ifmtarg{#1}
+	{\setfield{articletype}{SUBMITTED
 		}}
-		{\setfield{articletype}{#1}}
-	}
+	{\setfield{articletype}{#1}}
+}
+\NewDocumentCommand\issuetitle{m}%
+{\setfield{issuetitle}{#1}}
 \NewDocumentCommand\reviewer{m}%
-	{\setfield{reviewer}{#1}}
+{\setfield{reviewer}{#1}}
 \NewDocumentCommand\dataavailability{m}%
-	{\setfield{dataavailability}{#1}}
+{\setfield{dataavailability}{#1}}
 \NewDocumentCommand\softwareavailability{m}%
-	{\setfield{softwareavailability}{#1}}
+{\setfield{softwareavailability}{#1}}
 \NewDocumentCommand\licenses{m}%
-	{\setfield{licenses}{#1}}
+{\setfield{licenses}{#1}}
 
 \NewDocumentCommand\sideinfos{}{}
 \NewDocumentCommand\sideinfo{mm}{%
@@ -283,8 +285,8 @@
 
 \NewDocumentCommand\sideinfofield{mm}{
 	\ifcsvoid{@#2}
-		{}
-		{\sideinfo{#1}{\csuse{@#2}}}
+	{}
+	{\sideinfo{#1}{\csuse{@#2}}}
 }
 
 % authors and affiliations
@@ -351,16 +353,16 @@
 \NewDocumentCommand\printauthor{m}{%
 	\printfield{givennames}[#1] \printfield{surname}[#1]
 	\ifcsvoid{@orcid#1}
-		{\unskip}
-		{\unskip\,\orcidlink{\csuse{@orcid#1}}}
+	{\unskip}
+	{\unskip\,\orcidlink{\csuse{@orcid#1}}}
 	\ifcsvoid{@affiliation#1}
-		{}
-		{\ifcsvoid{@affilmarker\csuse{@affiliation#1}}
-			{\stepcounter{affiliations}%
-			 \csedef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
-			 \csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}}
-			{}}%
-		\unskip\,\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
+	{}
+	{\ifcsvoid{@affilmarker\csuse{@affiliation#1}}
+		{\stepcounter{affiliations}%
+			\csedef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
+			\csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}}
+		{}}%
+	\unskip\,\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
 }
 
 \NewDocumentCommand\printaffiliation{m}{%
@@ -373,8 +375,8 @@
 
 \NewDocumentCommand\printcontribution{m}{%
 	\ifcsvoid{@contribution#1}
-		{}
-		{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
+	{}
+	{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
 }
 
 \NewDocumentCommand\printauthors{}{%
@@ -398,23 +400,23 @@
 
 \NewDocumentCommand\printacknowledgements{}{%
 	\IfFileExists{acknowledgements.tex}
-		{\section{Acknowledgements}
-		 \input{acknowledgements.tex}}
-		{}
+	{\section{Acknowledgements}
+		\input{acknowledgements.tex}}
+	{}
 }
 
 \NewDocumentCommand\printdataavailability{}{%
 	\ifcsvoid{@dataavailability}
-		{}
-		{\section{Data availability}
-		 \csuse{@dataavailability}}
+	{}
+	{\section{Data availability}
+		\csuse{@dataavailability}}
 }
 
 \NewDocumentCommand\printsoftwareavailability{}{%
-	 \ifcsvoid{@softwareavailability}
-		{}
-		{\section{Software availability}
-		 \csuse{@softwareavailability}}
+	\ifcsvoid{@softwareavailability}
+	{}
+	{\section{Software availability}
+		\csuse{@softwareavailability}}
 }
 
 \NewDocumentCommand\printarticletype{}{%
@@ -437,7 +439,7 @@
 
 \fancypagestyle{jcls}{% 
 	\fancyhf{}% clear all header and footer fields 
-	\fancyhead[L]{\normalsize\sffamily\MakeUppercase{\@articletype}}
+	\fancyhead[L]{\normalsize\sffamily \getfield{issuetitle}}
 	\fancyhead[R]{\sffamily\printfield{shorttitle}}
 	\fancyfoot[L]{\sffamily JCLS, \the\year, \printarticletype}
 	\fancyfoot[R]{\sffamily \thepage}
@@ -449,41 +451,42 @@
 % headings
 \RequirePackage[small,sf,bf,raggedright,clearempty]{titlesec}
 \titleformat{\section}
-	{\Large\sffamily\bfseries}
-	{\thesection.}{0.5em}{}
+{\Large\sffamily\bfseries}
+{\thesection.}{0.5em}{}
 \titleformat{\subsection}
-	{\large\sffamily\bfseries}
-	{\thesubsection.}{0.5em}{}
+{\large\sffamily\bfseries}
+{\thesubsection.}{0.5em}{}
 \titleformat{\subsubsection}
-	{\large\sffamily\bfseries}
-	{\thesubsubsection.}{0.5em}{}
+{\large\sffamily\bfseries}
+{\thesubsubsection.}{0.5em}{}
 
 % title and sidebar
 \def\@maketitle{% 
-%
-% title
-%
+	%
+	% title
+	%
 	\begin{titlebox}
 		\begin{flushleft}%
+			\setstretch{1.0}%
 			\normalsize\sffamily%
 			{\getfield{articletype}\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}} \par}
-			{\vspace{-.8\baselineskip}
-			 \LARGE\bfseries \getfield{title} \par}
-			{\Large\getfield{subtitle} \par}
-			{\vspace{1.5em}%
-			 \normalsize\printauthors
-			 \vspace{\baselineskip}%
-			{\footnotesize\printaffiliations}
+			% \vspace{\baselineskip}
+			{\LARGE\bfseries \getfield{title} \par}
+			{\Large \getfield{subtitle} \par}
+			{\vspace{1.5\baselineskip}%
+				\normalsize\printauthors
+				\vspace{\baselineskip}%
+				{\footnotesize\printaffiliations}
 				\vspace{\baselineskip}}
 		\end{flushleft}%
 	\end{titlebox}
-%
-% sidebar
-%
+	%
+	% sidebar
+	%
 	\marginpar{% OpenAccess Logo
-			\vspace{2ex}
-			\adjustbox{width=2em}{\textcolor{white}{\aiOpenAccess}}%
-			\vspace{2ex}
+		\vspace{2ex}
+		\adjustbox{width=2em}{\textcolor{white}{\aiOpenAccess}}%
+		\vspace{2ex}
 	}
 	\sideinfofield{Citation}{howtocite}
 	\sideinfofield{Date Published}{datepublished}
@@ -497,9 +500,9 @@
 
 % abstract
 \renewenvironment{abstract}
-	{\begin{abstractbox}
-	 \sffamily\textbf{\abstractname.}}
-	{\end{abstractbox}}
+{\begin{abstractbox}
+		\sffamily\textbf{\abstractname.}}
+		{\end{abstractbox}}
 
 \RequirePackage{hyperref}
 \hypersetup{
@@ -510,27 +513,27 @@
 	citecolor=citecolor}
 
 \IfFileExists{./metadata/authors.tex}
-	{\input{./metadata/authors.tex}}
-	{}
+{\input{./metadata/authors.tex}}
+{}
 
 \IfFileExists{./metadata/article.tex}
-	{\input{./metadata/article.tex}}
-	{}
+{\input{./metadata/article.tex}}
+{}
 
 \RequirePackage[contents={},scale=5,color=blue!50]{background}
 
 \NewDocumentCommand\printwatermark{}{
 	\AddToHook{shipout/background}{%
 		\ifthenelse{\value{page}>1}%
-			{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
-			{}
-		\BgMaterial
-	}
+		{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
+	{}
+	\BgMaterial
+}
 }
 
 \ifcsvoid{@doi}
-	{\AddToHook{env/abstract/after}{\linenumbers\printwatermark}}
-	{}
+{\AddToHook{env/abstract/after}{\linenumbers\printwatermark}}
+{}
 
 \AddToHook{enddocument}{
 	\printdataavailability
