@@ -65,7 +65,7 @@
 
 \definecolor{jcls-red}      {RGB} {175, 29,  31}
 \definecolor{jcls-gray}     {RGB} {90,  90,  90}
-\definecolor{orcid-green} 	{RGB} {166, 206, 57}
+\definecolor{orcid-green}   {RGB} {166, 206, 57}
 
 \colorlet{primarycolor}     {jcls-red}
 \colorlet{secundarycolor}   {jcls-gray}
