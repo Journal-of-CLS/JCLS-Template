@@ -489,7 +489,9 @@
 		\vspace{2ex}
 	}
 	\sideinfofield{Citation}{howtocite}
-	\sideinfofield{Date Published}{datepublished}
+	\sideinfofield{Date published}{datepublished}
+	\sideinfofield{Date accepted}{dateaccepted}
+	\sideinfofield{Date received}{datereceived}
 	\sideinfofield{Keywords}{keywords}
 	\sideinfofield{Licenses}{licenses}
 	\sideinfofield{Reviewer}{reviewer}
