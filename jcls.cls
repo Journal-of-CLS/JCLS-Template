@@ -56,7 +56,7 @@
 
 \RequirePackage[english]{babel}
 \RequirePackage{csquotes}
-\RequirePackage[style=authoryear,backend=biber]{biblatex}
+\RequirePackage[style=authoryear,backend=biber,maxbibnames=99]{biblatex}
 
 \RequirePackage{datetime2}
 
@@ -513,6 +513,10 @@
 	linkcolor=linkcolor,
 	urlcolor=urlcolor,
 	citecolor=citecolor}
+
+\IfFileExists{./metadata/self.bib}
+{\addbibresource{./metadata/self.bib} \howtocite{\fullcite{self}}}
+{}
 
 \IfFileExists{./metadata/authors.tex}
 {\input{./metadata/authors.tex}}
