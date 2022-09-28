@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2021/11/11 v0.5.1 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2022-09-26 v0.5.2}
+\ProvidesClass{jcls}[2022/09/28 v0.5.3 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2022-09-28 v0.5.3}
 
 \LoadClass{article}
 
