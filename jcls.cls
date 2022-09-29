@@ -56,8 +56,7 @@
 
 \RequirePackage[english]{babel}
 \RequirePackage{csquotes}
-\RequirePackage[style=authoryear,backend=biber,maxbibnames=99]{biblatex}
-
+\RequirePackage[style=authoryear-icomp,backend=biber,maxbibnames=99,maxcitenames=2,uniquelist=false]{biblatex}
 \RequirePackage{datetime2}
 
 % color
