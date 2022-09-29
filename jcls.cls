@@ -372,6 +372,7 @@
 	\printfield{affilmarker}[#1][.\;]%
 	\printfield{department}[#1][, ]%
 	\printfield{organization}[#1][, ]%
+	\printfield{ror}[#1][, ]%
 	\printfield{streetaddress}[#1][, ]%
 	\printfield{city}[#1][.]%
 }
