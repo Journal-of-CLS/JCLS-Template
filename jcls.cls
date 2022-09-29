@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2022/09/29 v0.5.4 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2022-09-29 v0.5.4}
+\ProvidesClass{jcls}[2022/09/29 v0.6.0 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2022-09-29 v0.6.0}
 
 \LoadClass{article}
 
@@ -65,6 +65,8 @@
 \definecolor{jcls-red}      {RGB} {175, 29,  31}
 \definecolor{jcls-gray}     {RGB} {90,  90,  90}
 \definecolor{orcid-green}   {RGB} {166, 206, 57}
+\definecolor{ror-green}     {RGB} {83, 186, 161}
+
 
 \colorlet{primarycolor}     {jcls-red}
 \colorlet{secundarycolor}   {jcls-gray}
@@ -165,6 +167,9 @@
 % orcid
 \DeclareRobustCommand\orcidlink[1]{\texorpdfstring{%
 		\href{https://orcid.org/#1}{\textcolor{orcid-green}{\aiOrcid}}}{}}
+% ror
+\DeclareRobustCommand\rorlink[1]{\texorpdfstring{%
+		\href{https://ror.org/#1}{\textcolor{ror-green}{\aiROR}}}{}}
 % code
 \RequirePackage{listings}
 \RequirePackage[verbatim]{lstfiracode}
@@ -270,8 +275,8 @@
 {\setfield{issuenumber}{#1}}
 \NewDocumentCommand\issuenote{m}%
 {\setfield{issuenote}{#1}}
-\NewDocumentCommand\reviewer{m}%
-{\setfield{reviewer}{#1}}
+\NewDocumentCommand\reviewers{m}%
+{\setfield{reviewers}{#1}}
 \NewDocumentCommand\dataavailability{m}%
 {\setfield{dataavailability}{#1}}
 \NewDocumentCommand\softwareavailability{m}%
@@ -321,12 +326,15 @@
 \define@key{affiliation}{pid}{\csdef{aff@pid}{#1}}
 \define@key{affiliation}{street-address}{\csdef{aff@streetaddress}{#1}}
 \define@key{affiliation}{city}{\csdef{aff@city}{#1}}
-\define@key{affiliation}{country}{\csdef{aff@county}{#1}}
+\define@key{affiliation}{country}{\csdef{aff@country}{#1}}
 \define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
 \presetkeys{affiliation}{ % Set default values 
-	organization=,
+	department=\textcolor{jcls-red}{DEPARTMENT},
+	organization=\textcolor{jcls-red}{ORG},
+	ror=,
 	street-address=,
-	country=,
+	city=\textcolor{jcls-red}{CITY},
+	country=\textcolor{jcls-red}{COUNTRY},
 	country-code=,
 }{}
 
@@ -348,8 +356,10 @@
 	\setkeys{affiliation}{#1}
 	\global\csedef{@department\aff@id}{\expandafter\aff@department}%
 	\global\csedef{@organization\aff@id}{\expandafter\aff@organization}%
+	\global\csedef{@ror\aff@id}{\expandafter\aff@ror}%
 	\global\csedef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
 	\global\csedef{@city\aff@id}{\expandafter\aff@city}%
+	\global\csedef{@country\aff@id}{\expandafter\aff@country}%
 	\endgroup
 }
 
@@ -371,10 +381,11 @@
 \NewDocumentCommand\printaffiliation{m}{%
 	\printfield{affilmarker}[#1][.\;]%
 	\printfield{department}[#1][, ]%
-	\printfield{organization}[#1][, ]%
-	\printfield{ror}[#1][, ]%
+	\printfield{organization}[#1]%
+	\ifcsvoid{@ror#1}{\unskip,}{\unskip\,\rorlink{\csuse{@ror#1}},}
 	\printfield{streetaddress}[#1][, ]%
-	\printfield{city}[#1][.]%
+	\printfield{city}[#1][, ]%
+	\printfield{country}[#1][.]%
 }
 
 \NewDocumentCommand\printcontribution{m}{%
@@ -498,7 +509,7 @@
 	\sideinfofield{Date received}{datereceived}[]
 	\sideinfofield{Keywords}{keywords}
 	\sideinfofield{License}{license}
-	\sideinfofield{Reviewer}{reviewer}
+	\sideinfofield{Reviewers}{reviewers}
 	\sideinfofield{Note}{issuenote}
 	\sideinfos%
 }
