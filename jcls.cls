@@ -443,8 +443,8 @@
 \fancypagestyle{jcls}{% 
 	\fancyhf{}% clear all header and footer fields 
 	\fancyhead[L]{}
-	\fancyhead[R]{\sffamily\printfield{shorttitle}}
-	\fancyfoot[L]{\sffamily JCLS,\printfield{issuenumber}[, ] \the\year, \printarticletype}
+	\fancyhead[R]{\sffamily \printfield{shorttitle}}
+	\fancyfoot[L]{\sffamily JCLS, \printfield{issuenumber}[][,] \the\year, \printarticletype}
 	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
