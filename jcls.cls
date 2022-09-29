@@ -266,6 +266,10 @@
 }
 \NewDocumentCommand\issuetitle{m}%
 {\setfield{issuetitle}{#1}}
+\NewDocumentCommand\issuenumber{m}%
+{\setfield{issuenumber}{#1}}
+\NewDocumentCommand\issuenote{m}%
+{\setfield{issuenote}{#1}}
 \NewDocumentCommand\reviewer{m}%
 {\setfield{reviewer}{#1}}
 \NewDocumentCommand\dataavailability{m}%
@@ -276,9 +280,9 @@
 {\setfield{licenses}{#1}}
 
 \NewDocumentCommand\sideinfos{}{}
-\NewDocumentCommand\sideinfo{mm}{%
+\NewDocumentCommand\sideinfo{mmO{\newline}}{%
 	\gappto\sideinfos{%
-		\marginpar{\raggedright\sffamily\footnotesize\textbf{#1: } \\ #2 \vspace{1.5ex}}%
+		\marginpar{\raggedright\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{1.5ex}}%
 	}
 }
 
@@ -438,9 +442,9 @@
 
 \fancypagestyle{jcls}{% 
 	\fancyhf{}% clear all header and footer fields 
-	\fancyhead[L]{\normalsize\sffamily \getfield{issuetitle}}
+	\fancyhead[L]{}
 	\fancyhead[R]{\sffamily\printfield{shorttitle}}
-	\fancyfoot[L]{\sffamily JCLS, \the\year, \printarticletype}
+	\fancyfoot[L]{\sffamily JCLS,\printfield{issuenumber}[, ] \the\year, \printarticletype}
 	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
@@ -488,14 +492,13 @@
 		\vspace{2ex}
 	}
 	\sideinfofield{Citation}{howtocite}
-	\sideinfofield{Date published}{datepublished}
-	\sideinfofield{Date accepted}{dateaccepted}
-	\sideinfofield{Date received}{datereceived}
+	\sideinfofield{Date published}{datepublished}[]
+	\sideinfofield{Date accepted}{dateaccepted}[]
+	\sideinfofield{Date received}{datereceived}[]
 	\sideinfofield{Keywords}{keywords}
 	\sideinfofield{Licenses}{licenses}
 	\sideinfofield{Reviewer}{reviewer}
-	% \sideinfofield{Data availability}{dataavailability}
-	% \sideinfofield{Software availability}{softwareavailability}
+	\sideinfofield{Note}{issuenote}
 	\sideinfos%
 }
 
