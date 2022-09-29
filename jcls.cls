@@ -276,8 +276,8 @@
 {\setfield{dataavailability}{#1}}
 \NewDocumentCommand\softwareavailability{m}%
 {\setfield{softwareavailability}{#1}}
-\NewDocumentCommand\licenses{m}%
-{\setfield{licenses}{#1}}
+\NewDocumentCommand\license{m}%
+{\setfield{license}{#1}}
 
 \NewDocumentCommand\sideinfos{}{}
 \NewDocumentCommand\sideinfo{mmO{\newline}}{%
@@ -496,7 +496,7 @@
 	\sideinfofield{Date accepted}{dateaccepted}[]
 	\sideinfofield{Date received}{datereceived}[]
 	\sideinfofield{Keywords}{keywords}
-	\sideinfofield{Licenses}{licenses}
+	\sideinfofield{License}{license}
 	\sideinfofield{Reviewer}{reviewer}
 	\sideinfofield{Note}{issuenote}
 	\sideinfos%
