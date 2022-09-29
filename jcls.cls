@@ -58,6 +58,24 @@
 \RequirePackage[english]{babel}
 \RequirePackage{csquotes}
 \RequirePackage[style=authoryear-icomp,backend=biber,maxbibnames=99,maxcitenames=2,uniquelist=false]{biblatex}
+% patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
+\DeclareCiteCommand{\fullcite}
+{\defcounter{maxnames}{\blx@maxbibnames}%
+	\usebibmacro{prenote}}
+{\usedriver
+	{\DeclareNameAlias{sortname}{default}}
+	{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+\DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
+{\defcounter{maxnames}{\blx@maxbibnames}%
+	\usebibmacro{prenote}}
+{\usedriver
+	{\DeclareNameAlias{sortname}{default}}
+	{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
 \RequirePackage{datetime2}
 
 % color
