@@ -50,6 +50,7 @@
 \RequirePackage{setspace}
 \setstretch{1.25}
 
+\RequirePackage{enumitem}
 \RequirePackage{etoolbox}
 \RequirePackage{ifmtarg}
 \RequirePackage{xkeyval}
@@ -379,7 +380,7 @@
 }
 
 \NewDocumentCommand\printaffiliation{m}{%
-	\printfield{affilmarker}[#1][.\;]%
+	\item[\csuse{@affilmarker#1}.]
 	\printfield{department}[#1][, ]%
 	\printfield{organization}[#1]%
 	\ifcsvoid{@ror#1}{\unskip,}{\unskip\,\rorlink{\csuse{@ror#1}},}
@@ -402,8 +403,10 @@
 
 \NewDocumentCommand\printaffiliations{}{%
 	\setcounter{counter}{0}
-	\@whilenum\value{counter}<\value{affiliations}\do
-	{\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
+	\begin{enumerate}[left=\parindent,labelwidth=1em]
+		\@whilenum\value{counter}<\value{affiliations}\do
+		{\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
+	\end{enumerate}
 }
 
 \NewDocumentCommand\printcontributions{}{%
