@@ -280,16 +280,16 @@
 {\setfield{license}{#1}}
 
 \NewDocumentCommand\sideinfos{}{}
-\NewDocumentCommand\sideinfo{mmO{\newline}}{%
+\NewDocumentCommand\sideinfo{mmm}{%
 	\gappto\sideinfos{%
 		\marginpar{\raggedright\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{1.5ex}}%
 	}
 }
 
-\NewDocumentCommand\sideinfofield{mm}{
+\NewDocumentCommand\sideinfofield{mmO{\newline}}{%
 	\ifcsvoid{@#2}
 	{}
-	{\sideinfo{#1}{\csuse{@#2}}}
+	{\sideinfo{#1}{\csuse{@#2}}{#3}}
 }
 
 % authors and affiliations
