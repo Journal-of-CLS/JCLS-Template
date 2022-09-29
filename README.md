@@ -13,6 +13,7 @@
 ├── main.tex            <-- your content
 ├── metadata            
 │   ├── article.tex     <-- metadata provided by the journal editors
+│   ├── self.bib        <-- metadata provided by the journal editors
 │   └── authors.tex     <-- metadata provided by the authors
 └── references.bib      <-- your biblatex bibliography
 ```
