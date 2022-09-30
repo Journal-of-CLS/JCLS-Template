@@ -57,6 +57,7 @@
 
 \RequirePackage[english]{babel}
 \RequirePackage{csquotes}
+
 \RequirePackage[style=authoryear-icomp,backend=biber,maxbibnames=99,maxcitenames=2,uniquelist=false]{biblatex}
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
@@ -477,7 +478,7 @@
 	\fancyhf{}% clear all header and footer fields 
 	\fancyhead[L]{}
 	\fancyhead[R]{\sffamily \printfield{shorttitle}}
-	\fancyfoot[L]{\sffamily JCLS, \printfield{issuenumber}[][,] \the\year, \printarticletype}
+	\fancyfoot[L]{\sffamily JCLS, \getfield{issuenumber}, \the\year, \printarticletype}
 	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
@@ -567,9 +568,9 @@
 	\AddToHook{shipout/background}{%
 		\ifthenelse{\value{page}>1}%
 		{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
-	{}
+	    {}
 	\BgMaterial
-}
+    }
 }
 
 \ifcsvoid{@doi}
@@ -577,9 +578,10 @@
 {}
 
 \AddToHook{enddocument}{
-	\printdataavailability
-	\printsoftwareavailability
-	\printacknowledgements
-	\printcontributions
+	%\printdataavailability
+	%\printsoftwareavailability
+	%\printacknowledgements
+	%\printcontributions
+
 	\printbibliography
 }
