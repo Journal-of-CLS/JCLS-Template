@@ -289,8 +289,6 @@
 		}}
 	{\setfield{articletype}{#1}}
 }
-\NewDocumentCommand\issuetitle{m}%
-{\setfield{issuetitle}{#1}}
 \NewDocumentCommand\issuenumber{m}%
 {\setfield{issuenumber}{#1}}
 \NewDocumentCommand\issuenote{m}%
@@ -568,9 +566,9 @@
 	\AddToHook{shipout/background}{%
 		\ifthenelse{\value{page}>1}%
 		{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
-	    {}
+	{}
 	\BgMaterial
-    }
+}
 }
 
 \ifcsvoid{@doi}
