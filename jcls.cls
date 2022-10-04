@@ -47,6 +47,7 @@
 %\WarningsOff*
 
 \RequirePackage{amsmath,amssymb}
+\RequirePackage{calc}
 \RequirePackage{setspace}
 \setstretch{1.25}
 
@@ -180,7 +181,8 @@
 	footskip=10mm,
 	marginparsep=3mm,
 	marginparwidth=40mm,
-	reversemarginpar=true
+	reversemarginpar=true,
+% 	showframe,
 }
 
 
@@ -188,13 +190,31 @@
 \RequirePackage{graphicx}
 \graphicspath{{./figures/}}
 \RequirePackage[Export]{adjustbox}
+
+
+% captions and notes
+\RequirePackage[
+	%format=hang,
+	justification=raggedright,
+	singlelinecheck=off,
+	labelfont=bf,
+	font={normalfont,sf}]{caption}
+
+\RequirePackage{subcaption}
 \RequirePackage{sidenotes}
+\DeclareCaptionStyle{sidecaption}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{marginfigure}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{margintable}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{widefigure}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={normalfont,sf}}
+\DeclareCaptionStyle{widetable}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={normalfont,sf}}
+
+
 
 % tables
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
-\setlength\LTleft{0pt}
-\setlength\LTright{\fill}
+    \setlength\LTleft{0pt}
+    \setlength\LTright{\fill}
 
 % orcid
 \DeclareRobustCommand\orcidlink[1]{\texorpdfstring{%
@@ -229,23 +249,86 @@
 }
 
 \RequirePackage{selnolig}
-\RequirePackage{marginfix}
 \RequirePackage{marginnote}
 \renewcommand*{\marginfont}{\sffamily\footnotesize}
 \renewcommand*{\raggedleftmarginnote}{}
+\RequirePackage{marginfix}
+
 \RequirePackage{changepage}
 \RequirePackage{ifthen}
 \newlength{\overhang}
 \setlength{\overhang}{\marginparwidth}
 \addtolength{\overhang}{\marginparsep}
-\newenvironment{fullwidth}
-{\setlength\LTleft{-\overhang}
-	\ifthenelse{\boolean{@twoside}}
-	{\begin{adjustwidth*}{-\overhang}{}}
-	{\begin{adjustwidth}{-\overhang}{}}}
-			{\ifthenelse{\boolean{@twoside}}
-			{\end{adjustwidth*}}
-			{\end{adjustwidth}}}
+
+\RenewDocumentEnvironment{table*}{ O{htbp} }
+{
+    \ifthenelse{\boolean{@twoside}}
+	{
+	    \begin{table}[#1]
+	    \begin{adjustwidth*}{-.5\overhang}{}
+	}
+	{
+	    \begin{table}[#1]
+	    \begin{adjustwidth}{-.5\overhang}{}
+	}
+    \captionsetup{style=widefigure}
+}
+{
+    \ifthenelse{\boolean{@twoside}}
+	{
+	    \end{adjustwidth*}
+	}
+	{
+	    \end{adjustwidth}
+	}
+	\end{table}
+}
+
+\RenewDocumentEnvironment{figure*}{ O{htbp} }
+{
+    \ifthenelse{\boolean{@twoside}}
+	{
+	    \begin{figure}[#1]
+	    \begin{adjustwidth*}{-.5\overhang}{}
+	}
+	{
+	    \begin{figure}[#1]
+	    \begin{adjustwidth}{-.5\overhang}{}
+	}
+    \captionsetup{style=widefigure}
+}
+{
+    \ifthenelse{\boolean{@twoside}}
+	{
+	    \end{adjustwidth*}
+	}
+	{
+	    \end{adjustwidth}
+	}
+	\end{figure}
+}
+
+\NewDocumentEnvironment{fullwidth}{}
+{
+    \ifthenelse{\boolean{@twoside}}
+    {
+        \begin{adjustwidth*}{-.5\overhang}{}
+    }
+	{
+	    \begin{adjustwidth}{-.5\overhang}{}
+	}
+    \setlength\LTleft{-.5\overhang} 
+    \setlength\LTright{0pt}
+}
+{
+    \ifthenelse{\boolean{@twoside}}
+    {
+        \end{adjustwidth*}
+    }
+    {
+        \end{adjustwidth}
+    }
+}
 
 \RequirePackage{pdflscape}
 \RequirePackage{tcolorbox}
@@ -258,12 +341,6 @@
 {\noindent{\@thefnmark}. #1}
 \interfootnotelinepenalty=10000
 
-\RequirePackage[
-	%format=hang,
-	justification=raggedright,
-	singlelinecheck=off,
-	labelfont=bf,
-	font={normalfont,sf}]{caption}
 
 \NewDocumentCommand\setfield{mO{}m}%
 {\csdef{@#1#2}{#3}}
@@ -298,8 +375,7 @@
 {\setfield{subtitle}{#1}}
 \NewDocumentCommand\articletype{m}%
 {\@ifmtarg{#1}
-	{\setfield{articletype}{SUBMITTED
-		}}
+	{\setfield{articletype}{SUBMITTED}}
 	{\setfield{articletype}{#1}}
 }
 \NewDocumentCommand\issuetitle{m}%
