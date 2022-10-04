@@ -121,8 +121,8 @@
 \RequirePackage{academicons}
 \RequirePackage{parskip}
 \RequirePackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\defaultfontfeatures{Scale=MatchLowercase}
+\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 
 \setmainfont{texgyrepagella}[
   Extension = .otf,
@@ -214,8 +214,8 @@
 % tables
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
-  \setlength\LTleft{0pt}
-  \setlength\LTright{\fill}
+\setlength\LTleft{0pt}
+\setlength\LTright{\fill}
 \RequirePackage{makecell}
 
 % orcid
@@ -224,8 +224,8 @@
 }
 
 % ror
-\DeclareRobustCommand\rorlink[1]{\texorpdfstring{%
-  \textorpdfstring{\href{https://ror.org/#1}{\textcolor{ror-green}{\aiROR}}}{https://tot.org/#1}%
+\DeclareRobustCommand\rorlink[1]{%
+  \texorpdfstring{\href{https://ror.org/#1}{\textcolor{ror-green}{\aiROR}}}{https://tot.org/#1}%
 }
 
 % code
@@ -233,7 +233,7 @@
 \RequirePackage[verbatim]{lstfiracode}
 
 \RequirePackage[right]{lineno}
-  \renewcommand{\linenumberfont}{\ttfamily\small\color{primarycolor}}
+\renewcommand{\linenumberfont}{\ttfamily\small\color{primarycolor}}
 
 \lstset{
   style=FiraCodeStyle,
@@ -256,108 +256,108 @@
 
 \RequirePackage{selnolig}
 \RequirePackage{marginnote}
-  \renewcommand*{\marginfont}{\sffamily\footnotesize}
-  \renewcommand*{\raggedleftmarginnote}{}
+\renewcommand*{\marginfont}{\sffamily\footnotesize}
+\renewcommand*{\raggedleftmarginnote}{}
 \RequirePackage{marginfix}
 
 \RequirePackage{changepage}
 \RequirePackage{ifthen}
-  \newlength{\overhang}
-  \setlength{\overhang}{\marginparwidth + \marginparsep}
+\newlength{\overhang}
+\setlength{\overhang}{\marginparwidth + \marginparsep}
 
 \RenewDocumentEnvironment{table*}{ O{htbp} }
 {
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \begin{table}[#1]
-    \begin{adjustwidth*}{-.5\overhang}{}
-  }
-  {
-    \begin{table}[#1]
-    \begin{adjustwidth}{-.5\overhang}{}
-  }
-  \captionsetup{style=widetable, margin=.5\overhang}
+\ifthenelse{\boolean{@twoside}}
+{
+  \begin{table}[#1]
+  \begin{adjustwidth*}{-.5\overhang}{}
 }
 {
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \end{adjustwidth*}
-  }
-  {
+  \begin{table}[#1]
+    \begin{adjustwidth}{-.5\overhang}{}
+      }
+      \captionsetup{style=widetable, margin=.5\overhang}
+      }
+      {
+      \ifthenelse{\boolean{@twoside}}
+      {
+      \end{adjustwidth*}
+      }
+      {
     \end{adjustwidth}
-  }
+    }
   \end{table}
 }
 
 \RenewDocumentEnvironment{figure*}{ O{htbp} }
 {
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \begin{figure}[#1]
-    \begin{adjustwidth*}{-.5\overhang}{}
-  }
-  {
-    \begin{figure}[#1]
-    \begin{adjustwidth}{-.5\overhang}{}
-  }
-  \captionsetup{style=widefigure,margin=.5\overhang}
+\ifthenelse{\boolean{@twoside}}
+{
+  \begin{figure}[#1]
+  \begin{adjustwidth*}{-.5\overhang}{}
 }
 {
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \end{adjustwidth*}
-  }
-  {
+  \begin{figure}[#1]
+    \begin{adjustwidth}{-.5\overhang}{}
+      }
+      \captionsetup{style=widefigure,margin=.5\overhang}
+      }
+      {
+      \ifthenelse{\boolean{@twoside}}
+      {
+      \end{adjustwidth*}
+      }
+      {
     \end{adjustwidth}
-  }
+    }
   \end{figure}
 }
 
 \NewDocumentEnvironment{fullwidthtable}{ O{htbp} }
 {
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \begin{table}[#1]
-    \begin{adjustwidth*}{-\overhang}{}
-  }
-  {
-    \begin{table}[#1]
-    \begin{adjustwidth}{-\overhang}{}
-  }
-  \captionsetup{style=widetable, margin=\overhang}
+\ifthenelse{\boolean{@twoside}}
+{
+  \begin{table}[#1]
+  \begin{adjustwidth*}{-\overhang}{}
 }
 {
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \end{adjustwidth*}
-  }
-  {
+  \begin{table}[#1]
+    \begin{adjustwidth}{-\overhang}{}
+      }
+      \captionsetup{style=widetable, margin=\overhang}
+      }
+      {
+      \ifthenelse{\boolean{@twoside}}
+      {
+      \end{adjustwidth*}
+      }
+      {
     \end{adjustwidth}
-  }
+    }
   \end{table}
 }
 
 \NewDocumentEnvironment{fullwidthfigure}{ O{htbp} }
 {
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \begin{figure}[#1]
-    \begin{adjustwidth*}{-\overhang}{}
-  }
-  {
-    \begin{figure}[#1]
-    \begin{adjustwidth}{-\overhang}{}
-  }
-  \captionsetup{style=widefigure, margin=\overhang}
+\ifthenelse{\boolean{@twoside}}
+{
+  \begin{figure}[#1]
+  \begin{adjustwidth*}{-\overhang}{}
 }
 {
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \end{adjustwidth*}
-  }
-  {
+  \begin{figure}[#1]
+    \begin{adjustwidth}{-\overhang}{}
+      }
+      \captionsetup{style=widefigure, margin=\overhang}
+      }
+      {
+      \ifthenelse{\boolean{@twoside}}
+      {
+      \end{adjustwidth*}
+      }
+      {
     \end{adjustwidth}
-  }
+    }
   \end{figure}
 }
 
@@ -369,47 +369,47 @@
   }
   {
     \begin{adjustwidth}{-\overhang}{}
-  }
-  \setlength\LTleft{-\overhang}
-  \setlength\LTright{0pt}
-}
-{
-  \ifthenelse{\boolean{@twoside}}
-  {
-    \end{adjustwidth*}
-  }
-  {
+      }
+      \setlength\LTleft{-\overhang}
+      \setlength\LTright{0pt}
+      }
+      {
+      \ifthenelse{\boolean{@twoside}}
+      {
+      \end{adjustwidth*}
+      }
+      {
     \end{adjustwidth}
   }
 }
 
 \RequirePackage{pdflscape}
 \RequirePackage{tcolorbox}
-  \newtcolorbox{titlebox}{colback=white,arc=0pt,outer arc=0pt,colframe=white}
-  \newtcolorbox{abstractbox}{colback=secundarycolor!10,arc=0pt,outer arc=0pt,colframe=secundarycolor!10}
+\newtcolorbox{titlebox}{colback=white,arc=0pt,outer arc=0pt,colframe=white}
+\newtcolorbox{abstractbox}{colback=secundarycolor!10,arc=0pt,outer arc=0pt,colframe=secundarycolor!10}
 \RequirePackage[ragged,bottom,norule,multiple]{footmisc}
-  \renewcommand{\footnotemargin}{0em}
-  \renewcommand*{\thefootnote}{\arabic{footnote}}
-  \renewcommand*\@makefntext[1]%
-    {\noindent{\@thefnmark}. #1}
+\renewcommand{\footnotemargin}{0em}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+\renewcommand*\@makefntext[1]%
+{\noindent{\@thefnmark}. #1}
 \interfootnotelinepenalty=10000
 
 
 \NewDocumentCommand\setfield{mO{}m}%
-  {\csdef{@#1#2}{#3}}
+{\csdef{@#1#2}{#3}}
 \NewDocumentCommand\getfield{mO{}}%
-  {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
+{\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
 \NewDocumentCommand\printfield{mO{}O{}}{%
-  \ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}%
+\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}%
 }
 
 \NewDocumentCommand\keywords{m}%
-  {\setfield{keywords}{#1}}
+{\setfield{keywords}{#1}}
 \NewDocumentCommand\datereceived{m}%
-  {\setfield{datereceived}{#1}}
+{\setfield{datereceived}{#1}}
 \NewDocumentCommand\dateaccepted{m}%
-  {\setfield{dateaccepted}{#1}}
-  \let\date\relax
+{\setfield{dateaccepted}{#1}}
+\let\date\relax
 \NewDocumentCommand\datepublished{m}%
 {
   \setfield{datepublished}{#1}%
@@ -421,30 +421,30 @@
   {\setfield{doi}{\href{https://doi.org/#1}{doi.org/#1}}}
 }
 \NewDocumentCommand\shorttitle{m}%
-  {\setfield{shorttitle}{#1}}
+{\setfield{shorttitle}{#1}}
 \NewDocumentCommand\howtocite{m}%
-  {\setfield{howtocite}{#1}}
+{\setfield{howtocite}{#1}}
 \NewDocumentCommand\subtitle{m}%
-  {\setfield{subtitle}{#1}}
+{\setfield{subtitle}{#1}}
 \NewDocumentCommand\articletype{m}%
 {\@ifmtarg{#1}
   {\setfield{articletype}{SUBMITTED}}
   {\setfield{articletype}{#1}}
 }
 \NewDocumentCommand\issuetitle{m}%
-  {\setfield{issuetitle}{#1}}
+{\setfield{issuetitle}{#1}}
 \NewDocumentCommand\issuenumber{m}%
-  {\setfield{issuenumber}{#1}}
+{\setfield{issuenumber}{#1}}
 \NewDocumentCommand\issuenote{m}%
-  {\setfield{issuenote}{#1}}
+{\setfield{issuenote}{#1}}
 \NewDocumentCommand\reviewers{m}%
-  {\setfield{reviewers}{#1}}
+{\setfield{reviewers}{#1}}
 \NewDocumentCommand\dataavailability{m}%
-  {\setfield{dataavailability}{#1}}
+{\setfield{dataavailability}{#1}}
 \NewDocumentCommand\softwareavailability{m}%
-  {\setfield{softwareavailability}{#1}}
+{\setfield{softwareavailability}{#1}}
 \NewDocumentCommand\license{m}%
-  {\setfield{license}{#1}}
+{\setfield{license}{#1}}
 
 \NewDocumentCommand\sideinfos{}{}
 \NewDocumentCommand\sideinfo{mmm}{%
