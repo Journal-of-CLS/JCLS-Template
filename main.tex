@@ -128,7 +128,7 @@ Vivamus vestibulum lacinia laoreet. Pellentesque eu porta massa, a posuere odio.
 Donec viverra bibendum ante vel faucibus. Maecenas vitae laoreet libero, vitae posuere dolor. Phasellus luctus, neque in pharetra faucibus, tellus sapien mollis libero, sed elementum turpis ex nec justo. Ut molestie enim nec ipsum scelerisque maximus. Sed tincidunt risus commodo neque hendrerit, eu scelerisque nisl dignissim. Praesent et varius velit. Donec dictum sed sem vel fermentum. Suspendisse convallis nunc varius, volutpat sem quis, gravida metus.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{image-a.pdf}
+	\includegraphics[width=\linewidth]{image-a.pdf}
 	\caption{Image a}
 \end{figure}
 %
@@ -181,59 +181,61 @@ A <- www >>= B  # This is a comment
 
 If your table is too big to fit on one page, you can also use the longtable environment:
 
-\begin{longtable}{@{}llllll@{}}
-	\toprule
-	written     & burn        & orange   & share      & quick       & slowly    \\* \midrule
-	\endhead
-	%
-	\bottomrule
-	\endfoot
-	%
-	\endlastfoot
-	%
-	stronger    & slightly    & fat      & new        & enemy       & represent \\
-	development & deal        & putting  & supper     & greatly     & thy       \\
-	nice        & suddenly    & origin   & age        & almost      & tone      \\
-	managed     & highest     & function & pig        & include     & fly       \\
-	phrae       & could       & just     & giant      & over        & horn      \\
-	separate    & obtain      & mail     & apart      & pole        & origin    \\
-	toy         & please      & vast     & cowboy     & bean        & birthday  \\
-	say         & region      & couple   & how        & screen      & dust      \\
-	nest        & surface     & fence    & at         & related     & child     \\
-	stared      & horn        & farmer   & mighty     & raise       & vessels   \\
-	did         & forgot      & twice    & number     & advice      & also      \\
-	daughter    & suit        & far      & image      & arrangement & funny     \\
-	bad         & bar         & poem     & themselves & safe        & skin      \\
-	curve       & comfortable & identity & composed   & attack      & some      \\
-	long        & signal      & certain  & bring      & seems       & baby      \\
-	system      & leaving     & myself   & aware      & himself     & except    \\
-	smell       & combination & courage  & victory    & telephone   & white     \\
-	interior    & balance     & helpful  & former     & drove       & general   \\
-	freedom     & noun        & wall     & outline    & other       & park      \\
-	nice        & suddenly    & origin   & age        & almost      & tone      \\
-	managed     & highest     & function & pig        & include     & fly       \\
-	phrase      & could       & just     & giant      & over        & horn      \\
-	separate    & obtain      & mail     & apart      & pole        & origin    \\
-	toy         & please      & vast     & cowboy     & bean        & birthday  \\
-	say         & region      & couple   & how        & screen      & dust      \\
-	nest        & surface     & fence    & at         & related     & child     \\
-	stared      & horn        & farmer   & mighty     & raise       & vessels   \\
-	development & deal        & putting  & supper     & greatly     & thy       \\
-	nice        & suddenly    & origin   & age        & almost      & tone      \\
-	managed     & highest     & function & pig        & include     & fly       \\
-	did         & forgot      & twice    & number     & advice      & also      \\
-	daughter    & suit        & far      & image      & arrangement & funny     \\
-	bad         & bar         & poem     & themselves & safe        & skin      \\
-	curve       & comfortable & identity & composed   & attack      & some      \\
-	long        & signal      & certain  & bring      & seems       & baby      \\
-	system      & leaving     & myself   & aware      & himself     & except    \\
-	smell       & combination & courage  & victory    & telephone   & white     \\
-	development & deal        & putting  & supper     & greatly     & thy       \\
-	nice        & suddenly    & origin   & age        & almost      & tone      \\
-	managed     & highest     & function & pig        & include     & fly       \\
-	kitchen     & tin         & motion   & song       & buffalo     & tune      \\* \bottomrule
-	\caption{A very large table}
-\end{longtable}
+\begin{fullwidth}
+	\begin{longtable}{@{}llllll@{}}
+		\toprule
+		written     & burn        & orange   & share      & quick       & slowly    \\* \midrule
+		\endhead
+		%
+		\bottomrule
+		\endfoot
+		%
+		\endlastfoot
+		%
+		stronger    & slightly    & fat      & new        & enemy       & represent \\
+		development & deal        & putting  & supper     & greatly     & thy       \\
+		nice        & suddenly    & origin   & age        & almost      & tone      \\
+		managed     & highest     & function & pig        & include     & fly       \\
+		phrae       & could       & just     & giant      & over        & horn      \\
+		separate    & obtain      & mail     & apart      & pole        & origin    \\
+		toy         & please      & vast     & cowboy     & bean        & birthday  \\
+		say         & region      & couple   & how        & screen      & dust      \\
+		nest        & surface     & fence    & at         & related     & child     \\
+		stared      & horn        & farmer   & mighty     & raise       & vessels   \\
+		did         & forgot      & twice    & number     & advice      & also      \\
+		daughter    & suit        & far      & image      & arrangement & funny     \\
+		bad         & bar         & poem     & themselves & safe        & skin      \\
+		curve       & comfortable & identity & composed   & attack      & some      \\
+		long        & signal      & certain  & bring      & seems       & baby      \\
+		system      & leaving     & myself   & aware      & himself     & except    \\
+		smell       & combination & courage  & victory    & telephone   & white     \\
+		interior    & balance     & helpful  & former     & drove       & general   \\
+		freedom     & noun        & wall     & outline    & other       & park      \\
+		nice        & suddenly    & origin   & age        & almost      & tone      \\
+		managed     & highest     & function & pig        & include     & fly       \\
+		phrase      & could       & just     & giant      & over        & horn      \\
+		separate    & obtain      & mail     & apart      & pole        & origin    \\
+		toy         & please      & vast     & cowboy     & bean        & birthday  \\
+		say         & region      & couple   & how        & screen      & dust      \\
+		nest        & surface     & fence    & at         & related     & child     \\
+		stared      & horn        & farmer   & mighty     & raise       & vessels   \\
+		development & deal        & putting  & supper     & greatly     & thy       \\
+		nice        & suddenly    & origin   & age        & almost      & tone      \\
+		managed     & highest     & function & pig        & include     & fly       \\
+		did         & forgot      & twice    & number     & advice      & also      \\
+		daughter    & suit        & far      & image      & arrangement & funny     \\
+		bad         & bar         & poem     & themselves & safe        & skin      \\
+		curve       & comfortable & identity & composed   & attack      & some      \\
+		long        & signal      & certain  & bring      & seems       & baby      \\
+		system      & leaving     & myself   & aware      & himself     & except    \\
+		smell       & combination & courage  & victory    & telephone   & white     \\
+		development & deal        & putting  & supper     & greatly     & thy       \\
+		nice        & suddenly    & origin   & age        & almost      & tone      \\
+		managed     & highest     & function & pig        & include     & fly       \\
+		kitchen     & tin         & motion   & song       & buffalo     & tune      \\* \bottomrule
+		\caption{A very large table}
+	\end{longtable}
+\end{fullwidth}
 
 \section{Conclusion}
 

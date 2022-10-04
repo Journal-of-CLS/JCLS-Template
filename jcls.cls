@@ -166,6 +166,7 @@
 
 
 \RequirePackage{microtype}
+\RequirePackage{lua-widow-control}
 \RequirePackage{upquote}
 \RequirePackage{xurl}
 \RequirePackage{bookmark}
@@ -182,7 +183,7 @@
 	marginparsep=3mm,
 	marginparwidth=40mm,
 	reversemarginpar=true,
-% 	showframe,
+	% 	showframe,
 }
 
 
@@ -202,6 +203,7 @@
 
 \RequirePackage{subcaption}
 \RequirePackage{sidenotes}
+\DeclareCaptionStyle{base}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 \DeclareCaptionStyle{sidecaption}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 \DeclareCaptionStyle{marginfigure}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 \DeclareCaptionStyle{margintable}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
@@ -213,13 +215,14 @@
 % tables
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
-    \setlength\LTleft{0pt}
-    \setlength\LTright{\fill}
+\setlength\LTleft{0pt}
+\setlength\LTright{\fill}
 \RequirePackage{makecell}
 
 % orcid
-\DeclareRobustCommand\orcidlink[1]{\texorpdfstring{%
-		\href{https://orcid.org/#1}{\textcolor{orcid-green}{\aiOrcid}}}{}}
+\DeclareRobustCommand\orcidlink[1]{%
+	\texorpdfstring{\href{https://orcid.org/#1}{\textcolor{orcid-green}{\aiOrcid}}}{https://orcid.org/#1}%
+}
 % ror
 \DeclareRobustCommand\rorlink[1]{\texorpdfstring{%
 		\href{https://ror.org/#1}{\textcolor{ror-green}{\aiROR}}}{}}
@@ -262,120 +265,121 @@
 
 \RenewDocumentEnvironment{table*}{ O{htbp} }
 {
-    \ifthenelse{\boolean{@twoside}}
-	{
-	    \begin{table}[#1]
-	    \begin{adjustwidth*}{-.5\overhang}{}
-	}
-	{
-	    \begin{table}[#1]
-	    \begin{adjustwidth}{-.5\overhang}{}
-	}
-    \captionsetup{style=widetable, margin=.5\overhang}
+\ifthenelse{\boolean{@twoside}}
+{
+	\begin{table}[#1]
+	\begin{adjustwidth*}{-.5\overhang}{}
 }
 {
-    \ifthenelse{\boolean{@twoside}}
-	{
-	    \end{adjustwidth*}
-	}
-	{
-	    \end{adjustwidth}
-	}
+	\begin{table}[#1]
+		\begin{adjustwidth}{-.5\overhang}{}
+			}
+			\captionsetup{style=widetable, margin=.5\overhang}
+			}
+			{
+			\ifthenelse{\boolean{@twoside}}
+			{
+			\end{adjustwidth*}
+			}
+			{
+		\end{adjustwidth}
+		}
 	\end{table}
 }
 
 \RenewDocumentEnvironment{figure*}{ O{htbp} }
 {
-    \ifthenelse{\boolean{@twoside}}
-	{
-	    \begin{figure}[#1]
-	    \begin{adjustwidth*}{-.5\overhang}{}
-	}
-	{
-	    \begin{figure}[#1]
-	    \begin{adjustwidth}{-.5\overhang}{}
-	}
-    \captionsetup{style=widefigure,margin=.5\overhang}
+\ifthenelse{\boolean{@twoside}}
+{
+	\begin{figure}[#1]
+	\begin{adjustwidth*}{-.5\overhang}{}
 }
 {
-    \ifthenelse{\boolean{@twoside}}
-	{
-	    \end{adjustwidth*}
-	}
-	{
-	    \end{adjustwidth}
-	}
+	\begin{figure}[#1]
+		\begin{adjustwidth}{-.5\overhang}{}
+			}
+			\captionsetup{style=widefigure,margin=.5\overhang}
+			}
+			{
+			\ifthenelse{\boolean{@twoside}}
+			{
+			\end{adjustwidth*}
+			}
+			{
+		\end{adjustwidth}
+		}
 	\end{figure}
 }
 
 \NewDocumentEnvironment{fullwidthtable}{ O{htbp} }
 {
-    \ifthenelse{\boolean{@twoside}}
-	{
-	    \begin{table}[#1]
-	    \begin{adjustwidth*}{-\overhang}{}
-	}
-	{
-	    \begin{table}[#1]
-	    \begin{adjustwidth}{-\overhang}{}
-	}
-    \captionsetup{style=widetable, margin=\overhang}
+\ifthenelse{\boolean{@twoside}}
+{
+	\begin{table}[#1]
+	\begin{adjustwidth*}{-\overhang}{}
 }
 {
-    \ifthenelse{\boolean{@twoside}}
-	{
-	    \end{adjustwidth*}
-	}
-	{
-	    \end{adjustwidth}
-	}
+	\begin{table}[#1]
+		\begin{adjustwidth}{-\overhang}{}
+			}
+			\captionsetup{style=widetable, margin=\overhang}
+			}
+			{
+			\ifthenelse{\boolean{@twoside}}
+			{
+			\end{adjustwidth*}
+			}
+			{
+		\end{adjustwidth}
+		}
 	\end{table}
 }
 
 \NewDocumentEnvironment{fullwidthfigure}{ O{htbp} }
 {
-    \ifthenelse{\boolean{@twoside}}
-	{
-	    \begin{figure}[#1]
-	    \begin{adjustwidth*}{-\overhang}{}
-	}
-	{
-	    \begin{figure}[#1]
-	    \begin{adjustwidth}{-\overhang}{}
-	}
-    \captionsetup{style=widefigure, margin=\overhang}
+\ifthenelse{\boolean{@twoside}}
+{
+	\begin{figure}[#1]
+	\begin{adjustwidth*}{-\overhang}{}
 }
 {
-    \ifthenelse{\boolean{@twoside}}
-	{
-	    \end{adjustwidth*}
-	}
-	{
-	    \end{adjustwidth}
-	}
+	\begin{figure}[#1]
+		\begin{adjustwidth}{-\overhang}{}
+			}
+			\captionsetup{style=widefigure, margin=\overhang}
+			}
+			{
+			\ifthenelse{\boolean{@twoside}}
+			{
+			\end{adjustwidth*}
+			}
+			{
+		\end{adjustwidth}
+		}
 	\end{figure}
 }
+
 \NewDocumentEnvironment{fullwidth}{}
 {
-    \ifthenelse{\boolean{@twoside}}
-    {
-        \begin{adjustwidth*}{\overhang}{}
-    }
+	\ifthenelse{\boolean{@twoside}}
 	{
-	    \begin{adjustwidth}{\overhang}{}
+		\begin{adjustwidth*}{-\overhang}{}
 	}
-	\captionsetup{style=widefigure, margin=\overhang}
-    \setlength\LTleft{\overhang} 
-    \setlength\LTright{0pt}
-}
-{
-    \ifthenelse{\boolean{@twoside}}
-    {
-        \end{adjustwidth*}
-    }
-    {
-        \end{adjustwidth}
-    }
+	{
+		\begin{adjustwidth}{-\overhang}{}
+			}
+			% \captionsetup{style=widefigure, margin=\overhang}
+			\setlength\LTleft{-\overhang}
+			\setlength\LTright{0pt}
+			}
+			{
+			\ifthenelse{\boolean{@twoside}}
+			{
+			\end{adjustwidth*}
+			}
+			{
+		\end{adjustwidth}
+	}
 }
 
 \RequirePackage{pdflscape}
