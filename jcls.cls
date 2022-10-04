@@ -557,23 +557,26 @@
 
 \NewDocumentCommand\printauthors{}{%
 	\setcounter{counter}{0}
-	\@whilenum\value{counter}<\value{authors}\do
-	{\stepcounter{counter}\printauthor{\thecounter}\par}
+	\@whilenum\value{counter}<\value{authors}\do{%
+		\stepcounter{counter}\printauthor{\thecounter}\par
+	}
 }
 
 \NewDocumentCommand\printaffiliations{}{%
 	\setcounter{counter}{0}
 	\begin{enumerate}[left=\parindent,labelwidth=1em]
-		\@whilenum\value{counter}<\value{affiliations}\do
-		{\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
+		\@whilenum\value{counter}<\value{affiliations}\do{%
+			\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par
+		}
 	\end{enumerate}
 }
 
 \NewDocumentCommand\printcontributions{}{%
 	\section{Author contributions}
 	\setcounter{counter}{0}
-	\@whilenum\value{counter}<\value{authors}\do
-	{\stepcounter{counter}\printcontribution{\thecounter}\par}
+	\@whilenum\value{counter}<\value{authors}\do{%
+		\stepcounter{counter}\printcontribution{\thecounter}\par
+	}
 }
 
 \NewDocumentCommand\printacknowledgements{}{%
@@ -587,14 +590,14 @@
 	\ifcsvoid{@dataavailability}
 	{}
 	{\section{Data availability}
-		\csuse{@dataavailability}}
+		\getfield{dataavailability}}
 }
 
 \NewDocumentCommand\printsoftwareavailability{}{%
 	\ifcsvoid{@softwareavailability}
 	{}
 	{\section{Software availability}
-		\csuse{@softwareavailability}}
+		\getfield{softwareavailability}}
 }
 
 \NewDocumentCommand\printarticletype{}{%
@@ -618,8 +621,8 @@
 \fancypagestyle{jcls}{% 
 	\fancyhf{}% clear all header and footer fields 
 	\fancyhead[L]{}
-	\fancyhead[R]{\sffamily \printfield{shorttitle}}
-	\fancyfoot[L]{\sffamily JCLS, \getfield{issuenumber}, \the\year, \printarticletype}
+	\fancyhead[R]{\sffamily \getfield{shorttitle}}
+	\fancyfoot[L]{\sffamily JCLS, \getfield{issuenumber}, \the\year, \getfield{articletype}}
 	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
@@ -718,7 +721,7 @@
 {\AddToHook{env/abstract/after}{\linenumbers\printwatermark}}
 {}
 
-\AddToHook{enddocument}{
+\AtEndEnvironment{document}{
 	\printdataavailability
 	\printsoftwareavailability
 	\printacknowledgements
