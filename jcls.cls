@@ -215,6 +215,7 @@
 \RequirePackage{longtable}
     \setlength\LTleft{0pt}
     \setlength\LTright{\fill}
+\RequirePackage{makecell}
 
 % orcid
 \DeclareRobustCommand\orcidlink[1]{\texorpdfstring{%
@@ -257,8 +258,7 @@
 \RequirePackage{changepage}
 \RequirePackage{ifthen}
 \newlength{\overhang}
-\setlength{\overhang}{\marginparwidth}
-\addtolength{\overhang}{\marginparsep}
+\setlength{\overhang}{\marginparwidth + \marginparsep}
 
 \RenewDocumentEnvironment{table*}{ O{htbp} }
 {
@@ -271,7 +271,7 @@
 	    \begin{table}[#1]
 	    \begin{adjustwidth}{-.5\overhang}{}
 	}
-    \captionsetup{style=widefigure}
+    \captionsetup{style=widetable, margin=.5\overhang}
 }
 {
     \ifthenelse{\boolean{@twoside}}
@@ -295,7 +295,7 @@
 	    \begin{figure}[#1]
 	    \begin{adjustwidth}{-.5\overhang}{}
 	}
-    \captionsetup{style=widefigure}
+    \captionsetup{style=widefigure,margin=.5\overhang}
 }
 {
     \ifthenelse{\boolean{@twoside}}
@@ -308,16 +308,64 @@
 	\end{figure}
 }
 
+\NewDocumentEnvironment{fullwidthtable}{ O{htbp} }
+{
+    \ifthenelse{\boolean{@twoside}}
+	{
+	    \begin{table}[#1]
+	    \begin{adjustwidth*}{-\overhang}{}
+	}
+	{
+	    \begin{table}[#1]
+	    \begin{adjustwidth}{-\overhang}{}
+	}
+    \captionsetup{style=widetable, margin=\overhang}
+}
+{
+    \ifthenelse{\boolean{@twoside}}
+	{
+	    \end{adjustwidth*}
+	}
+	{
+	    \end{adjustwidth}
+	}
+	\end{table}
+}
+
+\NewDocumentEnvironment{fullwidthfigure}{ O{htbp} }
+{
+    \ifthenelse{\boolean{@twoside}}
+	{
+	    \begin{figure}[#1]
+	    \begin{adjustwidth*}{-\overhang}{}
+	}
+	{
+	    \begin{figure}[#1]
+	    \begin{adjustwidth}{-\overhang}{}
+	}
+    \captionsetup{style=widefigure, margin=\overhang}
+}
+{
+    \ifthenelse{\boolean{@twoside}}
+	{
+	    \end{adjustwidth*}
+	}
+	{
+	    \end{adjustwidth}
+	}
+	\end{figure}
+}
 \NewDocumentEnvironment{fullwidth}{}
 {
     \ifthenelse{\boolean{@twoside}}
     {
-        \begin{adjustwidth*}{-.5\overhang}{}
+        \begin{adjustwidth*}{\overhang}{}
     }
 	{
-	    \begin{adjustwidth}{-.5\overhang}{}
+	    \begin{adjustwidth}{\overhang}{}
 	}
-    \setlength\LTleft{-.5\overhang} 
+	\captionsetup{style=widefigure, margin=\overhang}
+    \setlength\LTleft{\overhang} 
     \setlength\LTright{0pt}
 }
 {
