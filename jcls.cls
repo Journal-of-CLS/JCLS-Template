@@ -58,7 +58,7 @@
 \RequirePackage[english]{babel}
 \RequirePackage{csquotes}
 
-\RequirePackage[style=authoryear-icomp,backend=biber,maxbibnames=99,maxcitenames=2,uniquelist=false]{biblatex}
+\RequirePackage[style=ext-authoryear-comp,backend=biber,maxbibnames=99,maxcitenames=2,uniquelist=false]{biblatex}
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
 {\defcounter{maxnames}{\blx@maxbibnames}%
@@ -76,6 +76,17 @@
 	{\thefield{entrytype}}}
 {\multicitedelim}
 {\usebibmacro{postnote}}
+
+% patch language field (https://tex.stackexchange.com/a/141831/29873)
+
+\DeclareSourcemap{
+	\maps{
+		\map{
+			\step[fieldsource=language, fieldset=langid, origfieldval, final]
+			\step[fieldset=language, null]
+		}
+	}
+}
 
 \RequirePackage{datetime2}
 
@@ -570,9 +581,9 @@
 	\AddToHook{shipout/background}{%
 		\ifthenelse{\value{page}>1}%
 		{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
-	    {}
+	{}
 	\BgMaterial
-    }
+}
 }
 
 \ifcsvoid{@doi}
