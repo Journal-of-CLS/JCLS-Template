@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2022/09/29 v0.6.0 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2022-09-29 v0.6.0}
+\ProvidesClass{jcls}[2022/10/04 v0.6.1 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2022-10-04 v0.6.1}
 
 \LoadClass{article}
 
@@ -93,7 +93,7 @@
 
 \colorlet{graycolor}        {jcls-gray}
 \colorlet{highlightcolor1}  {DarkOrange}
-\colorlet{highlightcolor2}  {DodgerBlue}
+\colorlet{highlightcolor2}  {DarkBlue}
 \colorlet{highlightcolor3}  {DarkGreen}
 \colorlet{highlightcolor4}  {DarkMagenta}
 
@@ -162,10 +162,11 @@
 \RequirePackage{geometry}
 \geometry{
 	paper=a4paper,
-	top=30mm,
+	top=25mm,
+	bottom=25mm,
 	right=17mm,
 	left=60mm,
-	footskip=17mm,
+	footskip=10mm,
 	marginparsep=3mm,
 	marginparwidth=40mm,
 	reversemarginpar=true
@@ -244,6 +245,7 @@
 \renewcommand*{\thefootnote}{\arabic{footnote}}
 \renewcommand*\@makefntext[1]%
 {\noindent{\@thefnmark}. #1}
+\interfootnotelinepenalty=10000
 
 \RequirePackage[
 	%format=hang,
@@ -289,6 +291,8 @@
 		}}
 	{\setfield{articletype}{#1}}
 }
+\NewDocumentCommand\issuetitle{m}%
+{\setfield{issuetitle}{#1}}
 \NewDocumentCommand\issuenumber{m}%
 {\setfield{issuenumber}{#1}}
 \NewDocumentCommand\issuenote{m}%
@@ -566,9 +570,9 @@
 	\AddToHook{shipout/background}{%
 		\ifthenelse{\value{page}>1}%
 		{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
-	{}
+	    {}
 	\BgMaterial
-}
+    }
 }
 
 \ifcsvoid{@doi}
@@ -576,10 +580,9 @@
 {}
 
 \AddToHook{enddocument}{
-	%\printdataavailability
-	%\printsoftwareavailability
-	%\printacknowledgements
-	%\printcontributions
-
+	\printdataavailability
+	\printsoftwareavailability
+	\printacknowledgements
+	\printcontributions
 	\printbibliography
 }
