@@ -60,33 +60,33 @@
 \RequirePackage{csquotes}
 
 \RequirePackage[style=ext-authoryear-comp,backend=biber,maxbibnames=99,maxcitenames=2,uniquelist=false]{biblatex}
+
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
 {\defcounter{maxnames}{\blx@maxbibnames}%
-	\usebibmacro{prenote}}
+  \usebibmacro{prenote}}
 {\usedriver
-	{\DeclareNameAlias{sortname}{default}}
-	{\thefield{entrytype}}}
+  {\DeclareNameAlias{sortname}{default}}
+  {\thefield{entrytype}}}
 {\multicitedelim}
 {\usebibmacro{postnote}}
 \DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
 {\defcounter{maxnames}{\blx@maxbibnames}%
-	\usebibmacro{prenote}}
+  \usebibmacro{prenote}}
 {\usedriver
-	{\DeclareNameAlias{sortname}{default}}
-	{\thefield{entrytype}}}
+  {\DeclareNameAlias{sortname}{default}}
+  {\thefield{entrytype}}}
 {\multicitedelim}
 {\usebibmacro{postnote}}
 
 % patch language field (https://tex.stackexchange.com/a/141831/29873)
-
 \DeclareSourcemap{
-	\maps{
-		\map{
-			\step[fieldsource=language, fieldset=langid, origfieldval, final]
-			\step[fieldset=language, null]
-		}
-	}
+  \maps{
+    \map{
+      \step[fieldsource=language, fieldset=langid, origfieldval, final]
+      \step[fieldset=language, null]
+    }
+  }
 }
 
 \RequirePackage{datetime2}
@@ -121,49 +121,48 @@
 \RequirePackage{academicons}
 \RequirePackage{parskip}
 \RequirePackage{unicode-math}
-\defaultfontfeatures{Scale=MatchLowercase}
-\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 
 \setmainfont{texgyrepagella}[
-	Extension = .otf,
-	UprightFont = *-regular,
-	BoldFont = *-bold,
-	ItalicFont = *-italic,
-	BoldItalicFont = *-bolditalic]
+  Extension = .otf,
+  UprightFont = *-regular,
+  BoldFont = *-bold,
+  ItalicFont = *-italic,
+  BoldItalicFont = *-bolditalic]
 
 \setmathfont{texgyrepagella-math}[
-	Extension = .otf,]
+  Extension = .otf,]
 
 \setsansfont{FiraSans}[
-	Extension = .otf,
-	UprightFont = *-Regular,
-	BoldFont = *-Bold,
-	ItalicFont = *-Italic,
-	BoldItalicFont = *-BoldItalic]
+  Extension = .otf,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
 
 \setmonofont{FiraCode}[
-	Extension = .ttf,
-	Path = ./fonts/firacode/,
-	Contextuals = Alternate,
-	UprightFont = *-Regular,
-	BoldFont = *-Bold,]
+  Extension = .ttf,
+  Path = ./fonts/firacode/,
+  Contextuals = Alternate,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,]
 
 \newfontfamily{\ubuntu}{Ubuntu}[
-	Extension = .ttf,
-	Path = ./fonts/ubuntu/,
-	UprightFont = *-R,
-	BoldFont = *-B,
-	ItalicFont = *-RI,
-	BoldItalicFont = *-BI]
+  Extension = .ttf,
+  Path = ./fonts/ubuntu/,
+  UprightFont = *-R,
+  BoldFont = *-B,
+  ItalicFont = *-RI,
+  BoldItalicFont = *-BI]
 
 \newfontfamily{\ubuntumono}{UbuntuMono}[
-	Extension = .ttf,
-	Path = ./fonts/ubuntu/,
-	UprightFont = *-R,
-	BoldFont = *-B,
-	ItalicFont = *-RI,
-	BoldItalicFont = *-BI]
-
+  Extension = .ttf,
+  Path = ./fonts/ubuntu/,
+  UprightFont = *-R,
+  BoldFont = *-B,
+  ItalicFont = *-RI,
+  BoldItalicFont = *-BI]
 
 \RequirePackage{microtype}
 \RequirePackage{lua-widow-control}
@@ -174,16 +173,16 @@
 % layout
 \RequirePackage{geometry}
 \geometry{
-	paper=a4paper,
-	top=25mm,
-	bottom=25mm,
-	right=17mm,
-	left=60mm,
-	footskip=10mm,
-	marginparsep=3mm,
-	marginparwidth=40mm,
-	reversemarginpar=true,
-	% 	showframe,
+  paper=a4paper,
+  top=25mm,
+  bottom=25mm,
+  right=17mm,
+  left=60mm,
+  footskip=10mm,
+  marginparsep=3mm,
+  marginparwidth=40mm,
+  reversemarginpar=true,
+  % 	showframe,
 }
 
 
@@ -195,11 +194,11 @@
 
 % captions and notes
 \RequirePackage[
-	%format=hang,
-	justification=raggedright,
-	singlelinecheck=off,
-	labelfont=bf,
-	font={normalfont,sf}]{caption}
+  %format=hang,
+  justification=raggedright,
+  singlelinecheck=off,
+  labelfont=bf,
+  font={normalfont,sf}]{caption}
 
 \RequirePackage{subcaption}
 \RequirePackage{sidenotes}
@@ -215,247 +214,249 @@
 % tables
 \RequirePackage{booktabs}
 \RequirePackage{longtable}
-\setlength\LTleft{0pt}
-\setlength\LTright{\fill}
+  \setlength\LTleft{0pt}
+  \setlength\LTright{\fill}
 \RequirePackage{makecell}
 
 % orcid
 \DeclareRobustCommand\orcidlink[1]{%
-	\texorpdfstring{\href{https://orcid.org/#1}{\textcolor{orcid-green}{\aiOrcid}}}{https://orcid.org/#1}%
+  \texorpdfstring{\href{https://orcid.org/#1}{\textcolor{orcid-green}{\aiOrcid}}}{https://orcid.org/#1}%
 }
+
 % ror
 \DeclareRobustCommand\rorlink[1]{\texorpdfstring{%
-		\href{https://ror.org/#1}{\textcolor{ror-green}{\aiROR}}}{}}
+  \textorpdfstring{\href{https://ror.org/#1}{\textcolor{ror-green}{\aiROR}}}{https://tot.org/#1}%
+}
+
 % code
 \RequirePackage{listings}
 \RequirePackage[verbatim]{lstfiracode}
 
 \RequirePackage[right]{lineno}
-\renewcommand{\linenumberfont}{\ttfamily\small\color{primarycolor}}
+  \renewcommand{\linenumberfont}{\ttfamily\small\color{primarycolor}}
 
 \lstset{
-	style=FiraCodeStyle,
-	basicstyle=\ttfamily,
-	commentstyle=\itshape\color{graycolor},
-	keywordstyle=\bfseries\color{highlightcolor2},
-	numberstyle=\ttfamily\small\color{graycolor},
-	stringstyle=\color{highlightcolor3},
-	breakatwhitespace=false,
-	breaklines=true,
-	captionpos=b,
-	keepspaces=true,
-	numbers=left,
-	numbersep=1em,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	tabsize=2
+  style=FiraCodeStyle,
+  basicstyle=\ttfamily,
+  commentstyle=\itshape\color{graycolor},
+  keywordstyle=\bfseries\color{highlightcolor2},
+  numberstyle=\ttfamily\small\color{graycolor},
+  stringstyle=\color{highlightcolor3},
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=1em,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
 }
 
 \RequirePackage{selnolig}
 \RequirePackage{marginnote}
-\renewcommand*{\marginfont}{\sffamily\footnotesize}
-\renewcommand*{\raggedleftmarginnote}{}
+  \renewcommand*{\marginfont}{\sffamily\footnotesize}
+  \renewcommand*{\raggedleftmarginnote}{}
 \RequirePackage{marginfix}
 
 \RequirePackage{changepage}
 \RequirePackage{ifthen}
-\newlength{\overhang}
-\setlength{\overhang}{\marginparwidth + \marginparsep}
+  \newlength{\overhang}
+  \setlength{\overhang}{\marginparwidth + \marginparsep}
 
 \RenewDocumentEnvironment{table*}{ O{htbp} }
 {
-\ifthenelse{\boolean{@twoside}}
-{
-	\begin{table}[#1]
-	\begin{adjustwidth*}{-.5\overhang}{}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \begin{table}[#1]
+    \begin{adjustwidth*}{-.5\overhang}{}
+  }
+  {
+    \begin{table}[#1]
+    \begin{adjustwidth}{-.5\overhang}{}
+  }
+  \captionsetup{style=widetable, margin=.5\overhang}
 }
 {
-	\begin{table}[#1]
-		\begin{adjustwidth}{-.5\overhang}{}
-			}
-			\captionsetup{style=widetable, margin=.5\overhang}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
-		\end{adjustwidth}
-		}
-	\end{table}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \end{adjustwidth*}
+  }
+  {
+    \end{adjustwidth}
+  }
+  \end{table}
 }
 
 \RenewDocumentEnvironment{figure*}{ O{htbp} }
 {
-\ifthenelse{\boolean{@twoside}}
-{
-	\begin{figure}[#1]
-	\begin{adjustwidth*}{-.5\overhang}{}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \begin{figure}[#1]
+    \begin{adjustwidth*}{-.5\overhang}{}
+  }
+  {
+    \begin{figure}[#1]
+    \begin{adjustwidth}{-.5\overhang}{}
+  }
+  \captionsetup{style=widefigure,margin=.5\overhang}
 }
 {
-	\begin{figure}[#1]
-		\begin{adjustwidth}{-.5\overhang}{}
-			}
-			\captionsetup{style=widefigure,margin=.5\overhang}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
-		\end{adjustwidth}
-		}
-	\end{figure}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \end{adjustwidth*}
+  }
+  {
+    \end{adjustwidth}
+  }
+  \end{figure}
 }
 
 \NewDocumentEnvironment{fullwidthtable}{ O{htbp} }
 {
-\ifthenelse{\boolean{@twoside}}
-{
-	\begin{table}[#1]
-	\begin{adjustwidth*}{-\overhang}{}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \begin{table}[#1]
+    \begin{adjustwidth*}{-\overhang}{}
+  }
+  {
+    \begin{table}[#1]
+    \begin{adjustwidth}{-\overhang}{}
+  }
+  \captionsetup{style=widetable, margin=\overhang}
 }
 {
-	\begin{table}[#1]
-		\begin{adjustwidth}{-\overhang}{}
-			}
-			\captionsetup{style=widetable, margin=\overhang}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
-		\end{adjustwidth}
-		}
-	\end{table}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \end{adjustwidth*}
+  }
+  {
+    \end{adjustwidth}
+  }
+  \end{table}
 }
 
 \NewDocumentEnvironment{fullwidthfigure}{ O{htbp} }
 {
-\ifthenelse{\boolean{@twoside}}
-{
-	\begin{figure}[#1]
-	\begin{adjustwidth*}{-\overhang}{}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \begin{figure}[#1]
+    \begin{adjustwidth*}{-\overhang}{}
+  }
+  {
+    \begin{figure}[#1]
+    \begin{adjustwidth}{-\overhang}{}
+  }
+  \captionsetup{style=widefigure, margin=\overhang}
 }
 {
-	\begin{figure}[#1]
-		\begin{adjustwidth}{-\overhang}{}
-			}
-			\captionsetup{style=widefigure, margin=\overhang}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
-		\end{adjustwidth}
-		}
-	\end{figure}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \end{adjustwidth*}
+  }
+  {
+    \end{adjustwidth}
+  }
+  \end{figure}
 }
 
 \NewDocumentEnvironment{fullwidth}{}
 {
-	\ifthenelse{\boolean{@twoside}}
-	{
-		\begin{adjustwidth*}{-\overhang}{}
-	}
-	{
-		\begin{adjustwidth}{-\overhang}{}
-			}
-			% \captionsetup{style=widefigure, margin=\overhang}
-			\setlength\LTleft{-\overhang}
-			\setlength\LTright{0pt}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
-		\end{adjustwidth}
-	}
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \begin{adjustwidth*}{-\overhang}{}
+  }
+  {
+    \begin{adjustwidth}{-\overhang}{}
+  }
+  \setlength\LTleft{-\overhang}
+  \setlength\LTright{0pt}
+}
+{
+  \ifthenelse{\boolean{@twoside}}
+  {
+    \end{adjustwidth*}
+  }
+  {
+    \end{adjustwidth}
+  }
 }
 
 \RequirePackage{pdflscape}
 \RequirePackage{tcolorbox}
-\newtcolorbox{titlebox}{colback=white,arc=0pt,outer arc=0pt,colframe=white}
-\newtcolorbox{abstractbox}{colback=secundarycolor!10,arc=0pt,outer arc=0pt,colframe=secundarycolor!10}
+  \newtcolorbox{titlebox}{colback=white,arc=0pt,outer arc=0pt,colframe=white}
+  \newtcolorbox{abstractbox}{colback=secundarycolor!10,arc=0pt,outer arc=0pt,colframe=secundarycolor!10}
 \RequirePackage[ragged,bottom,norule,multiple]{footmisc}
-\renewcommand{\footnotemargin}{0em}
-\renewcommand*{\thefootnote}{\arabic{footnote}}
-\renewcommand*\@makefntext[1]%
-{\noindent{\@thefnmark}. #1}
+  \renewcommand{\footnotemargin}{0em}
+  \renewcommand*{\thefootnote}{\arabic{footnote}}
+  \renewcommand*\@makefntext[1]%
+    {\noindent{\@thefnmark}. #1}
 \interfootnotelinepenalty=10000
 
 
 \NewDocumentCommand\setfield{mO{}m}%
-{\csdef{@#1#2}{#3}}
+  {\csdef{@#1#2}{#3}}
 \NewDocumentCommand\getfield{mO{}}%
-{\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
+  {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
 \NewDocumentCommand\printfield{mO{}O{}}{%
-\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}%
+  \ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}%
 }
 
 \NewDocumentCommand\keywords{m}%
-{\setfield{keywords}{#1}}
+  {\setfield{keywords}{#1}}
 \NewDocumentCommand\datereceived{m}%
-{\setfield{datereceived}{#1}}
+  {\setfield{datereceived}{#1}}
 \NewDocumentCommand\dateaccepted{m}%
-{\setfield{dateaccepted}{#1}}
-\let\date\relax
+  {\setfield{dateaccepted}{#1}}
+  \let\date\relax
 \NewDocumentCommand\datepublished{m}%
 {
-	\setfield{datepublished}{#1}%
-	\setfield{date}{#1}
+  \setfield{datepublished}{#1}%
+  \setfield{date}{#1}
 }
 \NewDocumentCommand\doi{m}%
 {\@ifmtarg{#1}
-	{}
-	{\setfield{doi}{\href{https://doi.org/#1}{doi.org/#1}}}
+  {}
+  {\setfield{doi}{\href{https://doi.org/#1}{doi.org/#1}}}
 }
 \NewDocumentCommand\shorttitle{m}%
-{\setfield{shorttitle}{#1}}
+  {\setfield{shorttitle}{#1}}
 \NewDocumentCommand\howtocite{m}%
-{\setfield{howtocite}{#1}}
+  {\setfield{howtocite}{#1}}
 \NewDocumentCommand\subtitle{m}%
-{\setfield{subtitle}{#1}}
+  {\setfield{subtitle}{#1}}
 \NewDocumentCommand\articletype{m}%
 {\@ifmtarg{#1}
-	{\setfield{articletype}{SUBMITTED}}
-	{\setfield{articletype}{#1}}
+  {\setfield{articletype}{SUBMITTED}}
+  {\setfield{articletype}{#1}}
 }
 \NewDocumentCommand\issuetitle{m}%
-{\setfield{issuetitle}{#1}}
+  {\setfield{issuetitle}{#1}}
 \NewDocumentCommand\issuenumber{m}%
-{\setfield{issuenumber}{#1}}
+  {\setfield{issuenumber}{#1}}
 \NewDocumentCommand\issuenote{m}%
-{\setfield{issuenote}{#1}}
+  {\setfield{issuenote}{#1}}
 \NewDocumentCommand\reviewers{m}%
-{\setfield{reviewers}{#1}}
+  {\setfield{reviewers}{#1}}
 \NewDocumentCommand\dataavailability{m}%
-{\setfield{dataavailability}{#1}}
+  {\setfield{dataavailability}{#1}}
 \NewDocumentCommand\softwareavailability{m}%
-{\setfield{softwareavailability}{#1}}
+  {\setfield{softwareavailability}{#1}}
 \NewDocumentCommand\license{m}%
-{\setfield{license}{#1}}
+  {\setfield{license}{#1}}
 
 \NewDocumentCommand\sideinfos{}{}
 \NewDocumentCommand\sideinfo{mmm}{%
-	\gappto\sideinfos{%
-		\marginpar{\raggedright\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{1.5ex}}%
-	}
+  \gappto\sideinfos{%
+    \marginpar{\raggedright\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{1.5ex}}%
+  }
 }
 
 \NewDocumentCommand\sideinfofield{mmO{\newline}}{%
-	\ifcsvoid{@#2}
-	{}
-	{\sideinfo{#1}{\csuse{@#2}}{#3}}
+  \ifcsvoid{@#2}
+  {}
+  {\sideinfo{#1}{\csuse{@#2}}{#3}}
 }
 
 % authors and affiliations
@@ -472,9 +473,9 @@
 \define@key{author}{cor-id}{\csdef{author@corid}{#1}}
 \define@key{author}{contribution}{\csdef{author@contribution}{#1}}
 \presetkeys{author}{ % Set default values 
-	email=,
-	affiliation=,
-	contribution=,
+  email=,
+  affiliation=,
+  contribution=,
 }{}
 
 \define@key{affiliation}{id}{\csdef{aff@id}{#1}}
@@ -490,142 +491,142 @@
 \define@key{affiliation}{country}{\csdef{aff@country}{#1}}
 \define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
 \presetkeys{affiliation}{ % Set default values 
-	department=\textcolor{jcls-red}{DEPARTMENT},
-	organization=\textcolor{jcls-red}{ORG},
-	ror=,
-	street-address=,
-	city=\textcolor{jcls-red}{CITY},
-	country=\textcolor{jcls-red}{COUNTRY},
-	country-code=,
+  department=\textcolor{jcls-red}{DEPARTMENT},
+  organization=\textcolor{jcls-red}{ORG},
+  ror=,
+  street-address=,
+  city=\textcolor{jcls-red}{CITY},
+  country=\textcolor{jcls-red}{COUNTRY},
+  country-code=,
 }{}
 
 \RenewDocumentCommand\author{m}{%
-	\begingroup
-	\global\stepcounter{authors}%
-	\setkeys{author}{#1}%
-	\global\csedef{@orcid\theauthors}{\expandafter\author@orcid}%
-	\global\csedef{@surname\theauthors}{\expandafter\author@surname}%
-	\global\csedef{@givennames\theauthors}{\expandafter\author@givennames}%
-	\global\csedef{@email\theauthors}{\expandafter\author@email}%
-	\global\csedef{@affiliation\theauthors}{\expandafter\author@affiliation}%
-	\global\csedef{@contribution\theauthors}{\expandafter\author@contribution}%
-	\endgroup
+  \begingroup
+  \global\stepcounter{authors}%
+  \setkeys{author}{#1}%
+  \global\csedef{@orcid\theauthors}{\expandafter\author@orcid}%
+  \global\csedef{@surname\theauthors}{\expandafter\author@surname}%
+  \global\csedef{@givennames\theauthors}{\expandafter\author@givennames}%
+  \global\csedef{@email\theauthors}{\expandafter\author@email}%
+  \global\csedef{@affiliation\theauthors}{\expandafter\author@affiliation}%
+  \global\csedef{@contribution\theauthors}{\expandafter\author@contribution}%
+  \endgroup
 }
 
 \NewDocumentCommand\affiliation{m}{%
-	\begingroup
-	\setkeys{affiliation}{#1}
-	\global\csedef{@department\aff@id}{\expandafter\aff@department}%
-	\global\csedef{@organization\aff@id}{\expandafter\aff@organization}%
-	\global\csedef{@ror\aff@id}{\expandafter\aff@ror}%
-	\global\csedef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
-	\global\csedef{@city\aff@id}{\expandafter\aff@city}%
-	\global\csedef{@country\aff@id}{\expandafter\aff@country}%
-	\endgroup
+  \begingroup
+  \setkeys{affiliation}{#1}
+  \global\csedef{@department\aff@id}{\expandafter\aff@department}%
+  \global\csedef{@organization\aff@id}{\expandafter\aff@organization}%
+  \global\csedef{@ror\aff@id}{\expandafter\aff@ror}%
+  \global\csedef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
+  \global\csedef{@city\aff@id}{\expandafter\aff@city}%
+  \global\csedef{@country\aff@id}{\expandafter\aff@country}%
+  \endgroup
 }
 
 \NewDocumentCommand\printauthor{m}{%
-	\printfield{givennames}[#1] \printfield{surname}[#1]
-	\ifcsvoid{@orcid#1}
-	{\unskip}
-	{\unskip\,\orcidlink{\csuse{@orcid#1}}}
-	\ifcsvoid{@affiliation#1}
-	{}
-	{\ifcsvoid{@affilmarker\csuse{@affiliation#1}}
-		{\stepcounter{affiliations}%
-			\csedef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
-			\csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}}
-		{}}%
-	\unskip\,\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
+  \printfield{givennames}[#1] \printfield{surname}[#1]
+  \ifcsvoid{@orcid#1}
+  {\unskip}
+  {\unskip\,\orcidlink{\csuse{@orcid#1}}}
+  \ifcsvoid{@affiliation#1}
+  {}
+  {\ifcsvoid{@affilmarker\csuse{@affiliation#1}}
+    {\stepcounter{affiliations}%
+      \csedef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
+      \csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}}
+    {}}%
+  \unskip\,\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
 }
 
 \NewDocumentCommand\printaffiliation{m}{%
-	\item[\csuse{@affilmarker#1}.]
-	\printfield{department}[#1][, ]%
-	\printfield{organization}[#1]%
-	\ifcsvoid{@ror#1}{\unskip,}{\unskip\,\rorlink{\csuse{@ror#1}},}
-	\printfield{streetaddress}[#1][, ]%
-	\printfield{city}[#1][, ]%
-	\printfield{country}[#1][.]%
+  \item[\csuse{@affilmarker#1}.]
+  \printfield{department}[#1][, ]%
+  \printfield{organization}[#1]%
+  \ifcsvoid{@ror#1}{\unskip,}{\unskip\,\rorlink{\csuse{@ror#1}},}
+  \printfield{streetaddress}[#1][, ]%
+  \printfield{city}[#1][, ]%
+  \printfield{country}[#1][.]%
 }
 
 \NewDocumentCommand\printcontribution{m}{%
-	\ifcsvoid{@contribution#1}
-	{}
-	{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
+  \ifcsvoid{@contribution#1}
+  {}
+  {\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
 }
 
 \NewDocumentCommand\printauthors{}{%
-	\setcounter{counter}{0}
-	\@whilenum\value{counter}<\value{authors}\do{%
-		\stepcounter{counter}\printauthor{\thecounter}\par
-	}
+  \setcounter{counter}{0}
+  \@whilenum\value{counter}<\value{authors}\do{%
+    \stepcounter{counter}\printauthor{\thecounter}\par
+  }
 }
 
 \NewDocumentCommand\printaffiliations{}{%
-	\setcounter{counter}{0}
-	\begin{enumerate}[left=\parindent,labelwidth=1em]
-		\@whilenum\value{counter}<\value{affiliations}\do{%
-			\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par
-		}
-	\end{enumerate}
+  \setcounter{counter}{0}
+  \begin{enumerate}[left=\parindent,labelwidth=1em]
+    \@whilenum\value{counter}<\value{affiliations}\do{%
+      \stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par
+    }
+  \end{enumerate}
 }
 
 \NewDocumentCommand\printcontributions{}{%
-	\section{Author contributions}
-	\setcounter{counter}{0}
-	\@whilenum\value{counter}<\value{authors}\do{%
-		\stepcounter{counter}\printcontribution{\thecounter}\par
-	}
+  \section{Author contributions}
+  \setcounter{counter}{0}
+  \@whilenum\value{counter}<\value{authors}\do{%
+    \stepcounter{counter}\printcontribution{\thecounter}\par
+  }
 }
 
 \NewDocumentCommand\printacknowledgements{}{%
-	\IfFileExists{acknowledgements.tex}
-	{\section{Acknowledgements}
-		\input{acknowledgements.tex}}
-	{}
+  \IfFileExists{acknowledgements.tex}
+  {\section{Acknowledgements}
+    \input{acknowledgements.tex}}
+  {}
 }
 
 \NewDocumentCommand\printdataavailability{}{%
-	\ifcsvoid{@dataavailability}
-	{}
-	{\section{Data availability}
-		\getfield{dataavailability}}
+  \ifcsvoid{@dataavailability}
+  {}
+  {\section{Data availability}
+    \getfield{dataavailability}}
 }
 
 \NewDocumentCommand\printsoftwareavailability{}{%
-	\ifcsvoid{@softwareavailability}
-	{}
-	{\section{Software availability}
-		\getfield{softwareavailability}}
+  \ifcsvoid{@softwareavailability}
+  {}
+  {\section{Software availability}
+    \getfield{softwareavailability}}
 }
 
 \NewDocumentCommand\printarticletype{}{%
-	\ifcsvoid{@doi}
-	{\getfield{articletype}}
-	{\getfield{doi}}
+  \ifcsvoid{@doi}
+  {\getfield{articletype}}
+  {\getfield{doi}}
 }
 
 % headers and footers
 \RequirePackage{fancyhdr}
 
 \fancypagestyle{plain}{% used for the first page
-	\fancyhf{}% clear all header and footer fields 
-	\fancyhead[L]{}
-	\fancyfoot[L]{}
-	\fancyfoot[R]{\sffamily \thepage}
-	\renewcommand{\headrulewidth}{0pt}% 
-	\renewcommand{\footrulewidth}{0pt}%
+  \fancyhf{}% clear all header and footer fields 
+  \fancyhead[L]{}
+  \fancyfoot[L]{}
+  \fancyfoot[R]{\sffamily \thepage}
+  \renewcommand{\headrulewidth}{0pt}% 
+  \renewcommand{\footrulewidth}{0pt}%
 }
 
 \fancypagestyle{jcls}{% 
-	\fancyhf{}% clear all header and footer fields 
-	\fancyhead[L]{}
-	\fancyhead[R]{\sffamily \getfield{shorttitle}}
-	\fancyfoot[L]{\sffamily JCLS, \getfield{issuenumber}, \the\year, \getfield{articletype}}
-	\fancyfoot[R]{\sffamily \thepage}
-	\renewcommand{\headrulewidth}{0pt}% 
-	\renewcommand{\footrulewidth}{0pt}%
+  \fancyhf{}% clear all header and footer fields 
+  \fancyhead[L]{}
+  \fancyhead[R]{\sffamily \getfield{shorttitle}}
+  \fancyfoot[L]{\sffamily JCLS, \getfield{issuenumber}, \the\year, \getfield{articletype}}
+  \fancyfoot[R]{\sffamily \thepage}
+  \renewcommand{\headrulewidth}{0pt}% 
+  \renewcommand{\footrulewidth}{0pt}%
 }
 \pagestyle{jcls}
 
@@ -643,56 +644,56 @@
 
 % title and sidebar
 \def\@maketitle{% 
-	%
-	% title
-	%
-	\begin{titlebox}
-		\begin{flushleft}%
-			\setstretch{1.0}%
-			\normalsize\sffamily%
-			{\getfield{articletype}\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}} \par}
-			% \vspace{\baselineskip}
-			{\LARGE\bfseries \getfield{title} \par}
-			{\Large \getfield{subtitle} \par}
-			{\vspace{1.5\baselineskip}%
-				\normalsize\printauthors
-				\vspace{\baselineskip}%
-				{\footnotesize\printaffiliations}
-				\vspace{\baselineskip}}
-		\end{flushleft}%
-	\end{titlebox}
-	%
-	% sidebar
-	%
-	\marginpar{% OpenAccess Logo
-		\vspace{2ex}
-		\adjustbox{width=2em}{\textcolor{white}{\aiOpenAccess}}%
-		\vspace{2ex}
-	}
-	\sideinfofield{Citation}{howtocite}
-	\sideinfofield{Date published}{datepublished}[]
-	\sideinfofield{Date accepted}{dateaccepted}[]
-	\sideinfofield{Date received}{datereceived}[]
-	\sideinfofield{Keywords}{keywords}
-	\sideinfofield{License}{license}
-	\sideinfofield{Reviewers}{reviewers}
-	\sideinfofield{Note}{issuenote}
-	\sideinfos%
+  %
+  % title
+  %
+  \begin{titlebox}
+    \begin{flushleft}%
+      \setstretch{1.0}%
+      \normalsize\sffamily%
+      {\getfield{articletype}\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}} \par}
+      % \vspace{\baselineskip}
+      {\LARGE\bfseries \getfield{title} \par}
+      {\Large \getfield{subtitle} \par}
+      {\vspace{1.5\baselineskip}%
+        \normalsize\printauthors
+        \vspace{\baselineskip}%
+        {\footnotesize\printaffiliations}
+        \vspace{\baselineskip}}
+    \end{flushleft}%
+  \end{titlebox}
+  %
+  % sidebar
+  %
+  \marginpar{% OpenAccess Logo
+    \vspace{2ex}
+    \adjustbox{width=2em}{\textcolor{white}{\aiOpenAccess}}%
+    \vspace{2ex}
+  }
+  \sideinfofield{Citation}{howtocite}
+  \sideinfofield{Date published}{datepublished}[]
+  \sideinfofield{Date accepted}{dateaccepted}[]
+  \sideinfofield{Date received}{datereceived}[]
+  \sideinfofield{Keywords}{keywords}
+  \sideinfofield{License}{license}
+  \sideinfofield{Reviewers}{reviewers}
+  \sideinfofield{Note}{issuenote}
+  \sideinfos%
 }
 
 % abstract
 \renewenvironment{abstract}
 {\begin{abstractbox}
-		\sffamily\textbf{\abstractname.}}
-		{\end{abstractbox}}
+    \sffamily\textbf{\abstractname.}}
+    {\end{abstractbox}}
 
 \RequirePackage{hyperref}
 \hypersetup{
-	colorlinks=true,
-	filecolor=filecolor,
-	linkcolor=linkcolor,
-	urlcolor=urlcolor,
-	citecolor=citecolor}
+  colorlinks=true,
+  filecolor=filecolor,
+  linkcolor=linkcolor,
+  urlcolor=urlcolor,
+  citecolor=citecolor}
 
 \IfFileExists{./metadata/self.bib}
 {\addbibresource{./metadata/self.bib} \howtocite{\fullcite{self}}}
@@ -709,11 +710,11 @@
 \RequirePackage[contents={},scale=5,color=blue!50]{background}
 
 \NewDocumentCommand\printwatermark{}{
-	\AddToHook{shipout/background}{%
-		\ifthenelse{\value{page}>1}%
-		{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
-	{}
-	\BgMaterial
+  \AddToHook{shipout/background}{%
+    \ifthenelse{\value{page}>1}%
+    {\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
+  {}
+  \BgMaterial
 }
 }
 
@@ -722,9 +723,9 @@
 {}
 
 \AtEndEnvironment{document}{
-	\printdataavailability
-	\printsoftwareavailability
-	\printacknowledgements
-	\printcontributions
-	\printbibliography
+  \printdataavailability
+  \printsoftwareavailability
+  \printacknowledgements
+  \printcontributions
+  \printbibliography
 }
