@@ -473,6 +473,7 @@
 \define@key{author}{cor-id}{\csdef{author@corid}{#1}}
 \define@key{author}{contribution}{\csdef{author@contribution}{#1}}
 \presetkeys{author}{ % Set default values 
+  orcid=,
   email=,
   affiliation=,
   contribution=,
