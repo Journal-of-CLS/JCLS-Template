@@ -624,7 +624,7 @@
 	\fancyhf{}% clear all header and footer fields 
 	\fancyhead[L]{}
 	\fancyhead[R]{\sffamily \getfield{shorttitle}}
-	\fancyfoot[L]{\sffamily JCLS, \getfield{issuenumber}, \the\year, \printarticletype}
+	\fancyfoot[L]{\sffamily JCLS (\getfield{issuenumber}), \the\year, \printarticletype}
 	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
