@@ -598,14 +598,14 @@
 \NewDocumentCommand\printdataavailability{}{%
 	\ifcsvoid{@dataavailability}
 	{}
-	{\section{Data availability}
+	{\section{Data Availability}
 		\getfield{dataavailability}}
 }
 
 \NewDocumentCommand\printsoftwareavailability{}{%
 	\ifcsvoid{@softwareavailability}
 	{}
-	{\section{Software availability}
+	{\section{Software Availability}
 		\getfield{softwareavailability}}
 }
 
