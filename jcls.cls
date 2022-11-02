@@ -56,6 +56,13 @@
 \RequirePackage{ifmtarg}
 \RequirePackage{xkeyval}
 
+\AtBeginDocument{%
+	\ifx\Umathchar\undefined\else
+		\def\encodingdefault{TU}%
+		\fontencoding{TU}\selectfont
+	\fi
+}
+
 \RequirePackage[english]{babel}
 \RequirePackage{csquotes}
 
