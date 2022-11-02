@@ -56,6 +56,7 @@
 \RequirePackage{ifmtarg}
 \RequirePackage{xkeyval}
 
+% https://tex.stackexchange.com/a/663846/29873
 \AtBeginDocument{%
 	\ifx\Umathchar\undefined\else
 		\def\encodingdefault{TU}%
