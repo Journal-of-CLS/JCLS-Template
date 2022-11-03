@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2022/11/02 v0.6.4 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2022-11-02 v0.6.4}
+\ProvidesClass{jcls}[2022/11/03 v0.6.5 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2022-11-03 v0.6.5}
 
 \LoadClass{article}
 
@@ -128,6 +128,7 @@
 \RequirePackage{ccicons}
 \RequirePackage{academicons}
 \RequirePackage{parskip}
+\RequirePackage{ragged2e}
 \RequirePackage{unicode-math}
 \defaultfontfeatures{Scale=MatchLowercase}
 \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
@@ -425,16 +426,14 @@
 {\setfield{license}{#1}}
 
 \NewDocumentCommand\sideinfos{}{}
-\NewDocumentCommand\sideinfo{mmm}{%
+\NewDocumentCommand\sideinfo{mmmm}{%
 	\gappto\sideinfos{%
-		\marginpar{\raggedright\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{1.5ex}}%
+		\marginpar{\RaggedRight\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{#4}}%
 	}
 }
 
-\NewDocumentCommand\sideinfofield{mmO{\newline}}{%
-	\ifcsvoid{@#2}
-	{}
-	{\sideinfo{#1}{\csuse{@#2}}{#3}}
+\NewDocumentCommand\sideinfofield{mmO{\newline}O{1ex}}{%
+	\ifcsvoid{@#2}{}{\sideinfo{#1}{\csuse{@#2}}{#3}{#4}}
 }
 
 % authors and affiliations
@@ -469,7 +468,7 @@
 \define@key{affiliation}{city}{\csdef{aff@city}{#1}}
 \define@key{affiliation}{country}{\csdef{aff@country}{#1}}
 \define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
-\presetkeys{affiliation}{ % Set default values 
+\presetkeys{affiliation}{% Set default values 
 	department=\textcolor{jcls-red}{DEPARTMENT},
 	organization=\textcolor{jcls-red}{ORG},
 	ror=,
@@ -653,8 +652,8 @@
 		\vspace{2ex}
 	}
 	\sideinfofield{Citation}{howtocite}
-	\sideinfofield{Date published}{datepublished}[]
-	\sideinfofield{Date accepted}{dateaccepted}[]
+	\sideinfofield{Date published}{datepublished}[][0ex]
+	\sideinfofield{Date accepted}{dateaccepted}[][0ex]
 	\sideinfofield{Date received}{datereceived}[]
 	\sideinfofield{Keywords}{keywords}
 	\sideinfofield{License}{license}
