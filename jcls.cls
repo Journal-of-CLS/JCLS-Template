@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2022/11/2 v0.6.4 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2022-11-2 v0.6.4}
+\ProvidesClass{jcls}[2022/11/02 v0.6.4 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2022-11-02 v0.6.4}
 
 \LoadClass{article}
 
@@ -56,7 +56,7 @@
 \RequirePackage{ifmtarg}
 \RequirePackage{xkeyval}
 
-% https://tex.stackexchange.com/a/663846/29873
+% Force unicode (https://tex.stackexchange.com/a/663846/29873)
 \AtBeginDocument{%
 	\ifx\Umathchar\undefined\else
 		\def\encodingdefault{TU}%
@@ -173,10 +173,10 @@
 	BoldItalicFont = *-BI]
 
 \RequirePackage{microtype}
-\RequirePackage{lua-widow-control}
+% \RequirePackage{lua-widow-control}
 \RequirePackage{upquote}
 \RequirePackage{xurl}
-\RequirePackage{bookmark}
+\RequirePackage[numbered]{bookmark}
 
 % layout
 \RequirePackage{geometry}
@@ -228,12 +228,12 @@
 
 % orcid
 \DeclareRobustCommand\orcidlink[1]{%
-	\texorpdfstring{\href{https://orcid.org/#1}{\textcolor{orcid-green}{\aiOrcid}}}{https://orcid.org/#1}%
+	\texorpdfstring{\href{https://orcid.org/#1}{\textcolor{orcid-green}{\raisebox{-.3ex}{\aiOrcid}}}}{https://orcid.org/#1}%
 }
 
 % ror
 \DeclareRobustCommand\rorlink[1]{%
-	\texorpdfstring{\href{https://ror.org/#1}{\textcolor{ror-green}{\aiROR}}}{https://tot.org/#1}%
+	\texorpdfstring{\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}{https://tot.org/#1}%
 }
 
 % code
@@ -273,120 +273,90 @@
 \newlength{\overhang}
 \setlength{\overhang}{\marginparwidth + \marginparsep}
 
-\RenewDocumentEnvironment{table*}{ O{htbp} }
-{
-\ifthenelse{\boolean{@twoside}}
-{
-	\begin{table}[#1]
-	\begin{adjustwidth*}{-.5\overhang}{}
-}
-{
-	\begin{table}[#1]
-		\begin{adjustwidth}{-.5\overhang}{}
-			}
-			\captionsetup{style=widetable, margin=.5\overhang}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
+\RenewDocumentEnvironment{table*}{ O{htbp} }{%
+    \ifthenelse{\boolean{@twoside}}{%
+    	\begin{table}[#1]
+    	\begin{adjustwidth*}{-.5\overhang}{}
+    }{%
+    	\begin{table}[#1]
+    	\begin{adjustwidth}{-.5\overhang}{}
+    }
+    \captionsetup{style=widetable, margin=.5\overhang}
+}{%
+    \ifthenelse{\boolean{@twoside}}{%
+    	\end{adjustwidth*}
+    }{%
 		\end{adjustwidth}
-		}
-	\end{table}
-}
-
-\RenewDocumentEnvironment{figure*}{ O{htbp} }
-{
-\ifthenelse{\boolean{@twoside}}
-{
-	\begin{figure}[#1]
-	\begin{adjustwidth*}{-.5\overhang}{}
-}
-{
-	\begin{figure}[#1]
-		\begin{adjustwidth}{-.5\overhang}{}
-			}
-			\captionsetup{style=widefigure,margin=.5\overhang}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
-		\end{adjustwidth}
-		}
-	\end{figure}
-}
-
-\NewDocumentEnvironment{fullwidthtable}{ O{htbp} }
-{
-\ifthenelse{\boolean{@twoside}}
-{
-	\begin{table}[#1]
-	\begin{adjustwidth*}{-\overhang}{}
-}
-{
-	\begin{table}[#1]
-		\begin{adjustwidth}{-\overhang}{}
-			}
-			\captionsetup{style=widetable, margin=\overhang}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
-		\end{adjustwidth}
-		}
-	\end{table}
-}
-
-\NewDocumentEnvironment{fullwidthfigure}{ O{htbp} }
-{
-\ifthenelse{\boolean{@twoside}}
-{
-	\begin{figure}[#1]
-	\begin{adjustwidth*}{-\overhang}{}
-}
-{
-	\begin{figure}[#1]
-		\begin{adjustwidth}{-\overhang}{}
-			}
-			\captionsetup{style=widefigure, margin=\overhang}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
-		\end{adjustwidth}
-		}
-	\end{figure}
-}
-
-\NewDocumentEnvironment{fullwidth}{}
-{
-	\ifthenelse{\boolean{@twoside}}
-	{
-		\begin{adjustwidth*}{-\overhang}{}
 	}
-	{
+	\end{table}
+}
+
+\RenewDocumentEnvironment{figure*}{ O{htbp} }{%
+    \ifthenelse{\boolean{@twoside}}{%
+    	\begin{figure}[#1]
+    	\begin{adjustwidth*}{-.5\overhang}{}
+    }{%
+	   \begin{figure}[#1]
+		\begin{adjustwidth}{-.5\overhang}{}
+	}
+	\captionsetup{style=widefigure,margin=.5\overhang}
+}{%
+    \ifthenelse{\boolean{@twoside}}{%
+		\end{adjustwidth*}
+	}{%
+	   \end{adjustwidth}
+	}
+	\end{figure}
+}
+
+\NewDocumentEnvironment{fullwidthtable}{ O{htbp} }{%
+    \ifthenelse{\boolean{@twoside}}{%
+    	\begin{table}[#1]
+    	\begin{adjustwidth*}{-\overhang}{}
+    }{%
+	   \begin{table}[#1]
+	   \begin{adjustwidth}{-\overhang}{}
+	}
+	\captionsetup{style=widetable, margin=\overhang}
+}{%
+    \ifthenelse{\boolean{@twoside}}{%
+		\end{adjustwidth*}
+	}{%
+		\end{adjustwidth}
+	}
+	\end{table}
+}
+
+\NewDocumentEnvironment{fullwidthfigure}{ O{htbp} }{%
+    \ifthenelse{\boolean{@twoside}}{%
+    	\begin{figure}[#1]
+    	\begin{adjustwidth*}{-\overhang}{}
+    }{%
+	   \begin{figure}[#1]
+	   \begin{adjustwidth}{-\overhang}{}
+	}
+	\captionsetup{style=widefigure, margin=\overhang}
+}{%
+	\ifthenelse{\boolean{@twoside}}{%
+		\end{adjustwidth*}
+	}{%
+		\end{adjustwidth}
+	}
+	\end{figure}
+}
+
+\NewDocumentEnvironment{fullwidth}{}{%
+	\ifthenelse{\boolean{@twoside}}{%
+		\begin{adjustwidth*}{-\overhang}{}
+	}{%
 		\begin{adjustwidth}{-\overhang}{}
-			}
-			\setlength\LTleft{-\overhang}
-			\setlength\LTright{0pt}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{
-			\end{adjustwidth*}
-			}
-			{
+	}
+    \setlength\LTleft{-\overhang}
+	\setlength\LTright{0pt}
+}{%
+	\ifthenelse{\boolean{@twoside}}{%
+		\end{adjustwidth*}
+	}{%
 		\end{adjustwidth}
 	}
 }
@@ -535,18 +505,16 @@
 }
 
 \NewDocumentCommand\printauthor{m}{%
-	\printfield{givennames}[#1] \printfield{surname}[#1]
-	\ifcsvoid{@orcid#1}
-	{\unskip}
-	{\unskip\,\orcidlink{\csuse{@orcid#1}}}
-	\ifcsvoid{@affiliation#1}
-	{}
-	{\ifcsvoid{@affilmarker\csuse{@affiliation#1}}
-		{\stepcounter{affiliations}%
+	\ifcsvoid{@affiliation#1}{}{%
+		\ifcsvoid{@affilmarker\csuse{@affiliation#1}}{%
+			\stepcounter{affiliations}%
 			\csedef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
-			\csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}}
-		{}}%
-	\unskip\,\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
+			\csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}%
+		}{}%
+	}%
+	\printfield{givennames}[#1] \printfield{surname}[#1]
+	\unskip\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
+	\ifcsvoid{@orcid#1}{\unskip}{\unskip\,\orcidlink{\csuse{@orcid#1}}}
 }
 
 \NewDocumentCommand\printaffiliation{m}{%
@@ -560,9 +528,9 @@
 }
 
 \NewDocumentCommand\printcontribution{m}{%
-	\ifcsvoid{@contribution#1}
-	{}
-	{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
+	\ifcsvoid{@contribution#1}{}{%
+		\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]
+	}
 }
 
 \NewDocumentCommand\printauthors{}{%
@@ -590,32 +558,37 @@
 }
 
 \NewDocumentCommand\printacknowledgements{}{%
-	\IfFileExists{acknowledgements.tex}
-	{\section{Acknowledgements}
-		\input{acknowledgements.tex}}
-	{}
+	\IfFileExists{acknowledgements.tex}{%
+		\section{Acknowledgements}
+		\input{acknowledgements.tex}
+	}{}
 }
 
 \NewDocumentCommand\printdataavailability{}{%
-	\ifcsvoid{@dataavailability}
-	{}
-	{\section{Data Availability}
-		\getfield{dataavailability}}
+	\ifcsvoid{@dataavailability}{}{%
+		\section{Data Availability} 
+		\getfield{dataavailability}
+	}
 }
 
 \NewDocumentCommand\printsoftwareavailability{}{%
-	\ifcsvoid{@softwareavailability}
-	{}
-	{\section{Software Availability}
-		\getfield{softwareavailability}}
+	\ifcsvoid{@softwareavailability}{}{%
+		\section{Software Availability} 
+		\getfield{softwareavailability}
+	}
 }
 
 \NewDocumentCommand\printarticletype{}{%
-	\ifcsvoid{@doi}
-	{\getfield{articletype}}
-	{\getfield{doi}}
+	\ifcsvoid{@doi}{\getfield{articletype}}{\getfield{doi}}
 }
 
+\NewDocumentCommand\printappendix{}{%
+    \IfFileExists{./appendix.tex}{%
+        \appendix
+        \section{Appendix}
+        \input{./appendix.tex}
+    }{}
+}
 % headers and footers
 \RequirePackage{fancyhdr}
 
@@ -690,11 +663,13 @@
 	\sideinfos%
 }
 
-% abstract
-\renewenvironment{abstract}
-{\begin{abstractbox}
-		\sffamily\textbf{\abstractname.}}
-		{\end{abstractbox}}
+% Abstract
+\renewenvironment{abstract}{%
+	\begin{abstractbox}
+		\sffamily\textbf{\abstractname.}
+}{%
+	\end{abstractbox}
+}
 
 \RequirePackage{hyperref}
 \hypersetup{
@@ -704,37 +679,26 @@
 	urlcolor=urlcolor,
 	citecolor=citecolor}
 
-\IfFileExists{./metadata/self.bib}
-{\addbibresource{./metadata/self.bib} \howtocite{\fullcite{self}}}
-{}
+\IfFileExists{./metadata/self.bib}{\addbibresource{./metadata/self.bib} \howtocite{\fullcite{self}}}{}
+\IfFileExists{./metadata/authors.tex}{\input{./metadata/authors.tex}}{}
+\IfFileExists{./metadata/article.tex}{\input{./metadata/article.tex}}{}
 
-\IfFileExists{./metadata/authors.tex}
-{\input{./metadata/authors.tex}}
-{}
-
-\IfFileExists{./metadata/article.tex}
-{\input{./metadata/article.tex}}
-{}
-
-\RequirePackage[contents={},scale=5,color=blue!50]{background}
-
-\NewDocumentCommand\printwatermark{}{
-	\AddToHook{shipout/background}{%
-		\ifthenelse{\value{page}>1}%
-		{\backgroundsetup{contents={\normalfont\sffamily\getfield{articletype}}}}
-	{}
-	\BgMaterial
-}
+\RequirePackage{tikz}
+\NewDocumentCommand\printwatermark{}{%
+	\AddToHook{shipout/foreground}{%
+  		\begin{tikzpicture}[remember picture,overlay]
+    		\node[red,rotate=30,scale=10,opacity=0.2] at (current page.center) {\sffamily\getfield{articletype}}; 
+  		\end{tikzpicture}
+	}
 }
 
-\ifcsvoid{@doi}
-{\AddToHook{env/abstract/after}{\linenumbers\printwatermark}}
-{}
+\ifcsvoid{@doi}{\AddToHook{env/abstract/after}{\linenumbers\printwatermark}}{}
 
-\AtEndEnvironment{document}{
+\AtEndEnvironment{document}{%
 	\printdataavailability
 	\printsoftwareavailability
 	\printacknowledgements
 	\printcontributions
 	\printbibliography
+	\printappendix
 }
