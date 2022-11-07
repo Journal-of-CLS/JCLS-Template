@@ -133,15 +133,8 @@
 \defaultfontfeatures{Scale=MatchLowercase}
 \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 
-\setmainfont{texgyrepagella}[
-	Extension = .otf,
-	UprightFont = *-regular,
-	BoldFont = *-bold,
-	ItalicFont = *-italic,
-	BoldItalicFont = *-bolditalic]
-
-\setmathfont{texgyrepagella-math}[
-	Extension = .otf,]
+% Using a local copy until pagella-otf is avialable on overleaf
+\RequirePackage{./fonts/pagella-otf}
 
 \setsansfont{FiraSans}[
 	Extension = .otf,
@@ -152,26 +145,11 @@
 
 \setmonofont{FiraCode}[
 	Extension = .ttf,
+	Contextuals={Alternate},
 	Path = ./fonts/firacode/,
 	Contextuals = Alternate,
 	UprightFont = *-Regular,
 	BoldFont = *-Bold,]
-
-\newfontfamily{\ubuntu}{Ubuntu}[
-	Extension = .ttf,
-	Path = ./fonts/ubuntu/,
-	UprightFont = *-R,
-	BoldFont = *-B,
-	ItalicFont = *-RI,
-	BoldItalicFont = *-BI]
-
-\newfontfamily{\ubuntumono}{UbuntuMono}[
-	Extension = .ttf,
-	Path = ./fonts/ubuntu/,
-	UprightFont = *-R,
-	BoldFont = *-B,
-	ItalicFont = *-RI,
-	BoldItalicFont = *-BI]
 
 \RequirePackage{microtype}
 % \RequirePackage{lua-widow-control}
@@ -275,74 +253,74 @@
 \setlength{\overhang}{\marginparwidth + \marginparsep}
 
 \RenewDocumentEnvironment{table*}{ O{htbp} }{%
-    \ifthenelse{\boolean{@twoside}}{%
-    	\begin{table}[#1]
-    	\begin{adjustwidth*}{-.5\overhang}{}
-    }{%
-    	\begin{table}[#1]
-    	\begin{adjustwidth}{-.5\overhang}{}
-    }
-    \captionsetup{style=widetable, margin=.5\overhang}
+\ifthenelse{\boolean{@twoside}}{%
+	\begin{table}[#1]
+	\begin{adjustwidth*}{-.5\overhang}{}
 }{%
-    \ifthenelse{\boolean{@twoside}}{%
-    	\end{adjustwidth*}
-    }{%
+	\begin{table}[#1]
+		\begin{adjustwidth}{-.5\overhang}{}
+			}
+			\captionsetup{style=widetable, margin=.5\overhang}
+			}{%
+			\ifthenelse{\boolean{@twoside}}{%
+			\end{adjustwidth*}
+			}{%
 		\end{adjustwidth}
-	}
+		}
 	\end{table}
 }
 
 \RenewDocumentEnvironment{figure*}{ O{htbp} }{%
-    \ifthenelse{\boolean{@twoside}}{%
-    	\begin{figure}[#1]
-    	\begin{adjustwidth*}{-.5\overhang}{}
-    }{%
-	   \begin{figure}[#1]
-		\begin{adjustwidth}{-.5\overhang}{}
-	}
-	\captionsetup{style=widefigure,margin=.5\overhang}
+\ifthenelse{\boolean{@twoside}}{%
+	\begin{figure}[#1]
+	\begin{adjustwidth*}{-.5\overhang}{}
 }{%
-    \ifthenelse{\boolean{@twoside}}{%
-		\end{adjustwidth*}
-	}{%
-	   \end{adjustwidth}
-	}
+	\begin{figure}[#1]
+		\begin{adjustwidth}{-.5\overhang}{}
+			}
+			\captionsetup{style=widefigure,margin=.5\overhang}
+			}{%
+			\ifthenelse{\boolean{@twoside}}{%
+			\end{adjustwidth*}
+			}{%
+		\end{adjustwidth}
+		}
 	\end{figure}
 }
 
 \NewDocumentEnvironment{fullwidthtable}{ O{htbp} }{%
-    \ifthenelse{\boolean{@twoside}}{%
-    	\begin{table}[#1]
-    	\begin{adjustwidth*}{-\overhang}{}
-    }{%
-	   \begin{table}[#1]
-	   \begin{adjustwidth}{-\overhang}{}
-	}
-	\captionsetup{style=widetable, margin=\overhang}
+\ifthenelse{\boolean{@twoside}}{%
+	\begin{table}[#1]
+	\begin{adjustwidth*}{-\overhang}{}
 }{%
-    \ifthenelse{\boolean{@twoside}}{%
-		\end{adjustwidth*}
-	}{%
+	\begin{table}[#1]
+		\begin{adjustwidth}{-\overhang}{}
+			}
+			\captionsetup{style=widetable, margin=\overhang}
+			}{%
+			\ifthenelse{\boolean{@twoside}}{%
+			\end{adjustwidth*}
+			}{%
 		\end{adjustwidth}
-	}
+		}
 	\end{table}
 }
 
 \NewDocumentEnvironment{fullwidthfigure}{ O{htbp} }{%
-    \ifthenelse{\boolean{@twoside}}{%
-    	\begin{figure}[#1]
-    	\begin{adjustwidth*}{-\overhang}{}
-    }{%
-	   \begin{figure}[#1]
-	   \begin{adjustwidth}{-\overhang}{}
-	}
-	\captionsetup{style=widefigure, margin=\overhang}
+\ifthenelse{\boolean{@twoside}}{%
+	\begin{figure}[#1]
+	\begin{adjustwidth*}{-\overhang}{}
 }{%
-	\ifthenelse{\boolean{@twoside}}{%
-		\end{adjustwidth*}
-	}{%
+	\begin{figure}[#1]
+		\begin{adjustwidth}{-\overhang}{}
+			}
+			\captionsetup{style=widefigure, margin=\overhang}
+			}{%
+			\ifthenelse{\boolean{@twoside}}{%
+			\end{adjustwidth*}
+			}{%
 		\end{adjustwidth}
-	}
+		}
 	\end{figure}
 }
 
@@ -351,13 +329,13 @@
 		\begin{adjustwidth*}{-\overhang}{}
 	}{%
 		\begin{adjustwidth}{-\overhang}{}
-	}
-    \setlength\LTleft{-\overhang}
-	\setlength\LTright{0pt}
-}{%
-	\ifthenelse{\boolean{@twoside}}{%
-		\end{adjustwidth*}
-	}{%
+			}
+			\setlength\LTleft{-\overhang}
+			\setlength\LTright{0pt}
+			}{%
+			\ifthenelse{\boolean{@twoside}}{%
+			\end{adjustwidth*}
+			}{%
 		\end{adjustwidth}
 	}
 }
@@ -433,7 +411,7 @@
 }
 
 \NewDocumentCommand\sideinfofield{mmO{\newline}O{1ex}}{%
-	\ifcsvoid{@#2}{}{\sideinfo{#1}{\csuse{@#2}}{#3}{#4}}
+\ifcsvoid{@#2}{}{\sideinfo{#1}{\csuse{@#2}}{#3}{#4}}
 }
 
 % authors and affiliations
@@ -565,14 +543,14 @@
 
 \NewDocumentCommand\printdataavailability{}{%
 	\ifcsvoid{@dataavailability}{}{%
-		\section{Data Availability} 
+		\section{Data Availability}
 		\getfield{dataavailability}
 	}
 }
 
 \NewDocumentCommand\printsoftwareavailability{}{%
 	\ifcsvoid{@softwareavailability}{}{%
-		\section{Software Availability} 
+		\section{Software Availability}
 		\getfield{softwareavailability}
 	}
 }
@@ -582,11 +560,11 @@
 }
 
 \NewDocumentCommand\printappendix{}{%
-    \IfFileExists{./appendix.tex}{%
-        \appendix
-        \section{Appendix}
-        \input{./appendix.tex}
-    }{}
+	\IfFileExists{./appendix.tex}{%
+		\appendix
+		\section{Appendix}
+		\input{./appendix.tex}
+	}{}
 }
 % headers and footers
 \RequirePackage{fancyhdr}
@@ -666,7 +644,7 @@
 \renewenvironment{abstract}{%
 	\begin{abstractbox}
 		\sffamily\textbf{\abstractname.}
-}{%
+		}{%
 	\end{abstractbox}
 }
 
@@ -685,9 +663,9 @@
 \RequirePackage{tikz}
 \NewDocumentCommand\printwatermark{}{%
 	\AddToHook{shipout/foreground}{%
-  		\begin{tikzpicture}[remember picture,overlay]
-    		\node[red,rotate=30,scale=10,opacity=0.2] at (current page.center) {\sffamily\getfield{articletype}}; 
-  		\end{tikzpicture}
+		\begin{tikzpicture}[remember picture,overlay]
+			\node[red,rotate=30,scale=10,opacity=0.2] at (current page.center) {\sffamily\getfield{articletype}};
+		\end{tikzpicture}
 	}
 }
 
