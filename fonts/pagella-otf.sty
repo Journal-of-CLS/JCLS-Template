@@ -1,0 +1,281 @@
+%% $Id: pagella-otf.sty 633 2022-10-15 07:58:35Z herbert $
+%%
+%% This file is distributed under the terms of the LaTeX Project Public
+%% License from CTAN archives in directory  macros/latex/base/lppl.txt.
+%% Either version 1.3 or, at your option, any later version.
+%%
+%
+\ProvidesPackage{pagella-otf}[%
+  2022/10/15 v. 0.02 (Herbert Voss) Supports pagella fonts for lualatex and xelatex.] 
+
+\RequirePackage{iftex,xkeyval,textcomp}
+
+\newif\ifpagella@lining \pagella@liningtrue
+\newif\ifpagella@tabular \pagella@tabulartrue
+\newif\ifpagella@usefilenames \pagella@usefilenamestrue
+\newif\ifpagella@nomath \pagella@nomathfalse
+\newif\ifpagella@libertinus \pagella@libertinusfalse
+
+\DeclareOptionX{lining}[true]{\@nameuse{pagella@lining#1}}
+\DeclareOptionX{nf}[true]{\@nameuse{pagella@lining#1}}
+\DeclareOptionX{lf}[true]{\@nameuse{pagella@lining#1}}
+\DeclareOptionX{oldstyle}[true]{\@nameuse{if#1}\pagella@liningfalse\else\pagella@liningtrue\fi}
+\DeclareOptionX{osf}[true]{\@nameuse{if#1}\pagella@liningfalse\else\pagella@liningtrue\fi}
+\DeclareOptionX{libertinus}[true]{\@nameuse{pagella@libertinus#1}}
+
+\newcommand*\pagellaMM@feature{}
+\DeclareOptionX{math}[]{\renewcommand*\pagellaMM@feature{#1}}
+\DeclareOptionX{nomath}[true]{\@nameuse{pagella@nomath#1}}
+
+\DeclareOptionX{usefilenames}[true]{\@nameuse{pagella@usefilenames#1}}
+
+\DeclareOptionX{tabular}[true]{\@nameuse{pagella@tabular#1}}
+\DeclareOptionX{t}[true]{\@nameuse{pagella@tabular#1}}
+\DeclareOptionX{proportional}[true]{\@nameuse{if#1}\pagella@tabularfalse\else\pagella@tabulartrue\fi}
+\DeclareOptionX{p}[true]{\@nameuse{if#1}\pagella@tabularfalse\else\pagella@tabulartrue\fi}
+
+\newcommand*\pagellaRM@scale{1}  
+\DeclareOptionX{ScaleRM}{\renewcommand*{\pagellaRM@scale}{#1}}
+
+\def\pagella@defaultfeatures{}
+\DeclareOptionX{defaultfeatures}{\def\pagella@defaultfeatures{#1}}
+
+\ProcessOptionsX\relax
+
+\RequirePackage{unicode-math}
+
+\ifpagella@lining
+    \def\pagella@figurestyle{+lnum}
+\else
+    \def\pagella@figurestyle{+onum}
+\fi
+
+\ifpagella@tabular
+    \def\pagella@figurealign{+tnum} 
+\else
+    \def\pagella@figurealign{+pnum} 
+\fi
+
+\ifxetex\XeTeXtracingfonts=1\fi
+\defaultfontfeatures[\rmfamily,\sffamily]{
+     Ligatures = TeX ,
+     SmallCapsFeatures={Letters=SmallCaps},%       \ifluatex,Renderer=Basic\fi}, 
+     \pagella@defaultfeatures
+}
+
+\ifpagella@usefilenames
+%------------------------   filenames start -------------------------
+
+%texgyrepagella-bold.otf		texgyrepagella-italic.otf
+%texgyrepagella-bolditalic.otf	texgyrepagella-regular.otf
+
+
+\setmainfont{texgyrepagella}[ 
+  RawFeature     = {\pagella@figurealign;\pagella@figurestyle},
+  Scale          = \pagellaRM@scale ,
+  UprightFont    = *-regular,
+  ItalicFont     = *-italic,
+  ItalicFeatures = { SmallCapsFont = *-italic },
+  SlantedFont    = *-regular,
+  SlantedFeatures= {FakeSlant=0.2},
+  BoldFont       = *-bold,
+  BoldFeatures   = { SmallCapsFont = *-bold },
+  BoldItalicFont = *-bolditalic,
+  BoldItalicFeatures = { SmallCapsFont = *-bolditalic },
+  BoldSlantedFont= *-bold,
+  BoldSlantedFeatures= {FakeSlant=0.2, SmallCapsFont = *-bold },
+  SmallCapsFont  = *-regular,
+%  SmallCapsFeatures={RawFeature=+smcp},
+  SmallCapsFeatures={Letters=SmallCaps}, 
+  Extension      = .otf  
+]
+
+\newfontfamily\pagellaOsF{texgyrepagella}[
+  RawFeature     = {+onum},
+  Scale          = \pagellaRM@scale ,
+  UprightFont    = *-regular,
+  ItalicFont     = *-italic,
+  ItalicFeatures = { SmallCapsFont = *-italic },
+  SlantedFont    = *-regular,
+  SlantedFeatures= {FakeSlant=0.2},
+  BoldFont       = *-bold,
+  BoldFeatures   = { SmallCapsFont = *-bold },
+  BoldItalicFont = *-bolditalic,
+  BoldItalicFeatures = { SmallCapsFont = *-bolditalic },
+  BoldSlantedFont= *-bold,
+  BoldSlantedFeatures= {FakeSlant=0.2, SmallCapsFont = *-bold },
+  SmallCapsFont  = *-regular,
+%  SmallCapsFeatures={RawFeature=+smcp},
+  SmallCapsFeatures={Letters=SmallCaps}, 
+  Extension      = .otf  
+]
+
+\newfontfamily\pagellaTLF{texgyrepagella}[
+  RawFeature        = {+tnum;-onum},
+  Scale          = \pagellaRM@scale ,
+  UprightFont    = *-regular,
+  ItalicFont     = *-italic,
+  ItalicFeatures = { SmallCapsFont = *-italic },
+  SlantedFont    = *-regular,
+  SlantedFeatures= {FakeSlant=0.2},
+  BoldFont       = *-bold,
+  BoldFeatures   = { SmallCapsFont = *-bold },
+  BoldItalicFont = *-bolditalic,
+  BoldItalicFeatures = { SmallCapsFont = *-bolditalic },
+  BoldSlantedFont= *-bold,
+  BoldSlantedFeatures= {FakeSlant=0.2, SmallCapsFont = *-bold },
+  SmallCapsFont  = *-regular,
+%  SmallCapsFeatures={RawFeature=+smcp},
+  SmallCapsFeatures={Letters=SmallCaps}, 
+  Extension      = .otf  
+]
+%------------------------   filenames stop -------------------------
+\else
+%------------------------   symbolic names start -------------------------
+\setmainfont{TeX Gyre Pagella}[ 
+  RawFeature        = {\pagella@figurealign,\pagella@figurestyle},
+  Scale             = \pagellaRM@scale ,
+  UprightFont       = * Regular,
+  SlantedFont       = * Regular,
+  SlantedFeatures   = {FakeSlant=0.2},
+  ItalicFont        = * Italic,
+  ItalicFeatures    = { SmallCapsFont = * Italic },
+  BoldFont          = * Bold, 
+  BoldFeatures      = { SmallCapsFont = * Bold },
+  BoldItalicFont    = * Bold Italic,
+  BoldItalicFeatures= { SmallCapsFont = * Bold Italic },
+  SmallCapsFont     = * Regular,
+  SmallCapsFeatures = {RawFeature=+smcp},
+  BoldSlantedFont   = * Bold,
+  BoldSlantedFeatures = {FakeSlant=0.2, SmallCapsFont = * Bold },
+  SmallCapsFeatures  = {Letters=SmallCaps}, 
+]
+\newfontfamily\pagella{TeX Gyre Pagella}[
+  RawFeature        = {\pagella@figurealign,\pagella@figurestyle},
+  Scale             = \pagellaRM@scale ,
+  UprightFont       = * Regular,
+  SlantedFont       = * Regular,
+  SlantedFeatures   = {FakeSlant=0.2},
+  ItalicFont        = * Italic,
+  ItalicFeatures    = { SmallCapsFont = * Italic },
+  BoldFont          = * Bold, 
+  BoldFeatures      = { SmallCapsFont = * Bold },
+  BoldItalicFont    = * Bold Italic,
+  BoldItalicFeatures= { SmallCapsFont = * Bold Italic },
+  SmallCapsFont     = * Regular,
+  SmallCapsFeatures = {RawFeature=+smcp},
+  BoldSlantedFont   = * Bold,
+  BoldSlantedFeatures = {FakeSlant=0.2, SmallCapsFont = * Bold },
+  SmallCapsFeatures  = {Letters=SmallCaps}, 
+]
+\newfontfamily\pagellaOsF{TeX Gyre Pagella}[
+  RawFeature        = {OldStyle,Proportional},
+  Scale             = \pagellaRM@scale ,
+  UprightFont       = * Regular,
+  SlantedFont       = * Regular,
+  SlantedFeatures   = {FakeSlant=0.2},
+  ItalicFont        = * Italic,
+  ItalicFeatures    = { SmallCapsFont = * Italic },
+  BoldFont          = * Bold, 
+  BoldFeatures      = { SmallCapsFont = * Bold },
+  BoldItalicFont    = * Bold Italic,
+  BoldItalicFeatures= { SmallCapsFont = * Bold Italic },
+  SmallCapsFont     = * Regular,
+  SmallCapsFeatures = {RawFeature=+smcp},
+  BoldSlantedFont   = * Bold,
+  BoldSlantedFeatures = {FakeSlant=0.2, SmallCapsFont = * Bold },
+  SmallCapsFeatures  = {Letters=SmallCaps}, 
+]
+
+\newfontfamily\pagellaTLF{TeX Gyre Pagella}[
+  RawFeature        = {Lining,Monospaced},
+  Scale             = \pagellaRM@scale ,
+  UprightFont       = * Regular,
+  SlantedFont       = * Regular,
+  SlantedFeatures   = {FakeSlant=0.2},
+  ItalicFont        = * Italic,
+  ItalicFeatures    = { SmallCapsFont = * Italic },
+  BoldFont          = * Bold, 
+  BoldFeatures      = { SmallCapsFont = * Bold },
+  BoldItalicFont    = * Bold Italic,
+  BoldItalicFeatures= { SmallCapsFont = * Bold Italic },
+  SmallCapsFont     = * Regular,
+  SmallCapsFeatures = {RawFeature=+smcp},
+  BoldSlantedFont   = * Bold,
+  BoldSlantedFeatures = {FakeSlant=0.2, SmallCapsFont = * Bold },
+  SmallCapsFeatures  = {Letters=SmallCaps}, 
+]
+
+\fi
+%------------------------   symbolic names stop -------------------------
+
+\ifpagella@nomath\else
+  \typeout{*************************************^^J%
+           * Using pagella math              *^^J%
+           *************************************}%
+  \setmathfont{texgyrepagella-math.otf}[AutoFakeBold,RawFeature=\pagellaMM@feature]
+  \ifpagella@libertinus
+    \setmathfont{LibertinusMath-Regular.otf}[AutoFakeBold,RawFeature=\pagellaMM@feature,
+    	range={\int,\iint,\iiint,\iiiint,\oint,\oiint,\oiiint}]
+  \fi	
+\fi
+
+\def\sufigures{\addfontfeatures{VerticalPosition=Superior}}
+\DeclareTextFontCommand{\textsup}{\sufigures}
+\DeclareTextFontCommand{\textinit}{\pagellaInitials}%  Initials
+
+\def\Lsup#1{{\addfontfeature{RawFeature=+sups}#1}}
+\def\Lsinf#1{{\addfontfeature{RawFeature=+sinf}#1}}
+\def\Land{{\addfontfeature{RawFeature=+ss06}\&}}
+
+\def\Lcase#1{{\addfontfeature{RawFeature=case}#1}}
+\def\LCASE{\@ifnextchar-\L@CASE\L@@CASE}
+\def\L@CASE-{\addfontfeature{RawFeature=-case}}
+\def\L@@CASE#1{\addfontfeature{RawFeature=+case}\ifx#1+\else#1\fi}
+
+\def\Lfrac#1{{\addfontfeature{RawFeature=+frac}#1}}
+\def\LFRAC{\@ifnextchar-\L@FRAC\L@@FRAC}
+\def\L@FRAC-{\addfontfeature{RawFeature=-frac}}
+\def\L@@FRAC#1{\addfontfeature{RawFeature=+frac}\ifx#1+\else#1\fi}
+
+\def\Lcpsp#1{{\addfontfeature{RawFeature=+cpsp}#1}}
+\def\LCPSP{\@ifnextchar-\L@CPSP\L@@CPSP}
+\def\L@CPSP-{\addfontfeature{RawFeature=-cpsp}}
+\def\L@@CPSP#1{\addfontfeature{RawFeature=+cpsp}\ifx#1+\else#1\fi}
+
+\def\Lss#1#2#3{{\addfontfeature{RawFeature=+ss#1#2}#3}}
+\def\LSS#1#2{\addfontfeature{RawFeature=+ss#1#2}}
+
+\def\Lctosc#1{{\addfontfeature{RawFeature=+c2sc}#1}}
+\def\LCtoSC{\@ifnextchar-\L@CtoSC\L@@CtoSC}
+\def\L@CtoSC-{\addfontfeature{RawFeature=-c2sc}}
+\def\L@@CtoSC#1{\addfontfeature{RawFeature=+c2sc}\ifx#1+\else#1\fi}
+
+\def\Lctosmcp#1{{\addfontfeature{RawFeature={+c2sc,+smcp}}#1}}
+\def\LCtoSMCP{\@ifnextchar-\L@CtoSMCP\L@@CtoSMCP}
+\def\L@CtoSMCP-{\addfontfeature{RawFeature={-c2sc,-smcp}}}
+\def\L@@CtoSMCP#1{\addfontfeature{RawFeature={+c2sc,+smcp}}\ifx#1+\else#1\fi}
+
+\def\Lsalt#1{{\addfontfeature{RawFeature=+salt}#1}}
+\def\LSALT{\@ifnextchar-\L@SALT\L@@SALT}
+\def\L@SALT-{\addfontfeature{RawFeature=-salt}}
+\def\L@@SALT#1{\addfontfeature{RawFeature=+salt}\ifx#1+\else#1\fi}
+
+\def\Lliga#1{{\addfontfeature{RawFeature=+liga}#1}}
+\def\LLIGA{\@ifnextchar-\L@LIGA\L@@LIGA}
+\def\L@LIGA-{\addfontfeature{RawFeature=-liga}}
+\def\L@@LIGA#1{\addfontfeature{RawFeature=+liga}\ifx#1+\else#1\fi}
+
+
+\def\Lhlig#1{{\addfontfeature{RawFeature=+hlig}#1}}
+\def\LHLIG{\@ifnextchar-\L@HLIG\L@@HLIG}
+\def\L@HLIG-{\addfontfeature{RawFeature=-hlig}}
+\def\L@@HLIG#1{\addfontfeature{RawFeature=+hlig}\ifx#1+\else#1\fi}
+
+\def\Ldlig#1{{\addfontfeature{RawFeature=+dlig}#1}}
+\def\LDLIG{\@ifnextchar-\L@DLIG\L@@DLIG}
+\def\L@DLIG-{\addfontfeature{RawFeature=-dlig}}
+\def\L@@DLIG#1{\addfontfeature{RawFeature=+dlig}\ifx#1+\else#1\fi}
+
+\endinput
+
