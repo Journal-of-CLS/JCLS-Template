@@ -537,7 +537,7 @@
 
 \NewDocumentCommand \printcontributions {}
 {
-  \section{Author contributions}
+  \section{Author Contributions}
   \setcounter{counter}{0}%
   \@whilenum\value{counter}<\value{authors}\do{%
     \stepcounter{counter}\printcontribution{\thecounter}\par}
