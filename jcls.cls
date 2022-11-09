@@ -579,7 +579,7 @@
 {
   \IfFileExists{./appendix.tex}
     {
-      \appendix
+      \clearpage\appendix
       \section{Appendix}
       \input{./appendix.tex}
     }{}
