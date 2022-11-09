@@ -360,10 +360,10 @@
 \NewDocumentCommand \setfield   { mO{}m }   {\csdef{@#1#2}{#3}}
 \NewDocumentCommand \getfield   { mO{} }    {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
 \NewDocumentCommand \printfield { mO{}O{} } {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}}
-\NewDocumentCommand \keywords   { m }       {\setfield{keywords}{#1}}
 
-\NewDocumentCommand \datereceived { m }       {\setfield{datereceived}{#1}}
-\NewDocumentCommand \dateaccepted { m }       {\setfield{dateaccepted}{#1}}
+\NewDocumentCommand \keywords     { m }     {\setfield{keywords}{#1}}
+\NewDocumentCommand \datereceived { m }     {\setfield{datereceived}{#1}}
+\NewDocumentCommand \dateaccepted { m }     {\setfield{dateaccepted}{#1}}
 
 \let\date\relax
 \NewDocumentCommand \datepublished { m }
@@ -389,6 +389,7 @@
     {\setfield{articletype}{#1}}
 }
 
+\NewDocumentCommand \volume      { m } {\setfield{volume}{#1}}
 \NewDocumentCommand \issuetitle  { m } {\setfield{issuetitle}{#1}}
 \NewDocumentCommand \issuenumber { m } {\setfield{issuenumber}{#1}}
 \NewDocumentCommand \issuenote   { m } {\setfield{issuenote}{#1}}
@@ -600,7 +601,7 @@
   \fancyhf{}% clear all header and footer fields 
   \fancyhead[L]{}
   \fancyhead[R]{\sffamily \getfield{shorttitle}}
-  \fancyfoot[L]{\sffamily JCLS (\getfield{issuenumber}), \the\year, \printarticletype}
+  \fancyfoot[L]{\sffamily JCLS \getfield{volume} (\getfield{issuenumber}), \the\year, \printarticletype}
   \fancyfoot[R]{\sffamily \thepage}
   \renewcommand{\headrulewidth}{0pt}% 
   \renewcommand{\footrulewidth}{0pt}%
