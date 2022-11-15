@@ -213,7 +213,10 @@
 \DeclareCaptionStyle{margintable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 \DeclareCaptionStyle{widefigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 \DeclareCaptionStyle{widetable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{jcls}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 
+\captionsetup[table]{style=jcls}
+\captionsetup[figure]{style=jcls}
 
 % tables
 \RequirePackage{booktabs}
@@ -280,7 +283,7 @@
   \ifthenelse{\boolean{@twoside}}
     {\begin{table}[#1]\begin{adjustwidth*}{-.5\overhang}{}}
     {\begin{table}[#1]\begin{adjustwidth}{-.5\overhang}{}}
-  \captionsetup{style=widetable, margin={.5\overhang, 0pt}}
+  \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
 }
 {
   \ifthenelse{\boolean{@twoside}}
@@ -294,7 +297,7 @@
   \ifthenelse{\boolean{@twoside}}
     {\begin{figure}[#1]\begin{adjustwidth*}{-.5\overhang}{}}
     {\begin{figure}[#1]\begin{adjustwidth}{-.5\overhang}{}}
-  \captionsetup{style=widefigure, margin={.5\overhang, 0pt}}
+  \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
 }
 {
   \ifthenelse{\boolean{@twoside}}
@@ -308,7 +311,7 @@
   \ifthenelse{\boolean{@twoside}}
     {\begin{table}[#1]\begin{adjustwidth*}{-\overhang}{}}
     {\begin{table}[#1]\begin{adjustwidth}{-\overhang}{}}
-  \captionsetup{style=widetable, margin={\overhang, 0pt}}
+  \captionsetup{style=jcls, margin={\overhang, 0pt}}
 }
 {
   \ifthenelse{\boolean{@twoside}}
@@ -322,7 +325,7 @@
   \ifthenelse{\boolean{@twoside}}
     {\begin{figure}[#1]\begin{adjustwidth*}{-\overhang}{}}
     {\begin{figure}[#1]\begin{adjustwidth}{-\overhang}{}}
-  \captionsetup{style=widefigure, margin={\overhang, 0pt}}
+  \captionsetup{style=jcls, margin={\overhang, 0pt}}
 }
 {
   \ifthenelse{\boolean{@twoside}}
@@ -372,7 +375,7 @@
 \interfootnotelinepenalty=10000
 
 
-\NewDocumentCommand \setfield   { mO{}m }   {\csdef{@#1#2}{#3}}
+\NewDocumentCommand \setfield   { mO{}m }   {\csgdef{@#1#2}{#3}}
 \NewDocumentCommand \getfield   { mO{} }    {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
 \NewDocumentCommand \printfield { mO{}O{} } {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}}
 
@@ -415,13 +418,16 @@
 
 \NewDocumentCommand \license { m } {\setfield{license}{#1}}
 
-\NewDocumentCommand \sideinfos {} {}
-\NewDocumentCommand \sideinfo  { mmmm }
+\NewDocumentCommand \sideinfos { } 
+{
+  \marginpar{\setlength{\baselineskip}{12pt}\vspace*{1\baselineskip}}
+}
+\NewDocumentCommand \sideinfo { m+mmm }
 {
   \gappto\sideinfos{\marginpar{\RaggedRight\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{#4}}}
 }
 
-\NewDocumentCommand \sideinfofield { mmO{\newline}O{1ex} }
+\NewDocumentCommand \sideinfofield { m+mO{\newline}O{1ex} }
 {
   \ifcsvoid{@#2}{}{\sideinfo{#1}{\csuse{@#2}}{#3}{#4}}
 }
@@ -475,12 +481,12 @@
   \begingroup
   \global\stepcounter{authors}%
   \setkeys{author}{#1}%
-  \global\csedef{@orcid\theauthors}{\expandafter\author@orcid}%
-  \global\csedef{@surname\theauthors}{\expandafter\author@surname}%
-  \global\csedef{@givennames\theauthors}{\expandafter\author@givennames}%
-  \global\csedef{@email\theauthors}{\expandafter\author@email}%
-  \global\csedef{@affiliation\theauthors}{\expandafter\author@affiliation}%
-  \global\csedef{@contribution\theauthors}{\expandafter\author@contribution}%
+  \csxdef{@orcid\theauthors}{\expandafter\author@orcid}%
+  \csxdef{@surname\theauthors}{\expandafter\author@surname}%
+  \csxdef{@givennames\theauthors}{\expandafter\author@givennames}%
+  \csxdef{@email\theauthors}{\expandafter\author@email}%
+  \csxdef{@affiliation\theauthors}{\expandafter\author@affiliation}%
+  \csxdef{@contribution\theauthors}{\expandafter\author@contribution}%
   \endgroup
 }
 
@@ -488,12 +494,12 @@
 {
   \begingroup
   \setkeys{affiliation}{#1}
-  \global\csedef{@department\aff@id}{\expandafter\aff@department}%
-  \global\csedef{@organization\aff@id}{\expandafter\aff@organization}%
-  \global\csedef{@ror\aff@id}{\expandafter\aff@ror}%
-  \global\csedef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
-  \global\csedef{@city\aff@id}{\expandafter\aff@city}%
-  \global\csedef{@country\aff@id}{\expandafter\aff@country}%
+  \csxdef{@department\aff@id}{\expandafter\aff@department}%
+  \csxdef{@organization\aff@id}{\expandafter\aff@organization}%
+  \csxdef{@ror\aff@id}{\expandafter\aff@ror}%
+  \csxdef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
+  \csxdef{@city\aff@id}{\expandafter\aff@city}%
+  \csxdef{@country\aff@id}{\expandafter\aff@country}%
   \endgroup
 }
 
@@ -505,8 +511,8 @@
       \ifcsvoid{@affilmarker\csuse{@affiliation#1}}
         {
           \stepcounter{affiliations}%
-          \csedef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
-          \csedef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}%
+          \csxdef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
+          \csxdef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}%
         }
         {}
     }
@@ -595,7 +601,6 @@
   \IfFileExists{./appendix.tex}
     {
       \clearpage\appendix
-      \section{Appendix}
       \input{./appendix.tex}
     }{}
 }
@@ -636,46 +641,53 @@
 \titleformat{\subsection}{\large\sffamily\bfseries}{\thesubsection.}{0.5em}{}
 \titleformat{\subsubsection}{\large\sffamily\bfseries}{\thesubsubsection.}{0.5em}{}
 
+
+
 % title and sidebar
 \def\@maketitle{% 
   %
   % title
   %
+  \newpage
+  \null
+  \vspace*{-\topskip}  
   \begin{titlebox}
-    \begin{flushleft}%
       \setstretch{1.0}%
       \normalsize\sffamily%
       {\getfield{articletype}%
-        \marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}}%
-        \marginnote{\textcolor{DarkOrange}{\normalsize\sffamily\bfseries OPEN \adjustbox{height=2\baselineskip, raise=-.5\baselineskip}{\aiOpenAccess} ACCESS}}[5\baselineskip]%
+       \marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}}%
+       \marginnote{\textcolor{DarkOrange}{\normalsize\sffamily\bfseries OPEN \adjustbox{height=2\baselineskip, raise=-.5\baselineskip}{\aiOpenAccess} ACCESS}}[6\baselineskip]%
        \par}
-      % \vspace{\baselineskip}
       {\LARGE\bfseries \getfield{title} \par}
       {\Large \getfield{subtitle} \par}
-      {\vspace{1.5\baselineskip}%
-        \normalsize\printauthors
-        \vspace{\baselineskip}%
-        {\footnotesize\printaffiliations}
-        \vspace{\baselineskip}}
-    \end{flushleft}%
-  \end{titlebox}
+       \vspace{1\baselineskip}
+      {\normalsize\printauthors}
+        \vspace{1\baselineskip}
+      {\footnotesize\printaffiliations}
+        %  \vspace{1\baselineskip}
+  \end{titlebox}  
+  % Sidebar
+  \sideinfofield{Citation}{howtocite}%
+  \sideinfofield{Date published}{datepublished}[][0ex]%
+  \sideinfofield{Date accepted}{dateaccepted}[][0ex]%
+  \sideinfofield{Date received}{datereceived}[]%
+  \sideinfofield{Keywords}{keywords}%
+  \sideinfofield{License}{license}%
+  \sideinfofield{Reviewers}{reviewers}%
+  \sideinfofield{Note}{issuenote}%
+  \sideinfos%       
+}
+  % \sideinfos%
   %
   % sidebar
   %
-  \marginpar{% OpenAccess Logo
-    \vspace{2ex}
-    \vspace{2ex}
-  }
-  \sideinfofield{Citation}{howtocite}
-  \sideinfofield{Date published}{datepublished}[][0ex]
-  \sideinfofield{Date accepted}{dateaccepted}[][0ex]
-  \sideinfofield{Date received}{datereceived}[]
-  \sideinfofield{Keywords}{keywords}
-  \sideinfofield{License}{license}
-  \sideinfofield{Reviewers}{reviewers}
-  \sideinfofield{Note}{issuenote}
-  \sideinfos%
-}
+  % \marginpar{% OpenAccess Logo
+  %   \vspace{2ex}
+  %   \vspace{2ex}
+  % }
+
+  
+
 
 % Abstract
 \renewenvironment{abstract}
