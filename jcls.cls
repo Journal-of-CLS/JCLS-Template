@@ -187,7 +187,7 @@
   justification = RaggedRight,
   singlelinecheck = off,
   labelfont = bf,
-  font = {normalfont,sf}
+  font = {footnotesize,sf}
 ]{caption}
 
 \RequirePackage{subcaption}
@@ -196,9 +196,8 @@
 \DeclareCaptionStyle{sidecaption}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 \DeclareCaptionStyle{marginfigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 \DeclareCaptionStyle{margintable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{widefigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={normalfont,sf}}
-\DeclareCaptionStyle{widetable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={normalfont,sf}}
-
+\DeclareCaptionStyle{widefigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{widetable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
 
 
 % tables
@@ -646,8 +645,8 @@
   % sidebar
   %
   \marginpar{% OpenAccess Logo
-    \vspace{2ex}
-    \adjustbox{width=2em}{\textcolor{white}{\aiOpenAccess}}%
+    \vspace{-2cm}
+    \adjustbox{width=2em}{\textcolor{DarkOrange}{\aiOpenAccess}}%
     \vspace{2ex}
   }
   \sideinfofield{Citation}{howtocite}
