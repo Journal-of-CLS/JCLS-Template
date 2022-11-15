@@ -153,24 +153,7 @@
 \RequirePackage[osf]{./fonts/pagella-otf}
 
 \RequirePackage[medium]{FiraSans}
-\RequirePackage{FiraMono}
-
-% \setsansfont{FiraSans}[
-%   Extension = .otf,
-%   UprightFont = *-Regular,
-%   BoldFont = *-Bold,
-%   ItalicFont = *-Italic,
-%   BoldItalicFont = *-BoldItalic,
-% ]
-
-% \setmonofont{FiraCode}[
-%   Extension = .ttf,
-%   Contextuals = {Alternate},
-%   Path = ./fonts/firacode/,
-%   Contextuals = Alternate,
-%   UprightFont = *-Regular,
-%   BoldFont = *-Bold,
-% ]
+\RequirePackage[medium, scaled=0.85]{FiraMono}
 
 \RequirePackage{microtype}
 \RequirePackage{lua-widow-control}
