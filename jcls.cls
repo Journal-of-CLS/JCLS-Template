@@ -123,7 +123,7 @@
   \ifhyperref
     {\href{https://doi.org/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
-    
+
 \RequirePackage{datetime2}
 
 % color
@@ -232,7 +232,7 @@
 
 % ror
 \DeclareRobustCommand\rorlink[1]{%
-  \texorpdfstring{\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}{https://tot.org/#1}%
+  \texorpdfstring{\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}{https://ror.org/#1}%
 }
 
 % code
