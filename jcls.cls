@@ -75,6 +75,15 @@
   uniquelist=false,
 ]{biblatex}
 
+% \usepackage[
+%   reflist,
+%   style=windycity,
+%   backend=biber,
+%   maxbibnames=99,
+%   maxcitenames=2,
+%   uniquelist=false,
+% ]{biblatex}
+
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
   {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
@@ -97,6 +106,12 @@
     }
   }
 }
+
+% remove p./pp.
+\DefineBibliographyStrings{english}{%
+  page             = {},
+  pages            = {},
+} 
 
 \RequirePackage{datetime2}
 
@@ -250,14 +265,14 @@
 
 \RequirePackage{selnolig}
 \RequirePackage{marginnote}
-\renewcommand*{\marginfont}{\sffamily\footnotesize}
-\renewcommand*{\raggedleftmarginnote}{}
+  \renewcommand*{\marginfont}{\sffamily\footnotesize}
+  \renewcommand*{\raggedleftmarginnote}{}
 
 \RequirePackage{marginfix}
 \RequirePackage{changepage}
 \RequirePackage{ifthen}
-\newlength{\overhang}
-\setlength{\overhang}{\marginparwidth+\marginparsep}
+  \newlength{\overhang}
+  \setlength{\overhang}{\marginparwidth+\marginparsep}
 
 
 \RenewDocumentEnvironment{table*}{ O{htbp} }
@@ -376,7 +391,7 @@
 {
   \@ifmtarg{#1}
     {}
-    {\setfield{doi}{\href{https://doi.org/#1}{doi.org/#1}}}
+    {\setfield{doi}{\href{https://doi.org/#1}{#1}}}
 }
 
 \NewDocumentCommand \shorttitle  { m } {\setfield{shorttitle}{#1}}
@@ -400,8 +415,8 @@
 
 \NewDocumentCommand \license { m } {\setfield{license}{#1}}
 
-\NewDocumentCommand\sideinfos {} {}
-\NewDocumentCommand\sideinfo  { mmmm }
+\NewDocumentCommand \sideinfos {} {}
+\NewDocumentCommand \sideinfo  { mmmm }
 {
   \gappto\sideinfos{\marginpar{\RaggedRight\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{#4}}}
 }
@@ -630,7 +645,10 @@
     \begin{flushleft}%
       \setstretch{1.0}%
       \normalsize\sffamily%
-      {\getfield{articletype}\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}} \par}
+      {\getfield{articletype}%
+        \marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}}%
+        \marginnote{\textcolor{DarkOrange}{\normalsize\sffamily\bfseries OPEN \adjustbox{height=2\baselineskip, raise=-.5\baselineskip}{\aiOpenAccess} ACCESS}}[5\baselineskip]%
+       \par}
       % \vspace{\baselineskip}
       {\LARGE\bfseries \getfield{title} \par}
       {\Large \getfield{subtitle} \par}
@@ -645,8 +663,7 @@
   % sidebar
   %
   \marginpar{% OpenAccess Logo
-    \vspace{-2cm}
-    \adjustbox{width=2em}{\textcolor{DarkOrange}{\aiOpenAccess}}%
+    \vspace{2ex}
     \vspace{2ex}
   }
   \sideinfofield{Citation}{howtocite}
