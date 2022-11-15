@@ -150,7 +150,7 @@
 \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 
 % Using a local copy until pagella-otf is avialable on overleaf
-\RequirePackage{./fonts/pagella-otf}
+\RequirePackage[osf]{./fonts/pagella-otf}
 
 \setsansfont{FiraSans}[
   Extension = .otf,
