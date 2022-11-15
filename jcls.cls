@@ -355,12 +355,14 @@
   arc=0pt,
   outer arc=0pt,
   colframe=white,
+  left*=1ex, right*=1ex, top=0mm, bottom=0mm,
 }
 \newtcolorbox{abstractbox}{
   colback=secundarycolor!10,
   arc=0pt,
   outer arc=0pt,
   colframe=secundarycolor!10,
+  left*=1ex, right*=1ex, top=0mm, bottom=0mm,
 }
 \RequirePackage[
   ragged,
@@ -420,7 +422,7 @@
 
 \NewDocumentCommand \sideinfos { } 
 {
-  \marginpar{\setlength{\baselineskip}{12pt}\vspace*{1\baselineskip}}
+  \marginpar{\setlength{\baselineskip}{12pt}\vspace*{1.5ex}}
 }
 \NewDocumentCommand \sideinfo { m+mmm }
 {
@@ -666,6 +668,8 @@
       {\footnotesize\printaffiliations}
         %  \vspace{1\baselineskip}
   \end{titlebox}  
+  %
+  %
   % Sidebar
   \sideinfofield{Citation}{howtocite}%
   \sideinfofield{Date published}{datepublished}[][0ex]%
@@ -675,16 +679,9 @@
   \sideinfofield{License}{license}%
   \sideinfofield{Reviewers}{reviewers}%
   \sideinfofield{Note}{issuenote}%
-  \sideinfos%       
+      
 }
-  % \sideinfos%
-  %
-  % sidebar
-  %
-  % \marginpar{% OpenAccess Logo
-  %   \vspace{2ex}
-  %   \vspace{2ex}
-  % }
+
 
   
 
@@ -692,7 +689,7 @@
 % Abstract
 \renewenvironment{abstract}
 {
-  \begin{abstractbox}\sffamily\textbf{\abstractname.}
+  \sideinfos\begin{abstractbox}\sffamily\textbf{\abstractname.}
 }
 {
   \end{abstractbox}
