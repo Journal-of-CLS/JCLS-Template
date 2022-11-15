@@ -113,6 +113,17 @@
   pages            = {},
 } 
 
+% remove doi + url labels
+\DeclareFieldFormat{url}{%
+  \ifhyperref
+    {\href{#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
+
+\DeclareFieldFormat{doi}{%
+  \ifhyperref
+    {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
+    
 \RequirePackage{datetime2}
 
 % color
