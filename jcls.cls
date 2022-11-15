@@ -184,7 +184,7 @@
 
 % captions and notes
 \RequirePackage[
-  justification = raggedright,
+  justification = RaggedRight,
   singlelinecheck = off,
   labelfont = bf,
   font = {normalfont,sf}
@@ -192,12 +192,12 @@
 
 \RequirePackage{subcaption}
 \RequirePackage{sidenotes}
-\DeclareCaptionStyle{base}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{sidecaption}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{marginfigure}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{margintable}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{widefigure}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={normalfont,sf}}
-\DeclareCaptionStyle{widetable}{justification=raggedright, singlelinecheck=off, labelfont=bf, font={normalfont,sf}}
+\DeclareCaptionStyle{base}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{sidecaption}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{marginfigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{margintable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{widefigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={normalfont,sf}}
+\DeclareCaptionStyle{widetable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={normalfont,sf}}
 
 
 
@@ -208,6 +208,7 @@
   \setlength\LTleft{0pt}
   \setlength\LTright{\fill}
 
+\RequirePackage{tabularx}
 \RequirePackage{makecell}
 
 % orcid
@@ -265,7 +266,7 @@
   \ifthenelse{\boolean{@twoside}}
     {\begin{table}[#1]\begin{adjustwidth*}{-.5\overhang}{}}
     {\begin{table}[#1]\begin{adjustwidth}{-.5\overhang}{}}
-  \captionsetup{style=widetable, margin=.5\overhang}
+  \captionsetup{style=widetable, margin={.5\overhang, 0pt}}
 }
 {
   \ifthenelse{\boolean{@twoside}}
@@ -279,7 +280,7 @@
   \ifthenelse{\boolean{@twoside}}
     {\begin{figure}[#1]\begin{adjustwidth*}{-.5\overhang}{}}
     {\begin{figure}[#1]\begin{adjustwidth}{-.5\overhang}{}}
-  \captionsetup{style=widefigure,margin=.5\overhang}
+  \captionsetup{style=widefigure, margin={.5\overhang, 0pt}}
 }
 {
   \ifthenelse{\boolean{@twoside}}
@@ -293,7 +294,7 @@
   \ifthenelse{\boolean{@twoside}}
     {\begin{table}[#1]\begin{adjustwidth*}{-\overhang}{}}
     {\begin{table}[#1]\begin{adjustwidth}{-\overhang}{}}
-  \captionsetup{style=widetable, margin=\overhang}
+  \captionsetup{style=widetable, margin={\overhang, 0pt}}
 }
 {
   \ifthenelse{\boolean{@twoside}}
@@ -307,7 +308,7 @@
   \ifthenelse{\boolean{@twoside}}
     {\begin{figure}[#1]\begin{adjustwidth*}{-\overhang}{}}
     {\begin{figure}[#1]\begin{adjustwidth}{-\overhang}{}}
-  \captionsetup{style=widefigure, margin=\overhang}
+  \captionsetup{style=widefigure, margin={\overhang, 0pt}}
 }
 {
   \ifthenelse{\boolean{@twoside}}
