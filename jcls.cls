@@ -152,22 +152,25 @@
 % Using a local copy until pagella-otf is avialable on overleaf
 \RequirePackage[osf]{./fonts/pagella-otf}
 
-\setsansfont{FiraSans}[
-  Extension = .otf,
-  UprightFont = *-Regular,
-  BoldFont = *-Bold,
-  ItalicFont = *-Italic,
-  BoldItalicFont = *-BoldItalic,
-]
+\RequirePackage[medium]{FiraSans}
+\RequirePackage{FiraMono}
 
-\setmonofont{FiraCode}[
-  Extension = .ttf,
-  Contextuals = {Alternate},
-  Path = ./fonts/firacode/,
-  Contextuals = Alternate,
-  UprightFont = *-Regular,
-  BoldFont = *-Bold,
-]
+% \setsansfont{FiraSans}[
+%   Extension = .otf,
+%   UprightFont = *-Regular,
+%   BoldFont = *-Bold,
+%   ItalicFont = *-Italic,
+%   BoldItalicFont = *-BoldItalic,
+% ]
+
+% \setmonofont{FiraCode}[
+%   Extension = .ttf,
+%   Contextuals = {Alternate},
+%   Path = ./fonts/firacode/,
+%   Contextuals = Alternate,
+%   UprightFont = *-Regular,
+%   BoldFont = *-Bold,
+% ]
 
 \RequirePackage{microtype}
 \RequirePackage{lua-widow-control}
