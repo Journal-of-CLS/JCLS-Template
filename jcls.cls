@@ -651,6 +651,7 @@
   \null
   \vspace*{-\topskip}  
   \begin{titlebox}
+      \raggedright%
       \setstretch{1.0}%
       \normalsize\sffamily%
       {\getfield{articletype}%
