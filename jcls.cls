@@ -352,14 +352,14 @@
   arc=0pt,
   outer arc=0pt,
   colframe=white,
-  left*=1ex, right*=1ex, top=0mm, bottom=0mm,
+  left=3mm, right=0mm, top=0mm, bottom=0mm,
 }
 \newtcolorbox{abstractbox}{
   colback=secundarycolor!10,
   arc=0pt,
   outer arc=0pt,
   colframe=secundarycolor!10,
-  left*=1ex, right*=1ex, top=0mm, bottom=0mm,
+  left=3mm, right=3mm, top=2mm, bottom=2mm,
 }
 \RequirePackage[
   ragged,
@@ -419,7 +419,7 @@
 
 \NewDocumentCommand \sideinfos { } 
 {
-  \marginpar{\setlength{\baselineskip}{12pt}\vspace*{1.5ex}}
+  \marginpar{\setlength{\baselineskip}{12pt}\vspace*{1\baselineskip}}
 }
 \NewDocumentCommand \sideinfo { m+mmm }
 {
@@ -636,9 +636,9 @@
   clearempty,
 ]{titlesec}
 
-\titleformat{\section}{\Large\sffamily\bfseries}{\thesection.}{0.5em}{}
-\titleformat{\subsection}{\large\sffamily\bfseries}{\thesubsection.}{0.5em}{}
-\titleformat{\subsubsection}{\large\sffamily\bfseries}{\thesubsubsection.}{0.5em}{}
+\titleformat{\section}{\Large\sffamily\bfseries}{\thesection.}{.5em}{}
+\titleformat{\subsection}{\large\sffamily\bfseries}{\thesubsection}{.5em}{}
+\titleformat{\subsubsection}{\normalsize\sffamily\bfseries}{\thesubsubsection}{.5em}{}
 
 
 
@@ -676,8 +676,7 @@
   \sideinfofield{Keywords}{keywords}%
   \sideinfofield{License}{license}%
   \sideinfofield{Reviewers}{reviewers}%
-  \sideinfofield{Note}{issuenote}%
-      
+  \sideinfofield{Note}{issuenote}%   
 }
 
 
