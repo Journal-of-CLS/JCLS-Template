@@ -199,18 +199,18 @@
   justification = RaggedRight,
   singlelinecheck = off,
   labelfont = bf,
-  font = {footnotesize,sf}
+  font = {small,sf}
 ]{caption}
 
 \RequirePackage{subcaption}
 \RequirePackage{sidenotes}
-\DeclareCaptionStyle{base}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{sidecaption}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{marginfigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{margintable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{widefigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{widetable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
-\DeclareCaptionStyle{jcls}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={footnotesize,sf}}
+\DeclareCaptionStyle{base}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
+\DeclareCaptionStyle{sidecaption}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
+\DeclareCaptionStyle{marginfigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
+\DeclareCaptionStyle{margintable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
+\DeclareCaptionStyle{widefigure}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
+\DeclareCaptionStyle{widetable}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
+\DeclareCaptionStyle{jcls}{justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
 
 \captionsetup[table]{style=jcls}
 \captionsetup[figure]{style=jcls}
@@ -687,7 +687,7 @@
 % Abstract
 \renewenvironment{abstract}
 {
-  \sideinfos\begin{abstractbox}\sffamily\textbf{\abstractname.}
+  \sideinfos\begin{abstractbox}\sffamily\normalsize\textbf{\abstractname.}
 }
 {
   \end{abstractbox}
