@@ -133,7 +133,7 @@
 \definecolor{jcls-gray}     {RGB} {90,  90,  90}
 \definecolor{orcid-green}   {RGB} {166, 206, 57}
 \definecolor{ror-green}     {RGB} {83, 186, 161}
-
+\definecolor{oa-orange}     {RGB} {246, 130, 18}
 
 \colorlet{primarycolor}     {jcls-red}
 \colorlet{secundarycolor}   {jcls-gray}
@@ -656,7 +656,7 @@
       \normalsize\sffamily%
       {\getfield{articletype}%
        \marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}}%
-       \marginnote{\textcolor{DarkOrange}{\normalsize\sffamily\bfseries OPEN \adjustbox{height=2\baselineskip, raise=-.5\baselineskip}{\aiOpenAccess} ACCESS}}[6\baselineskip]%
+       \marginnote{\textcolor{oa-orange}{\normalsize\sffamily\bfseries OPEN \adjustbox{height=2\baselineskip, raise=-.5\baselineskip}{\aiOpenAccess} ACCESS}}[6\baselineskip]%
        \par}
       {\LARGE\bfseries \getfield{title} \par}
       {\Large \getfield{subtitle} \par}
