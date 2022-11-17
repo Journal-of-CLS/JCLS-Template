@@ -391,17 +391,17 @@
 
 \NewDocumentCommand \doi {m}
 {
-  \@ifmtarg{#1}
+  \ifblank{#1}
     {}
     {\setfield{doi}{\href{https://doi.org/#1}{#1}}}
 }
 
+\NewDocumentCommand \subtitle    { m } {\setfield{subtitle}{#1}}
 \NewDocumentCommand \shorttitle  { m } {\setfield{shorttitle}{#1}}
 \NewDocumentCommand \howtocite   { m } {\setfield{howtocite}{#1}}
-\NewDocumentCommand \subtitle    { m } {\setfield{subtitle}{#1}}
 \NewDocumentCommand \articletype { m }
 {
-  \@ifmtarg{#1}
+  \ifblank{#1}
     {\setfield{articletype}{SUBMITTED}}
     {\setfield{articletype}{#1}}
 }
@@ -431,7 +431,7 @@
   \ifcsvoid{@#2}{}{\sideinfo{#1}{\csuse{@#2}}{#3}{#4}}
 }
 
-% authors and affiliations
+% authors, affiliations, and article
 \newcounter{authors}
 \newcounter{affiliations}
 \newcounter{counter}
@@ -466,13 +466,43 @@
 \define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
 \presetkeys{affiliation}
 {% Set default values 
-  department=\textcolor{jcls-red}{DEPARTMENT},
-  organization=\textcolor{jcls-red}{ORG},
-  ror=,
-  street-address=,
-  city=\textcolor{jcls-red}{CITY},
-  country=\textcolor{jcls-red}{COUNTRY},
-  country-code=,
+  department = \textcolor{jcls-red}{DEPARTMENT},
+  organization = \textcolor{jcls-red}{ORG},
+  ror =,
+  street-address =,
+  city = \textcolor{jcls-red}{CITY},
+  country = \textcolor{jcls-red}{COUNTRY},
+  country-code =,
+}{}
+
+\define@key{article}{title}{\csdef{article@title}{#1}}
+\define@key{article}{subtitle}{\csdef{article@subtitle}{#1}}
+\define@key{article}{shorttitle}{\csdef{article@shorttitle}{#1}}
+\define@key{article}{datereceived}{\csdef{article@datereceived}{#1}}
+\define@key{article}{dateaccepted}{\csdef{article@dateaccepted}{#1}}
+\define@key{article}{datepublished}{\csdef{article@datepublished}{#1}}
+\define@key{article}{doi}{\csdef{article@doi}{#1}}
+\define@key{article}{articletype}{\csdef{article@articletype}{#1}}
+\define@key{article}{volume}{\csdef{article@volume}{#1}}
+\define@key{article}{issuenumber}{\csdef{article@issuenumber}{#1}}
+\define@key{article}{issuenote}{\csdef{article@issuenote}{#1}}
+\define@key{article}{reviewers}{\csdef{article@reviewers}{#1}}
+\define@key{article}{license}{\csdef{article@license}{#1}}
+\presetkeys{article}
+{ % Set default values 
+  title =,
+  subtitle =,
+  shorttitle =,
+  datereceived =,
+  dateaccepted =,
+  datepublished =,
+  doi =,
+  articletype = Submitted,
+  volume =,
+  issuenumber =,
+  issuenote =,
+  reviewers =,
+  license = \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby},
 }{}
 
 \RenewDocumentCommand \author { m }
@@ -500,6 +530,26 @@
   \csxdef{@city\aff@id}{\expandafter\aff@city}%
   \csxdef{@country\aff@id}{\expandafter\aff@country}%
   \endgroup
+}
+
+\NewDocumentCommand \article { m }
+{
+  % \begingroup
+  \setkeys{article}{#1}
+  \title{\expandafter\article@title}
+  \subtitle{\expandafter\article@subtitle}
+  \shorttitle{\expandafter\article@shorttitle}
+  \datereceived{\expandafter\article@datereceived}
+  \dateaccepted{\expandafter\article@dateaccepted}
+  \datepublished{\expandafter\article@datepublished}
+  \doi{\expandafter\article@doi}
+  \articletype{\expandafter\article@articletype}
+  \volume{\expandafter\article@volume}
+  \issuenumber{\expandafter\article@issuenumber}
+  \issuenote{\expandafter\article@issuenote}
+  \reviewers{\expandafter\article@reviewers}
+  \license{\expandafter\article@license}
+  % \endgroup
 }
 
 \NewDocumentCommand \printauthor { m }
@@ -702,7 +752,7 @@
 }
 
 \IfFileExists{./metadata/self.bib}
-  {\addbibresource{./metadata/self.bib} \howtocite{\fullcite{self}}}
+  {\addbibresource{./metadata/self.bib} \howtocite{\begin{refsection}\fullcite{self}\end{refsection}}}
   {}
 
 \IfFileExists{./metadata/authors.tex}
