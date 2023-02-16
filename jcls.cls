@@ -608,12 +608,13 @@
 \NewDocumentCommand \printaffiliations {}
 {
 	\setcounter{counter}{0}%
-	\begin{enumerate}[left=\parindent,labelwidth=1em]
-		\@whilenum\value{counter}<\value{affiliations}\do{%
-			\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
-	\end{enumerate}
+	\ifnum\value{affiliations}>0
+		\begin{enumerate}[left=\parindent,labelwidth=1em]
+			\@whilenum\value{counter}<\value{affiliations}\do{%
+				\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
+		\end{enumerate}
+	\fi
 }
-
 \NewDocumentCommand \printcontributions {}
 {
 	\section{Author Contributions}
