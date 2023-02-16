@@ -490,6 +490,7 @@
 \define@key{article}{doi}{\csdef{article@doi}{#1}}
 \define@key{article}{articletype}{\csdef{article@articletype}{#1}}
 \define@key{article}{volume}{\csdef{article@volume}{#1}}
+\define@key{article}{issuetitle}{\csdef{article@issuetitle}{#1}}
 \define@key{article}{issuenumber}{\csdef{article@issuenumber}{#1}}
 \define@key{article}{issuenote}{\csdef{article@issuenote}{#1}}
 \define@key{article}{reviewers}{\csdef{article@reviewers}{#1}}
@@ -503,8 +504,9 @@
 	dateaccepted =,
 	datepublished =,
 	doi =,
-	articletype = Submitted,
+	articletype = submitted,
 	volume =,
+	issuetitle=,
 	issuenumber =,
 	issuenote =,
 	reviewers =,
