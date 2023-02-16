@@ -504,7 +504,7 @@
 	dateaccepted =,
 	datepublished =,
 	doi =,
-	articletype = submitted,
+	articletype = under review,
 	volume =,
 	issuetitle=,
 	issuenumber =,
