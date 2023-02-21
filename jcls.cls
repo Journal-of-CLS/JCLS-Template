@@ -786,6 +786,7 @@
 
 \iffinal
 \else
+	\RequirePackage[All]{lua-typo}
 	\AddToHook{env/abstract/after}{\linenumbers\printwatermark}
 \fi
 
