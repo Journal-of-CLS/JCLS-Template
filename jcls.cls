@@ -39,7 +39,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{jcls}[2023/04/16 v1.0.1RC LaTeX class for JCLS]
-\typeout{This is jcls.cls 202300-16 v1.0.1RC}
+\typeout{This is jcls.cls 2023-04-16 v1.0.1RC}
 \newif\iffinal
 \DeclareOption{final}{\finaltrue}
 \ProcessOptions\relax
@@ -77,27 +77,18 @@
 	uniquelist=false,
 ]{biblatex}
 
-% \usepackage[
-%   reflist,
-%   style=windycity,
-%   backend=biber,
-%   maxbibnames=99,
-%   maxcitenames=2,
-%   uniquelist=false,
-% ]{biblatex}
-
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
-{\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
-{\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
+  {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
+  {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
-{\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
-{\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
+  {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
+  {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 % patch language field (https://tex.stackexchange.com/a/141831/29873)
 \DeclareSourcemap{
@@ -228,17 +219,19 @@
 \RequirePackage{makecell}
 
 % orcid
-\DeclareRobustCommand\orcidlink[1]{%
+\NewDocumentCommand \orcidlink { m }
+{%
 	\texorpdfstring
-	{\href{https://orcid.org/#1}{\textcolor{orcid-green}{\raisebox{-.3ex}{\aiOrcid}}}}
-	{https://orcid.org/#1}%
+	  {\href{https://orcid.org/#1}{\textcolor{orcid-green}{\raisebox{-.3ex}{\aiOrcid}}}}
+	  {https://orcid.org/#1}%
 }
 
 % ror
-\DeclareRobustCommand\rorlink[1]{%
+\NewDocumentCommand \rorlink { m }
+{%
 	\texorpdfstring
-	{\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}
-	{https://ror.org/#1}%
+	  {\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}
+	  {https://ror.org/#1}%
 }
 
 % code
@@ -246,7 +239,8 @@
 \RequirePackage[verbatim]{lstfiracode}
 
 \RequirePackage[right]{lineno}
-\renewcommand{\linenumberfont}{%
+\RenewDocumentCommand \linenumberfont { }
+{%
 	\ttfamily\small\color{primarycolor}%
 }
 
@@ -271,8 +265,9 @@
 
 \RequirePackage{selnolig}
 \RequirePackage{marginnote}
-\renewcommand*{\marginfont}{\sffamily\footnotesize}
-\renewcommand*{\raggedleftmarginnote}{}
+\RenewDocumentCommand \marginfont { }
+  { \sffamily\footnotesize }
+\RenewDocumentCommand \raggedleftmarginnote { } { }
 
 \RequirePackage{marginfix}
 \RequirePackage{changepage}
@@ -281,7 +276,7 @@
 \setlength{\overhang}{\marginparwidth+\marginparsep}
 
 
-\RenewDocumentEnvironment{table*}{ O{htbp} +b }
+\NewDocumentEnvironment { table* } { O{htbp} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -301,7 +296,7 @@
 	}
 }{}
 
-\RenewDocumentEnvironment{figure*}{ O{htbp} +b }
+\NewDocumentEnvironment { figure* } { O{htbp} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -321,8 +316,7 @@
 	}
 }{}
 
-
-\NewDocumentEnvironment{fullwidthtable}{ O{htbp} +b }
+\NewDocumentEnvironment { fullwidthtable } { O{htbp} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -342,7 +336,7 @@
 	}
 }{}
 
-\NewDocumentEnvironment{fullwidthfigure}{ O{htbp} +b }
+\NewDocumentEnvironment{ fullwidthfigure } { O{htbp} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -361,7 +355,8 @@
 		\end{figure}
 	}
 }{}
-\NewDocumentEnvironment{fullwidth}{ +b }
+
+\NewDocumentEnvironment { fullwidth } { +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -378,6 +373,7 @@
 }{}
 
 \RequirePackage{pdflscape}
+
 \RequirePackage{tcolorbox}
 \newtcolorbox{titlebox}{
 	colback=white,
@@ -386,6 +382,7 @@
 	colframe=white,
 	left=3mm, right=0mm, top=0mm, bottom=0mm,
 }
+
 \newtcolorbox{abstractbox}{
 	colback=secundarycolor!10,
 	arc=0pt,
@@ -393,6 +390,7 @@
 	colframe=secundarycolor!10,
 	left=3mm, right=3mm, top=2mm, bottom=2mm,
 }
+
 \RequirePackage[
 	ragged,
 	bottom,
@@ -400,9 +398,9 @@
 	multiple,
 ]{footmisc}
 
-\renewcommand{\footnotemargin}{0em}
-\renewcommand*{\thefootnote}{\arabic{footnote}}
-\renewcommand*\@makefntext[1]{\noindent{\@thefnmark}. #1}
+\RenewDocumentCommand \footnotemargin { } {0em}
+\RenewDocumentCommand \thefootnote { } {\arabic{footnote}}
+\RenewDocumentCommand \@makefntext { m } {\noindent{\@thefnmark}. #1}
 \interfootnotelinepenalty=10000
 
 
@@ -625,14 +623,14 @@
 	{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
 }
 
-\NewDocumentCommand \printauthors {}
+\NewDocumentCommand \printauthors { }
 {
 	\setcounter{counter}{0}%
 	\@whilenum\value{counter}<\value{authors}\do{%
 		\stepcounter{counter}\printauthor{\thecounter}\par}
 }
 
-\NewDocumentCommand \printaffiliations {}
+\NewDocumentCommand \printaffiliations { }
 {
 	\setcounter{counter}{0}%
 	\ifnum\value{affiliations}>0
@@ -770,13 +768,12 @@
 
 
 % Abstract
-\renewenvironment{abstract}
-{
+\RenewDocumentEnvironment {abstract} { +b } 
+{%
 	\sideinfos\begin{abstractbox}\sffamily\normalsize\textbf{\abstractname.}
-		}
-		{
+	  #1	
 	\end{abstractbox}
-}
+}{}
 
 \RequirePackage{hyperref}
 \hypersetup{
