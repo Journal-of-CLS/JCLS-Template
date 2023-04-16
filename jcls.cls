@@ -88,16 +88,16 @@
 
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
-  {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
-  {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
+{\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
-  {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
-  {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
+{\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 % patch language field (https://tex.stackexchange.com/a/141831/29873)
 \DeclareSourcemap{
@@ -111,20 +111,20 @@
 
 % remove p./pp.
 \DefineBibliographyStrings{english}{%
-	page             = {},
-	pages            = {},
+	page={},
+	pages={},
 }
 
 % remove doi + url labels
 \DeclareFieldFormat{url}{%
 	\ifhyperref
-    {\href{#1}{\nolinkurl{#1}}}
-    {\nolinkurl{#1}}}
+	{\href{#1}{\nolinkurl{#1}}}
+	{\nolinkurl{#1}}}
 
 \DeclareFieldFormat{doi}{%
 	\ifhyperref
-		{\href{https://doi.org/#1}{\nolinkurl{#1}}}
-		{\nolinkurl{#1}}}
+	{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+	{\nolinkurl{#1}}}
 
 \RequirePackage{datetime2}
 
@@ -177,15 +177,15 @@
 % layout
 \RequirePackage{geometry}
 \geometry{
-	paper = a4paper,
-	top = 25mm,
-	bottom = 25mm,
-	right = 17mm,
-	left = 60mm,
-	footskip = 10mm,
-	marginparsep = 3mm,
-	marginparwidth = 40mm,
-	reversemarginpar = true,
+	paper=a4paper,
+	top=25mm,
+	bottom=25mm,
+	right=17mm,
+	left=60mm,
+	footskip=10mm,
+	marginparsep=3mm,
+	marginparwidth=40mm,
+	reversemarginpar=true,
 	% showframe,
 }
 
@@ -198,10 +198,10 @@
 
 % captions and notes
 \RequirePackage[
-	justification = RaggedRight,
-	singlelinecheck = off,
-	labelfont = bf,
-	font = {small,sf}
+	justification=RaggedRight,
+	singlelinecheck=off,
+	labelfont=bf,
+	font={small,sf}
 ]{caption}
 
 \RequirePackage{subcaption}
@@ -283,98 +283,98 @@
 
 \RenewDocumentEnvironment{table*}{ O{htbp} +b }
 {%
-  \ifthenelse{\boolean{@twoside}}
-    {%
-      \begin{table}[#1]
-        \begin{adjustwidth*}{-.5\overhang}{}
-		      \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-		      #2
-        \end{adjustwidth*}
-	    \end{table}
-    }{%
-      \begin{table}[#1]
-        \begin{adjustwidth}{-.5\overhang}{}
-		      \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-		      #2
-        \end{adjustwidth}
-	    \end{table}
-    }
+	\ifthenelse{\boolean{@twoside}}
+	{%
+		\begin{table}[#1]
+			\begin{adjustwidth*}{-.5\overhang}{}
+				\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
+				#2
+			\end{adjustwidth*}
+		\end{table}
+	}{%
+		\begin{table}[#1]
+			\begin{adjustwidth}{-.5\overhang}{}
+				\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
+				#2
+			\end{adjustwidth}
+		\end{table}
+	}
 }{}
 
 \RenewDocumentEnvironment{figure*}{ O{htbp} +b }
 {%
-  \ifthenelse{\boolean{@twoside}}
-    {%
-      \begin{figure}[#1]
-        \begin{adjustwidth*}{-.5\overhang}{}
-		      \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-		      #2
-        \end{adjustwidth*}
-	    \end{figure}
-    }{%
-      \begin{figure}[#1]
-        \begin{adjustwidth}{-.5\overhang}{}
-		      \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-		      #2
-        \end{adjustwidth}
-	    \end{figure}
-    }
+	\ifthenelse{\boolean{@twoside}}
+	{%
+		\begin{figure}[#1]
+			\begin{adjustwidth*}{-.5\overhang}{}
+				\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
+				#2
+			\end{adjustwidth*}
+		\end{figure}
+	}{%
+		\begin{figure}[#1]
+			\begin{adjustwidth}{-.5\overhang}{}
+				\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
+				#2
+			\end{adjustwidth}
+		\end{figure}
+	}
 }{}
 
 
 \NewDocumentEnvironment{fullwidthtable}{ O{htbp} +b }
 {%
-  \ifthenelse{\boolean{@twoside}}
-    {%
-      \begin{table}[#1]
-        \begin{adjustwidth*}{-\overhang}{}
-		      \captionsetup{style=jcls, margin={\overhang, 0pt}}
-		      #2
-        \end{adjustwidth*}
-	    \end{table}
-    }{
-      \begin{table}[#1]
-        \begin{adjustwidth}{-\overhang}{}
-		      \captionsetup{style=jcls, margin={\overhang, 0pt}}
-		      #2
-        \end{adjustwidth}
-	    \end{table}
-    }
+	\ifthenelse{\boolean{@twoside}}
+	{%
+		\begin{table}[#1]
+			\begin{adjustwidth*}{-\overhang}{}
+				\captionsetup{style=jcls, margin={\overhang, 0pt}}
+				#2
+			\end{adjustwidth*}
+		\end{table}
+	}{
+		\begin{table}[#1]
+			\begin{adjustwidth}{-\overhang}{}
+				\captionsetup{style=jcls, margin={\overhang, 0pt}}
+				#2
+			\end{adjustwidth}
+		\end{table}
+	}
 }{}
 
 \NewDocumentEnvironment{fullwidthfigure}{ O{htbp} +b }
 {%
-  \ifthenelse{\boolean{@twoside}}
-    {%
-      \begin{figure}[#1]
-        \begin{adjustwidth*}{-\overhang}{}
-		      \captionsetup{style=jcls, margin={\overhang, 0pt}}
-		      #2
-        \end{adjustwidth*}
-	    \end{figure}
-    }{%
-      \begin{figure}[#1]
-        \begin{adjustwidth}{-\overhang}{}
-		      \captionsetup{style=jcls, margin={\overhang, 0pt}}
-		      #2
-        \end{adjustwidth}
-	    \end{figure}
-    }
+	\ifthenelse{\boolean{@twoside}}
+	{%
+		\begin{figure}[#1]
+			\begin{adjustwidth*}{-\overhang}{}
+				\captionsetup{style=jcls, margin={\overhang, 0pt}}
+				#2
+			\end{adjustwidth*}
+		\end{figure}
+	}{%
+		\begin{figure}[#1]
+			\begin{adjustwidth}{-\overhang}{}
+				\captionsetup{style=jcls, margin={\overhang, 0pt}}
+				#2
+			\end{adjustwidth}
+		\end{figure}
+	}
 }{}
 \NewDocumentEnvironment{fullwidth}{ +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
-		{%
-			\begin{adjustwidth*}{-\overhang}{}
-				\captionsetup{style=jcls, margin={\overhang, 0pt}}
-				#1
-			\end{adjustwidth*}
-		}{%
-			\begin{adjustwidth}{-\overhang}{}
-				\captionsetup{style=jcls, margin={\overhang, 0pt}}
-				#1
-			\end{adjustwidth}
-		}
+	{%
+		\begin{adjustwidth*}{-\overhang}{}
+			\captionsetup{style=jcls, margin={\overhang, 0pt}}
+			#1
+		\end{adjustwidth*}
+	}{%
+		\begin{adjustwidth}{-\overhang}{}
+			\captionsetup{style=jcls, margin={\overhang, 0pt}}
+			#1
+		\end{adjustwidth}
+	}
 }{}
 
 \RequirePackage{pdflscape}
@@ -453,6 +453,7 @@
 {
 	\marginpar{\setlength{\baselineskip}{12pt}\vspace*{1\baselineskip}}
 }
+
 \NewDocumentCommand \sideinfo { m+mmm }
 {
 	\gappto\sideinfos{\marginpar{\RaggedRight\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{#4}}}
@@ -498,13 +499,13 @@
 \define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
 \presetkeys{affiliation}
 {% Set default values 
-	department = \textcolor{jcls-red}{DEPARTMENT},
-	organization = \textcolor{jcls-red}{ORG},
-	ror =,
-	street-address =,
-	city = \textcolor{jcls-red}{CITY},
-	country = \textcolor{jcls-red}{COUNTRY},
-	country-code =,
+	department=\textcolor{jcls-red}{DEPARTMENT},
+	organization=\textcolor{jcls-red}{ORG},
+	ror=,
+	street-address=,
+	city=\textcolor{jcls-red}{CITY},
+	country=\textcolor{jcls-red}{COUNTRY},
+	country-code=,
 }{}
 
 \define@key{article}{title}{\csdef{article@title}{#1}}
@@ -523,20 +524,20 @@
 \define@key{article}{license}{\csdef{article@license}{#1}}
 \presetkeys{article}
 { % Set default values 
-	title =,
-	subtitle =,
-	shorttitle =,
-	datereceived =,
-	dateaccepted =,
-	datepublished =,
-	doi =,
-	articletype = under review,
-	volume =,
+	title=,
+	subtitle=,
+	shorttitle=,
+	datereceived=,
+	dateaccepted=,
+	datepublished=,
+	doi=,
+	articletype=under review,
+	volume=,
 	issuetitle=,
-	issuenumber =,
-	issuenote =,
-	reviewers =,
-	license = \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby},
+	issuenumber=,
+	issuenote=,
+	reviewers=,
+	license=\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby},
 }{}
 
 \RenewDocumentCommand \author { m }
@@ -812,7 +813,7 @@
 
 \iffinal
 \else
-	\RequirePackage[All]{lua-typo}
+	% \RequirePackage[All]{lua-typo}
 	\AddToHook{env/abstract/after}{\linenumbers\printwatermark}
 \fi
 
