@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2023/02/16 v1.0.0RC LaTeX class for JCLS]
-\typeout{This is jcls.cls 2023-02-16 v1.0.0RC}
+\ProvidesClass{jcls}[2023/04/16 v1.0.1RC LaTeX class for JCLS]
+\typeout{This is jcls.cls 202300-16 v1.0.1RC}
 \newif\iffinal
 \DeclareOption{final}{\finaltrue}
 \ProcessOptions\relax
@@ -88,16 +88,16 @@
 
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
-{\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
-{\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
+  {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
+  {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
-{\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
-{\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
+  {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
+  {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 % patch language field (https://tex.stackexchange.com/a/141831/29873)
 \DeclareSourcemap{
@@ -118,13 +118,13 @@
 % remove doi + url labels
 \DeclareFieldFormat{url}{%
 	\ifhyperref
-	{\href{#1}{\nolinkurl{#1}}}
-	{\nolinkurl{#1}}}
+    {\href{#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
 
 \DeclareFieldFormat{doi}{%
 	\ifhyperref
-	{\href{https://doi.org/#1}{\nolinkurl{#1}}}
-	{\nolinkurl{#1}}}
+		{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+		{\nolinkurl{#1}}}
 
 \RequirePackage{datetime2}
 
@@ -281,75 +281,101 @@
 \setlength{\overhang}{\marginparwidth+\marginparsep}
 
 
-\RenewDocumentEnvironment{table*}{ O{htbp} }
-{
-\ifthenelse{\boolean{@twoside}}
-{\begin{table}[#1]\begin{adjustwidth*}{-.5\overhang}{}}
-{\begin{table}[#1]\begin{adjustwidth}{-.5\overhang}{}}
-			\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{\end{adjustwidth*}}
-			{\end{adjustwidth}}
-	\end{table}
-}
+\RenewDocumentEnvironment{table*}{ O{htbp} +b }
+{%
+  \ifthenelse{\boolean{@twoside}}
+    {%
+      \begin{table}[#1]
+        \begin{adjustwidth*}{-.5\overhang}{}
+		      \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
+		      #2
+        \end{adjustwidth*}
+	    \end{table}
+    }{%
+      \begin{table}[#1]
+        \begin{adjustwidth}{-.5\overhang}{}
+		      \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
+		      #2
+        \end{adjustwidth}
+	    \end{table}
+    }
+}{}
 
-\RenewDocumentEnvironment{figure*}{ O{htbp} }
-{
-\ifthenelse{\boolean{@twoside}}
-{\begin{figure}[#1]\begin{adjustwidth*}{-.5\overhang}{}}
-{\begin{figure}[#1]\begin{adjustwidth}{-.5\overhang}{}}
-			\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{\end{adjustwidth*}}
-			{\end{adjustwidth}}
-	\end{figure}
-}
+\RenewDocumentEnvironment{figure*}{ O{htbp} +b }
+{%
+  \ifthenelse{\boolean{@twoside}}
+    {%
+      \begin{figure}[#1]
+        \begin{adjustwidth*}{-.5\overhang}{}
+		      \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
+		      #2
+        \end{adjustwidth*}
+	    \end{figure}
+    }{%
+      \begin{figure}[#1]
+        \begin{adjustwidth}{-.5\overhang}{}
+		      \captionsetup{style=jcls, margin={.5\overhang, 0pt}}
+		      #2
+        \end{adjustwidth}
+	    \end{figure}
+    }
+}{}
 
-\NewDocumentEnvironment{fullwidthtable}{ O{htbp} }
-{
-\ifthenelse{\boolean{@twoside}}
-{\begin{table}[#1]\begin{adjustwidth*}{-\overhang}{}}
-{\begin{table}[#1]\begin{adjustwidth}{-\overhang}{}}
-			\captionsetup{style=jcls, margin={\overhang, 0pt}}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{\end{adjustwidth*}}
-			{\end{adjustwidth} }
-	\end{table}
-}
 
-\NewDocumentEnvironment{fullwidthfigure}{ O{htbp} }
-{
-\ifthenelse{\boolean{@twoside}}
-{\begin{figure}[#1]\begin{adjustwidth*}{-\overhang}{}}
-{\begin{figure}[#1]\begin{adjustwidth}{-\overhang}{}}
-			\captionsetup{style=jcls, margin={\overhang, 0pt}}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{\end{adjustwidth*}}
-			{\end{adjustwidth}}
-	\end{figure}
-}
+\NewDocumentEnvironment{fullwidthtable}{ O{htbp} +b }
+{%
+  \ifthenelse{\boolean{@twoside}}
+    {%
+      \begin{table}[#1]
+        \begin{adjustwidth*}{-\overhang}{}
+		      \captionsetup{style=jcls, margin={\overhang, 0pt}}
+		      #2
+        \end{adjustwidth*}
+	    \end{table}
+    }{
+      \begin{table}[#1]
+        \begin{adjustwidth}{-\overhang}{}
+		      \captionsetup{style=jcls, margin={\overhang, 0pt}}
+		      #2
+        \end{adjustwidth}
+	    \end{table}
+    }
+}{}
 
-\NewDocumentEnvironment{fullwidth}{}
-{
+\NewDocumentEnvironment{fullwidthfigure}{ O{htbp} +b }
+{%
+  \ifthenelse{\boolean{@twoside}}
+    {%
+      \begin{figure}[#1]
+        \begin{adjustwidth*}{-\overhang}{}
+		      \captionsetup{style=jcls, margin={\overhang, 0pt}}
+		      #2
+        \end{adjustwidth*}
+	    \end{figure}
+    }{%
+      \begin{figure}[#1]
+        \begin{adjustwidth}{-\overhang}{}
+		      \captionsetup{style=jcls, margin={\overhang, 0pt}}
+		      #2
+        \end{adjustwidth}
+	    \end{figure}
+    }
+}{}
+\NewDocumentEnvironment{fullwidth}{ +b }
+{%
 	\ifthenelse{\boolean{@twoside}}
-	{\begin{adjustwidth*}{-\overhang}{}}
-	{\begin{adjustwidth}{-\overhang}{}}
-			\setlength\LTleft{-\overhang}
-			\setlength\LTright{0pt}
-			}
-			{
-			\ifthenelse{\boolean{@twoside}}
-			{\end{adjustwidth*}}
-			{\end{adjustwidth}}
-}
+		{%
+			\begin{adjustwidth*}{-\overhang}{}
+				\captionsetup{style=jcls, margin={\overhang, 0pt}}
+				#1
+			\end{adjustwidth*}
+		}{%
+			\begin{adjustwidth}{-\overhang}{}
+				\captionsetup{style=jcls, margin={\overhang, 0pt}}
+				#1
+			\end{adjustwidth}
+		}
+}{}
 
 \RequirePackage{pdflscape}
 \RequirePackage{tcolorbox}
