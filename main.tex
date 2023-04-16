@@ -134,6 +134,18 @@ Donec viverra bibendum ante vel faucibus. Maecenas vitae laoreet libero, vitae p
 %
 %
 
+
+\begin{figure*}
+	\includegraphics[width=\linewidth]{example-image-b.pdf}
+	\caption{Image b}
+\end{figure*}
+
+\begin{fullwidthfigure}
+	\includegraphics[width=\linewidth]{example-image-c.pdf}
+	\caption{Image c}
+\end{fullwidthfigure}
+
+
 \subsection{Subsection}
 
 Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi egestas vestibulum tortor. Mauris tempus nec nisl ut lacinia. Quisque congue nunc non ornare dapibus. Proin sit amet porttitor erat, eget varius mauris. Donec feugiat ligula ac enim cursus molestie. Donec tempor in lectus at facilisis. Vivamus pulvinar finibus lectus fringilla sodales. Nam fringilla ut velit quis commodo. Ut in velit sed dui euismod fringilla. Aliquam condimentum commodo purus ac suscipit. Donec auctor turpis libero, eu ultricies nisl hendrerit et. Nam gravida hendrerit tortor sit amet sagittis (\cite{dirac}).
@@ -175,6 +187,27 @@ A <- www >>= B  # This is a comment
 	\end{tabular}
 	\caption{A table}
 \end{table}
+
+
+\begin{table*}
+	\begin{tabular}{@{}lllll@{}}
+		Value & Something & Other & T & F \\ \midrule
+		1     & 2         & 3     & a & b \\
+		4     & 5         & 6     & c & d \\
+		7     & 8         & 9     & e & f \\
+	\end{tabular}
+	\caption{A starred table}
+\end{table*}
+
+\begin{fullwidthtable}
+	\begin{tabular}{@{}lllll@{}}
+		Value & Something & Other & T & F \\ \midrule
+		1     & 2         & 3     & a & b \\
+		4     & 5         & 6     & c & d \\
+		7     & 8         & 9     & e & f \\
+	\end{tabular}
+	\caption{A fullwidth table}
+\end{fullwidthtable}
 
 If your table is too big to fit on one page, you can also use the longtable environment:
 
