@@ -38,8 +38,13 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2023/04/16 v1.0.1RC LaTeX class for JCLS]
-\typeout{This is jcls.cls 2023-04-16 v1.0.1RC}
+\ProvidesClass{jcls}[2023/12/20 v1.0.2RC LaTeX class for JCLS]
+\typeout{This is jcls.cls 2023-12-20 v1.0.2RC}
+
+% Check for lualatex
+\RequirePackage{iftex}
+\RequireLuaTeX
+
 \newif\iffinal
 \DeclareOption{final}{\finaltrue}
 \ProcessOptions\relax
