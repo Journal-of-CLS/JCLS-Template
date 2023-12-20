@@ -79,16 +79,16 @@
 
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
-  {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
-  {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
+{\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
-  {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
-  {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+{\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
+{\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
 
 % patch language field (https://tex.stackexchange.com/a/141831/29873)
 \DeclareSourcemap{
@@ -222,16 +222,16 @@
 \NewDocumentCommand \orcidlink { m }
 {%
 	\texorpdfstring
-	  {\href{https://orcid.org/#1}{\textcolor{orcid-green}{\raisebox{-.3ex}{\aiOrcid}}}}
-	  {https://orcid.org/#1}%
+	{\href{https://orcid.org/#1}{\textcolor{orcid-green}{\raisebox{-.3ex}{\aiOrcid}}}}
+	{https://orcid.org/#1}%
 }
 
 % ror
 \NewDocumentCommand \rorlink { m }
 {%
 	\texorpdfstring
-	  {\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}
-	  {https://ror.org/#1}%
+	{\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}
+	{https://ror.org/#1}%
 }
 
 % code
@@ -266,7 +266,7 @@
 \RequirePackage{selnolig}
 \RequirePackage{marginnote}
 \RenewDocumentCommand \marginfont { }
-  { \sffamily\footnotesize }
+{ \sffamily\footnotesize }
 \RenewDocumentCommand \raggedleftmarginnote { } { }
 
 \RequirePackage{marginfix}
@@ -768,10 +768,10 @@
 
 
 % Abstract
-\RenewDocumentEnvironment {abstract} { +b } 
+\RenewDocumentEnvironment {abstract} { +b }
 {%
 	\sideinfos\begin{abstractbox}\sffamily\normalsize\textbf{\abstractname.}
-	  #1	
+		#1
 	\end{abstractbox}
 }{}
 
@@ -803,7 +803,7 @@
 	\AddToHook{shipout/foreground}
 	{
 		\begin{tikzpicture}[remember picture,overlay]
-			\node[red,rotate=30,scale=10,opacity=0.2] at (current page.center) {\sffamily\getfield{articletype}};
+			\node[primarycolor,rotate=90,scale=2,opacity=1] at ([xshift=2em]current page.west) {\sffamily\getfield{articletype}};
 		\end{tikzpicture}
 	}
 }
