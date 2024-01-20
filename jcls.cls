@@ -158,8 +158,7 @@
 \defaultfontfeatures{Scale=MatchLowercase}
 \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 
-% Using a local copy until pagella-otf is avialable on overleaf
-\RequirePackage[osf]{./fonts/pagella-otf}
+\RequirePackage[osf]{pagella-otf}
 
 \RequirePackage[medium]{FiraSans}
 \RequirePackage[medium, scaled=0.85]{FiraMono}
