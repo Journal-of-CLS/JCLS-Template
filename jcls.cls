@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2023/12/20 v1.0.2RC LaTeX class for JCLS]
-\typeout{This is jcls.cls 2023-12-20 v1.0.2RC}
+\ProvidesClass{jcls}[2024/01/20 v1.0.3RC LaTeX class for JCLS]
+\typeout{This is jcls.cls 2024-01-20 v1.0.2RC}
 
 % Check for lualatex
 \RequirePackage{iftex}
@@ -421,6 +421,7 @@
 {
 	\setfield{datepublished}{#1}%
 	\setfield{date}{#1}
+	% \date{#1}
 }
 
 \NewDocumentCommand \doi {m}
@@ -442,6 +443,7 @@
 
 \NewDocumentCommand \volume      { m } {\setfield{volume}{#1}}
 \NewDocumentCommand \issuetitle  { m } {\setfield{issuetitle}{#1}}
+\NewDocumentCommand \issueyear   { m } {\setfield{issueyear}{#1}}
 \NewDocumentCommand \issuenumber { m } {\setfield{issuenumber}{#1}}
 \NewDocumentCommand \issuenote   { m } {\setfield{issuenote}{#1}}
 \NewDocumentCommand \reviewers   { m } {\setfield{reviewers}{#1}}
@@ -520,6 +522,7 @@
 \define@key{article}{articletype}{\csdef{article@articletype}{#1}}
 \define@key{article}{volume}{\csdef{article@volume}{#1}}
 \define@key{article}{issuetitle}{\csdef{article@issuetitle}{#1}}
+\define@key{article}{issueyear}{\csdef{article@issueyear}{#1}}
 \define@key{article}{issuenumber}{\csdef{article@issuenumber}{#1}}
 \define@key{article}{issuenote}{\csdef{article@issuenote}{#1}}
 \define@key{article}{reviewers}{\csdef{article@reviewers}{#1}}
@@ -536,6 +539,7 @@
 	articletype=under review,
 	volume=,
 	issuetitle=,
+	issueyear=,
 	issuenumber=,
 	issuenote=,
 	reviewers=,
@@ -582,6 +586,7 @@
 	\doi{\expandafter\article@doi}
 	\articletype{\expandafter\article@articletype}
 	\volume{\expandafter\article@volume}
+	\issueyear{\expandafter\article@issueyear}
 	\issuenumber{\expandafter\article@issuenumber}
 	\issuenote{\expandafter\article@issuenote}
 	\reviewers{\expandafter\article@reviewers}
@@ -708,7 +713,7 @@
 	\fancyhf{}% clear all header and footer fields 
 	\fancyhead[L]{}
 	\fancyhead[R]{\sffamily \getfield{shorttitle}}
-	\fancyfoot[L]{\sffamily JCLS \getfield{volume} (\getfield{issuenumber}), \the\year, \printarticletype}
+	\fancyfoot[L]{\sffamily JCLS \getfield{volume} (\getfield{issuenumber}), \getfield{issueyear}, \printarticletype}
 	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
