@@ -163,6 +163,15 @@
 \RequirePackage[medium]{FiraSans}
 \RequirePackage[medium, scaled=0.85]{FiraMono}
 
+\directlua{luaotfload.add_fallback
+	("fallbacks",
+	{
+			"NotoColorEmoji:mode=harf;",
+			"STIX:"
+		}
+	)}
+\defaultfontfeatures{RawFeature={fallback=fallbacks}}
+
 \RequirePackage{microtype}
 \RequirePackage{lua-widow-control}
 \RequirePackage{upquote}
