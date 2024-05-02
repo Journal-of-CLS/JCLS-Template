@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2024/01/20 v1.0.3RC LaTeX class for JCLS]
-\typeout{This is jcls.cls 2024-01-20 v1.0.2RC}
+\ProvidesClass{jcls}[2024/05/02 v1.0.4RC LaTeX class for JCLS]
+\typeout{This is jcls.cls 2024-05-02 v1.0.4RC}
 
 % Check for lualatex
 \RequirePackage{iftex}
@@ -681,7 +681,7 @@
 	\ifcsvoid{@dataavailability}
 	{}
 	{
-		\section{Data Availability}
+		\section{Data Availability}\label{sec:dataavailability}
 		\getfield{dataavailability}
 	}
 }
@@ -690,7 +690,7 @@
 {
 	\ifcsvoid{@softwareavailability}{}
 	{
-		\section{Software Availability}
+		\section{Software Availability}\label{sec:softwareavailability}
 		\getfield{softwareavailability}
 	}
 }
