@@ -90,6 +90,36 @@
 	uniquelist=false,
 ]{biblatex}
 
+\DeclareFieldFormat{origdate}{\mkbibbrackets{#1}}
+\renewbibmacro*{cite:labeldate+extradate}{%
+	\iffieldundef{origyear}
+	{}
+	{\printorigdate
+		\setunit{\addspace}}%
+	\iffieldundef{labelyear}
+	{}
+	{\printtext[bibhyperref]{\printlabeldateextra}}}
+
+\DeclareCiteCommand{\citeorigyear}
+{\boolfalse{citetracker}%
+	\boolfalse{pagetracker}%
+	\usebibmacro{prenote}}
+{\printfield{origyear}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+\renewbibmacro*{date+extradate}{%
+	\iffieldundef{origyear}
+	{}
+	{\printorigdate
+		\setunit{\addspace}}%
+	\iffieldundef{labelyear}
+	{}
+	{\printtext[parens]{%
+			\iflabeldateisdate
+			{\printdateextra}
+			{\printlabeldateextra}}}}
+
 % patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
 \DeclareCiteCommand{\fullcite}
 {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
