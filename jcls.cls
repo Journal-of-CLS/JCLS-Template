@@ -808,19 +808,11 @@
 
 \IfFileExists{./metadata/authors.tex}
 {\input{./metadata/authors.tex}}
-<<<<<<< HEAD
-{\ClassError{jcls}{./metadata/authors.tex not found}}
-
-\IfFileExists{./metadata/article.tex}
-{\input{./metadata/article.tex}}
-{\ClassError{jcls}{./metadata/article.tex not found}}
-=======
 {\ClassError{jcls}{./metadata/authors.tex not found}{Please add metadata in ./metadata/authors.tex}}
 
 \IfFileExists{./metadata/article.tex}
 {\input{./metadata/article.tex}}
 {\ClassError{jcls}{./metadata/article.tex not found}{Please add metadata in ./metadata/article.tex}}
->>>>>>> 8226ba3 (feat(metadata): Check metadata files)
 
 \RequirePackage{tikz}
 
