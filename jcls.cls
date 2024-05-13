@@ -46,7 +46,10 @@
 \RequireLuaTeX
 
 \newif\iffinal
+\newif\ifmetadata
+\metadatatrue
 \DeclareOption{final}{\finaltrue}
+\DeclareOption{nometadata}{\metadatafalse}
 \ProcessOptions\relax
 \LoadClass{article}
 
@@ -493,8 +496,12 @@
 \presetkeys{author}
 { % Set default values 
 	orcid=,
+	surname=,
+	given-names=,
 	email=,
 	affiliation=,
+	equal-contrib=,
+	cor-id=,
 	contribution=,
 }{}
 
@@ -512,9 +519,14 @@
 \define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
 \presetkeys{affiliation}
 {% Set default values 
+	id=,
+	group=,
 	department=\textcolor{jcls-red}{DEPARTMENT},
 	organization=\textcolor{jcls-red}{ORG},
+	isni=,
+	ringgold=,
 	ror=,
+	pid=,
 	street-address=,
 	city=\textcolor{jcls-red}{CITY},
 	country=\textcolor{jcls-red}{COUNTRY},
@@ -763,22 +775,26 @@
 		{\LARGE\bfseries \getfield{title} \par}
 		{\Large \getfield{subtitle} \par}
 		\vspace{1\baselineskip}
+		\ifmetadata
 		{\normalsize\printauthors}
 		\vspace{1\baselineskip}
 		{\footnotesize\printaffiliations}
+		\fi
 		%  \vspace{1\baselineskip}
 	\end{titlebox}
 	%
 	%
 	% Sidebar
-	\sideinfofield{Citation}{howtocite}%
-	\sideinfofield{Date published}{datepublished}[][0ex]%
-	\sideinfofield{Date accepted}{dateaccepted}[][0ex]%
-	\sideinfofield{Date received}{datereceived}[]%
-	\sideinfofield{Keywords}{keywords}%
-	\sideinfofield{License}{license}%
-	\sideinfofield{Reviewers}{reviewers}%
-	\sideinfofield{Note}{issuenote}%   
+	\ifmetadata
+		\sideinfofield{Citation}{howtocite}%
+		\sideinfofield{Date published}{datepublished}[][0ex]%
+		\sideinfofield{Date accepted}{dateaccepted}[][0ex]%
+		\sideinfofield{Date received}{datereceived}[]%
+		\sideinfofield{Keywords}{keywords}%
+		\sideinfofield{License}{license}%
+		\sideinfofield{Reviewers}{reviewers}%
+		\sideinfofield{Note}{issuenote}%   
+	\fi
 }
 
 
@@ -804,15 +820,15 @@
 
 \IfFileExists{./metadata/self.bib}
 {\addbibresource{./metadata/self.bib} \howtocite{\begin{refsection}\fullcite{self}\end{refsection}}}
-{\ClassWarning{jcls}{./metadata/self.bib not found}}
+{\ClassWarning{jcls}{./metadata/self.bib not found}\metadatafalse}
 
 \IfFileExists{./metadata/authors.tex}
 {\input{./metadata/authors.tex}}
-{\ClassError{jcls}{./metadata/authors.tex not found}{Please add metadata in ./metadata/authors.tex}}
+{\ClassWarning{jcls}{./metadata/authors.tex not found}\metadatafalse}
 
 \IfFileExists{./metadata/article.tex}
 {\input{./metadata/article.tex}}
-{\ClassError{jcls}{./metadata/article.tex not found}{Please add metadata in ./metadata/article.tex}}
+{\ClassWarning{jcls}{./metadata/article.tex not found}\metadatafalse}
 
 \RequirePackage{tikz}
 
