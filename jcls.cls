@@ -74,7 +74,12 @@
 	\fi
 }
 
-\RequirePackage[english]{babel}
+\RequirePackage[main=english]{babel}
+\babelfont[*cyrillic]{rm}{Domitian}
+\babelfont{rm}[Language=Default]{FreeSerif}
+\babelfont{sf}[Language=Default]{FreeSans}
+\babelfont{tt}[Language=Default]{FreeMono}
+
 \RequirePackage{csquotes}
 
 \RequirePackage[
@@ -153,27 +158,26 @@
 \colorlet{backgroundcolor}  {graycolor!10}
 
 % font
+\RequirePackage{unicode-math}
 \RequirePackage{ccicons}
 \RequirePackage{academicons}
 \RequirePackage{parskip}
 \RequirePackage{ragged2e}
-\RequirePackage{unicode-math}
-\defaultfontfeatures{Scale=MatchLowercase}
-\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-
-\RequirePackage[osf]{pagella-otf}
-
-\RequirePackage[medium]{FiraSans}
-\RequirePackage[medium, scaled=0.85]{FiraMono}
 
 \directlua{luaotfload.add_fallback
 	("fallbacks",
 	{
+			"Domitian:mode=harf;",
 			"NotoColorEmoji:mode=harf;",
-			"STIX:"
+			"STIX Two Math:mode=harf;",
+			"freeserif:mode=harf;",
 		}
 	)}
-\defaultfontfeatures{RawFeature={fallback=fallbacks}}
+\defaultfontfeatures{RawFeature={fallback=fallbacks}, Scale=MatchLowercase, Ligatures=TeX,Scale=1}
+
+\RequirePackage[osf]{pagella-otf}
+\RequirePackage[medium]{FiraSans}
+\RequirePackage[medium, scaled=0.85]{FiraMono}
 
 \RequirePackage{microtype}
 \RequirePackage{lua-widow-control}
