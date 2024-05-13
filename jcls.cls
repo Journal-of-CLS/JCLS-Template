@@ -38,8 +38,8 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2024/05/02 v1.0.4RC LaTeX class for JCLS]
-\typeout{This is jcls.cls 2024-05-02 v1.0.4RC}
+\ProvidesClass{jcls}[2024/05/13 v1.0.5RC LaTeX class for JCLS]
+\typeout{This is jcls.cls 2024-05-13 v1.0.5RC}
 
 % Check for lualatex
 \RequirePackage{iftex}
@@ -804,15 +804,15 @@
 
 \IfFileExists{./metadata/self.bib}
 {\addbibresource{./metadata/self.bib} \howtocite{\begin{refsection}\fullcite{self}\end{refsection}}}
-{}
+{\ClassWarning{jcls}{./metadata/self.bib not found}}
 
 \IfFileExists{./metadata/authors.tex}
 {\input{./metadata/authors.tex}}
-{}
+{\ClassError{jcls}{./metadata/authors.tex not found}}
 
 \IfFileExists{./metadata/article.tex}
 {\input{./metadata/article.tex}}
-{}
+{\ClassError{jcls}{./metadata/article.tex not found}}
 
 \RequirePackage{tikz}
 
