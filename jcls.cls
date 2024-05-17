@@ -76,9 +76,7 @@
 
 \RequirePackage[main=english]{babel}
 \babelfont[*cyrillic]{rm}{Domitian}
-\babelfont{rm}[Language=Default]{FreeSerif}
-\babelfont{sf}[Language=Default]{FreeSans}
-\babelfont{tt}[Language=Default]{FreeMono}
+\babelfont[greek]{rm}{FreeSerif}
 
 \RequirePackage{csquotes}
 
