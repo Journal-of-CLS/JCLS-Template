@@ -36,20 +36,20 @@
 %
 % The Current Maintainer of this work is Dominik Gerstorfer.
 %
-
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2024/05/13 v1.0.5RC LaTeX class for JCLS]
-\typeout{This is jcls.cls 2024-05-13 v1.0.5RC}
+\ProvidesClass{jcls}[2024/05/17 v1.0.6RC LaTeX class for JCLS]
+\typeout{This is jcls.cls 2024-05-17 v1.0.6RC}
 
 % Check for lualatex
 \RequirePackage{iftex}
 \RequireLuaTeX
 
-\newif\iffinal
-\newif\ifmetadata
-\metadatatrue
+\newif\iffinal\finalfalse
+\newif\ifmetadata\metadatatrue
+\newif\ifpreprint\preprintfalse
 \DeclareOption{final}{\finaltrue}
 \DeclareOption{nometadata}{\metadatafalse}
+\DeclareOption{preprint}{\preprinttrue}
 \ProcessOptions\relax
 \LoadClass{article}
 
@@ -768,7 +768,9 @@
 	\fancyhf{}% clear all header and footer fields 
 	\fancyhead[L]{}
 	\fancyhead[R]{\sffamily \getfield{shorttitle}}
-	\fancyfoot[L]{\sffamily JCLS \getfield{volume} (\getfield{issuenumber}), \getfield{issueyear}, \printarticletype}
+	\fancyfoot[L]{\sffamily \ifpreprint%
+			CCLS \getfield{issueyear} Conference Preprints \else% 
+			JCLS \getfield{volume} (\getfield{issuenumber}), \getfield{issueyear}, \printarticletype\fi}
 	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
@@ -826,7 +828,7 @@
 		\sideinfofield{Date received}{datereceived}[]%
 		\sideinfofield{Keywords}{keywords}%
 		\sideinfofield{License}{license}%
-		\sideinfofield{Reviewers}{reviewers}%
+		\ifpreprint\else\sideinfofield{Reviewers}{reviewers}\fi%
 		\sideinfofield{Note}{issuenote}%   
 	\fi
 }
@@ -876,8 +878,7 @@
 	}
 }
 
-\iffinal
-\else
+\iffinal\else
 	% \RequirePackage[All]{lua-typo}
 	\AddToHook{env/abstract/after}{\linenumbers\printwatermark}
 \fi
