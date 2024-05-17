@@ -37,8 +37,8 @@
 % The Current Maintainer of this work is Dominik Gerstorfer.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2024/05/17 v1.0.6RC LaTeX class for JCLS]
-\typeout{This is jcls.cls 2024-05-17 v1.0.6RC}
+\ProvidesClass{jcls}[2024/05/17 v1.0.6 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2024-05-17 v1.0.6}
 
 % Check for lualatex
 \RequirePackage{iftex}
