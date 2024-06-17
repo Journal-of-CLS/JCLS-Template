@@ -549,93 +549,23 @@
 \newcounter{affiliations}
 \newcounter{counter}
 
-\define@key{author}{orcid}{\csdef{author@orcid}{#1}}
-\define@key{author}{surname}{\csdef{author@surname}{#1}}
-\define@key{author}{given-names}{\csdef{author@givennames}{#1}}
-\define@key{author}{email}{\csdef{author@email}{#1}}
-\define@key{author}{affiliation}{\csdef{author@affiliation}{#1}}
-\define@key{author}{equal-contrib}{\csdef{author@equalcontrib}{#1}}
-\define@key{author}{cor-id}{\csdef{author@corid}{#1}}
-\define@key{author}{contribution}{\csdef{author@contribution}{#1}}
-\presetkeys{author}
-{ % Set default values 
-	orcid=,
-	surname=,
-	given-names=,
-	email=,
-	affiliation=,
-	equal-contrib=,
-	cor-id=,
-	contribution=,
-}{}
-
-\define@key{affiliation}{id}{\csdef{aff@id}{#1}}
-\define@key{affiliation}{group}{\csdef{aff@group}{#1}}
-\define@key{affiliation}{department}{\csdef{aff@department}{#1}}
-\define@key{affiliation}{organization}{\csdef{aff@organization}{#1}}
-\define@key{affiliation}{isni}{\csdef{aff@isni}{#1}}
-\define@key{affiliation}{ringgold}{\csdef{aff@ringgold}{#1}}
-\define@key{affiliation}{ror}{\csdef{aff@ror}{#1}}
-\define@key{affiliation}{pid}{\csdef{aff@pid}{#1}}
-\define@key{affiliation}{street-address}{\csdef{aff@streetaddress}{#1}}
-\define@key{affiliation}{city}{\csdef{aff@city}{#1}}
-\define@key{affiliation}{country}{\csdef{aff@country}{#1}}
-\define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
-\presetkeys{affiliation}
-{% Set default values 
-	id=,
-	group=,
-	department=\textcolor{jcls-red}{DEPARTMENT},
-	organization=\textcolor{jcls-red}{ORG},
-	isni=,
-	ringgold=,
-	ror=,
-	pid=,
-	street-address=,
-	city=\textcolor{jcls-red}{CITY},
-	country=\textcolor{jcls-red}{COUNTRY},
-	country-code=,
-}{}
-
-\define@key{article}{title}{\csdef{article@title}{#1}}
-\define@key{article}{subtitle}{\csdef{article@subtitle}{#1}}
-\define@key{article}{shorttitle}{\csdef{article@shorttitle}{#1}}
-\define@key{article}{datereceived}{\csdef{article@datereceived}{#1}}
-\define@key{article}{dateaccepted}{\csdef{article@dateaccepted}{#1}}
-\define@key{article}{datepublished}{\csdef{article@datepublished}{#1}}
-\define@key{article}{doi}{\csdef{article@doi}{#1}}
-\define@key{article}{articletype}{\csdef{article@articletype}{#1}}
-\define@key{article}{volume}{\csdef{article@volume}{#1}}
-\define@key{article}{issuetitle}{\csdef{article@issuetitle}{#1}}
-\define@key{article}{issueyear}{\csdef{article@issueyear}{#1}}
-\define@key{article}{issuenumber}{\csdef{article@issuenumber}{#1}}
-\define@key{article}{issuenote}{\csdef{article@issuenote}{#1}}
-\define@key{article}{reviewers}{\csdef{article@reviewers}{#1}}
-\define@key{article}{license}{\csdef{article@license}{#1}}
-\presetkeys{article}
-{ % Set default values 
-	title=,
-	subtitle=,
-	shorttitle=,
-	datereceived=,
-	dateaccepted=,
-	datepublished=,
-	doi=,
-	articletype=under review,
-	volume=,
-	issuetitle=,
-	issueyear=,
-	issuenumber=,
-	issuenote=,
-	reviewers=,
-	license=\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby},
-}{}
+\ekvdefinekeys{jcls/author}
+{
+	store orcid           = \author@orcid
+	,store surname         = \author@surname
+	,store given-names     = \author@givennames
+	,store email           = \author@email
+	,store affiliation     = \author@affiliation
+	,store equal-contrib   = \author@equalcontrib
+	,store cor-id          = \author@corid
+	,store contribution    = \author@contribution
+}
 
 \RenewDocumentCommand \author { m }
 {
 	\begingroup
 	\global\stepcounter{authors}%
-	\setkeys{author}{#1}%
+	\ekvset{jcls/author}{#1}%
 	\csxdef{@orcid\theauthors}{\expandafter\author@orcid}%
 	\csxdef{@surname\theauthors}{\expandafter\author@surname}%
 	\csxdef{@givennames\theauthors}{\expandafter\author@givennames}%
@@ -645,10 +575,26 @@
 	\endgroup
 }
 
+\ekvdefinekeys{jcls/affiliation}
+{
+	store id = \aff@id
+	,store group = \aff@group
+	,store department = \aff@department
+	,store organization = \aff@organization
+	,store isni = \aff@isni
+	,store ringgold = \aff@ringgold
+	,store ror = \aff@ror
+	,store pid = \aff@pid
+	,store street-address = \aff@streetaddress
+	,store city = \aff@city
+	,store country = \aff@country
+	,store country = \aff@countrycode
+}
+
 \NewDocumentCommand \affiliation { m }
 {
 	\begingroup
-	\setkeys{affiliation}{#1}
+	\ekvset{jcls/affiliation}{#1}
 	\csxdef{@department\aff@id}{\expandafter\aff@department}%
 	\csxdef{@organization\aff@id}{\expandafter\aff@organization}%
 	\csxdef{@ror\aff@id}{\expandafter\aff@ror}%
@@ -658,10 +604,49 @@
 	\endgroup
 }
 
+
+\ekvdefinekeys{jcls/article}
+{
+	long store title = \article@title
+	,long store subtitle = \article@subtitle
+	,store shorttitle = \article@shorttitle
+	,store datereceived = \article@datereceived
+	,store dateaccepted = \article@dateaccepted
+	,store datepublished = \article@datepublished
+	,store doi = \article@doi
+	,store articletype = \article@articletype
+	,initial articletype = {under review}
+	,store volume = \article@volume
+	,store issuetitle = \article@issuetitle
+	,store issueyear = \article@issueyear
+	,store issuenumber = \article@issuenumber
+	,store issuenote = \article@issuenote
+	,store reviewers = \article@reviewers
+	,store license = \article@license
+	,initial license = {\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby}}
+	% \presetkeys{article}
+	% { % Set default values 
+	% 	title=,
+	% 	subtitle=,
+	% 	shorttitle=,
+	% 	datereceived=,
+	% 	dateaccepted=,
+	% 	datepublished=,
+	% 	doi=,
+	% 	articletype=under review,
+	% 	volume=,
+	% 	issuetitle=,
+	% 	issueyear=,
+	% 	issuenumber=,
+	% 	issuenote=,
+	% 	reviewers=,
+	% }{}
+}
+
 \NewDocumentCommand \article { m }
 {
 	% \begingroup
-	\setkeys{article}{#1}
+	\ekvset{jcls/article}{#1}
 	\title{\expandafter\article@title}
 	\subtitle{\expandafter\article@subtitle}
 	\shorttitle{\expandafter\article@shorttitle}
