@@ -37,8 +37,8 @@
 % The Current Maintainer of this work is Dominik Gerstorfer.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2024/05/17 v1.0.6 LaTeX class for JCLS]
-\typeout{This is jcls.cls 2024-05-17 v1.0.6}
+\ProvidesClass{jcls}[2024/06/17 v1.1.0 LaTeX class for JCLS]
+\typeout{This is jcls.cls 2024-06-17 v1.1.0}
 
 % Check for lualatex
 \RequirePackage{iftex}
@@ -75,7 +75,10 @@
 	\fi
 }
 
-\RequirePackage[main=english]{babel}
+\RequirePackage[
+	main=english
+]{babel}
+
 \babelfont[*cyrillic]{rm}{Domitian}
 \babelfont[greek]{rm}{FreeSerif}
 
@@ -454,9 +457,9 @@
 \interfootnotelinepenalty=10000
 
 
-\NewDocumentCommand \setfield   { mm      } {\csgdef{@#1}{#2}}
-\NewDocumentCommand \getfield   { m       } {\ifcsvoid{@#1}{}{\csuse{@#1}}}
-\NewDocumentCommand \printfield { mO{}O{} } {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}}
+\NewDocumentCommand \setfield   { mm   } {\csgdef{@#1}{#2}}
+\NewDocumentCommand \getfield   { m    } {\ifcsvoid{@#1}{}{\csuse{@#1}}}
+\NewDocumentCommand \printfield { mO{} } {\ifcsvoid{@#1}{}{\csuse{@#1}\unskip#2}}
 
 % % https://tex.stackexchange.com/a/44950/29873
 %
@@ -566,12 +569,12 @@
 	\begingroup
 	\global\stepcounter{authors}%
 	\ekvset{jcls/author}{#1}%
-	\csxdef{@orcid\theauthors}{\expandafter\author@orcid}%
-	\csxdef{@surname\theauthors}{\expandafter\author@surname}%
-	\csxdef{@givennames\theauthors}{\expandafter\author@givennames}%
-	\csxdef{@email\theauthors}{\expandafter\author@email}%
-	\csxdef{@affiliation\theauthors}{\expandafter\author@affiliation}%
-	\csxdef{@contribution\theauthors}{\expandafter\author@contribution}%
+	\global\cslet{@orcid\theauthors}{\author@orcid}%
+	\global\cslet{@surname\theauthors}{\author@surname}%
+	\global\cslet{@givennames\theauthors}{\author@givennames}%
+	\global\cslet{@email\theauthors}{\author@email}%
+	\global\cslet{@affiliation\theauthors}{\author@affiliation}%
+	\global\cslet{@contribution\theauthors}{\author@contribution}%
 	\endgroup
 }
 
@@ -595,12 +598,12 @@
 {
 	\begingroup
 	\ekvset{jcls/affiliation}{#1}
-	\csxdef{@department\aff@id}{\expandafter\aff@department}%
-	\csxdef{@organization\aff@id}{\expandafter\aff@organization}%
-	\csxdef{@ror\aff@id}{\expandafter\aff@ror}%
-	\csxdef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
-	\csxdef{@city\aff@id}{\expandafter\aff@city}%
-	\csxdef{@country\aff@id}{\expandafter\aff@country}%
+	\global\cslet{@department\aff@id}{\aff@department}%
+	\global\cslet{@organization\aff@id}{\aff@organization}%
+	\global\cslet{@ror\aff@id}{\aff@ror}%
+	\global\cslet{@streetaddress\aff@id}{\aff@streetaddress}%
+	\global\cslet{@city\aff@id}{\aff@city}%
+	\global\cslet{@country\aff@id}{\aff@country}%
 	\endgroup
 }
 
@@ -624,23 +627,6 @@
 	,store reviewers = \article@reviewers
 	,store license = \article@license
 	,initial license = {\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby}}
-	% \presetkeys{article}
-	% { % Set default values 
-	% 	title=,
-	% 	subtitle=,
-	% 	shorttitle=,
-	% 	datereceived=,
-	% 	dateaccepted=,
-	% 	datepublished=,
-	% 	doi=,
-	% 	articletype=under review,
-	% 	volume=,
-	% 	issuetitle=,
-	% 	issueyear=,
-	% 	issuenumber=,
-	% 	issuenote=,
-	% 	reviewers=,
-	% }{}
 }
 
 \NewDocumentCommand \article { m }
