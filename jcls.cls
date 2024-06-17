@@ -56,18 +56,19 @@
 %\RequirePackage{silence}
 %\WarningsOff*
 
-\RequirePackage{amsmath,amssymb}
 \RequirePackage{calc}
 \RequirePackage{setspace}
 \setstretch{1.25}
 
 \RequirePackage{enumitem}
-\RequirePackage{etoolbox}
+\RequirePackage{etoolbox}             % maybe switch to expl3 
 \RequirePackage{ifmtarg}
-\RequirePackage{xkeyval}
+\RequirePackage{xkeyval}              % switch to expkv
+\RequirePackage[all]{expkv}
 
 % Force unicode (https://tex.stackexchange.com/a/663846/29873)
-\AtBeginDocument{%
+% find better expl3 solution 
+\AtBeginDocument{%                  
 	\ifx\Umathchar\undefined\else
 		\def\encodingdefault{TU}%
 		\fontencoding{TU}\selectfont
@@ -158,7 +159,7 @@
 	{\href{https://doi.org/#1}{\nolinkurl{#1}}}
 	{\nolinkurl{#1}}}
 
-\RequirePackage{datetime2}
+\RequirePackage{datetime2}      % check if needed
 
 % color
 \RequirePackage[dvipsnames,svgnames]{xcolor}
@@ -186,6 +187,7 @@
 \colorlet{backgroundcolor}  {graycolor!10}
 
 % font
+\RequirePackage{mathtools}
 \RequirePackage{unicode-math}
 \RequirePackage{ccicons}
 \RequirePackage{academicons}
@@ -324,7 +326,7 @@
 \setlength{\overhang}{\marginparwidth+\marginparsep}
 
 
-\NewDocumentEnvironment { table* } { O{htbp} +b }
+\NewDocumentEnvironment { table* } { O{htb} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -344,7 +346,7 @@
 	}
 }{}
 
-\NewDocumentEnvironment { figure* } { O{htbp} +b }
+\NewDocumentEnvironment { figure* } { O{htb} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -364,7 +366,7 @@
 	}
 }{}
 
-\NewDocumentEnvironment { fullwidthtable } { O{htbp} +b }
+\NewDocumentEnvironment { fullwidthtable } { O{htb} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -384,7 +386,7 @@
 	}
 }{}
 
-\NewDocumentEnvironment{ fullwidthfigure } { O{htbp} +b }
+\NewDocumentEnvironment{ fullwidthfigure } { O{htb} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -446,15 +448,45 @@
 	multiple,
 ]{footmisc}
 
-\RenewDocumentCommand \footnotemargin { } {0em}
-\RenewDocumentCommand \thefootnote { } {\arabic{footnote}}
-\RenewDocumentCommand \@makefntext { m } {\noindent{\@thefnmark}. #1}
+\RenewDocumentCommand \footnotemargin {   } {0em}
+\RenewDocumentCommand \thefootnote    {   } {\arabic{footnote}}
+\RenewDocumentCommand \@makefntext    { m } {\noindent{\@thefnmark}. #1}
 \interfootnotelinepenalty=10000
 
 
-\NewDocumentCommand \setfield   { mO{}m }   {\csgdef{@#1#2}{#3}}
-\NewDocumentCommand \getfield   { mO{} }    {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
+\NewDocumentCommand \setfield   { mm      } {\csgdef{@#1}{#2}}
+\NewDocumentCommand \getfield   { m       } {\ifcsvoid{@#1}{}{\csuse{@#1}}}
 \NewDocumentCommand \printfield { mO{}O{} } {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}}
+
+% % https://tex.stackexchange.com/a/44950/29873
+%
+% \ExplSyntaxOn
+% \NewDocumentCommand{\setproperty}{ O{standard} m m }
+% {
+% 	\cs_if_exist:cF { g_citr_#1_prop } { \prop_new:c { g_citr_#1_prop } }
+% 	\prop_gput:cnn { g_citr_#1_prop } { #2 } { #3 }
+% }
+% \NewDocumentCommand{\getproperty}{ O{standard} m }
+% {
+% 	\cs_if_exist:cTF { g_citr_#1_prop }
+% 	{
+% 		\prop_get:cnN { g_citr_#1_prop } { #2 } \l_citr_value_tl
+% 		\quark_if_no_value:NTF \l_citr_value_tl
+% 		{
+% 			Inexistent~property~#2
+% 		}
+% 		{
+% 			\tl_use:N \l_citr_value_tl
+% 		}
+% 	}
+% 	{
+% 		Inexistent~family~#1
+% 	}
+% }
+% \prop_new:N \g_citr_standard_prop
+% \tl_new:N \l_citr_value_tl
+% \ExplSyntaxOff
+
 
 \NewDocumentCommand \keywords     { m }     {\setfield{keywords}{#1}}
 \NewDocumentCommand \datereceived { m }     {\setfield{datereceived}{#1}}
