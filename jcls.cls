@@ -323,8 +323,8 @@
 \newlength{\overhang}
 \setlength{\overhang}{\marginparwidth+\marginparsep}
 
-
-\NewDocumentEnvironment { table* } { O{htbp} +b }
+%TODO msg on redefinition ?
+\DeclareDocumentEnvironment { table* } { O{htbp} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
@@ -344,7 +344,8 @@
 	}
 }{}
 
-\NewDocumentEnvironment { figure* } { O{htbp} +b }
+%TODO msg on redefinition ?
+\DeclareDocumentEnvironment { figure* } { O{htbp} +b }
 {%
 	\ifthenelse{\boolean{@twoside}}
 	{%
