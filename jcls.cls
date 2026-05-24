@@ -392,16 +392,6 @@
 
 
 
-\NewDocumentEnvironment{abstractbox}{+b}{}{%
-	\par
-	\setlength{\fboxsep}{2mm}%
-	\colorbox{secundarycolor!10}{%
-		\hskip1mm\parbox{\dimexpr\linewidth-6mm}{%
-			#1
-		}%
-	\hskip1mm}%
-	\par
-}
 
 \RequirePackage[
 	ragged,
@@ -793,6 +783,8 @@
 		\ifpreprint\else\sideinfofield{Reviewers}{reviewers}\fi%
 		\sideinfofield{Note}{issuenote}%   
 	\fi
+	\par
+	\sideinfos\ignorespaces
 }
 
 
@@ -800,12 +792,18 @@
 
 
 % Abstract
-\RenewDocumentEnvironment {abstract} { +b }
-{%
-	\sideinfos\begin{abstractbox}\sffamily\normalsize\textbf{\abstractname.}
-		#1
-	\end{abstractbox}
-}{}
+\RenewDocumentEnvironment{abstract}{+b}{}{%
+	\par
+	\setlength{\fboxsep}{2mm}%
+	\noindent
+	\colorbox{secundarycolor!10}{%
+		\hskip1mm\parbox{\dimexpr\linewidth-6mm}{%
+			\textbf{\abstractname.}\space
+			#1
+		}%
+	\hskip1mm}%
+	\par
+}
 
 \RequirePackage{hyperref}
 \hypersetup{
