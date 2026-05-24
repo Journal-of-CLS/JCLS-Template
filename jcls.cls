@@ -217,7 +217,6 @@
 \RequirePackage{graphicx}
 \graphicspath{ {./figures/} }
 
-\RequirePackage[Export]{adjustbox}
 
 % captions and notes
 \RequirePackage[
@@ -287,17 +286,14 @@
 	tabsize=2,
 }
 
-\RequirePackage{selnolig}
 \RequirePackage{marginnote}
 \RenewDocumentCommand \marginfont { }
 { \sffamily\footnotesize }
 \RenewDocumentCommand \raggedleftmarginnote { } { }
 
-\RequirePackage{marginfix}
 \RequirePackage{changepage}
-\RequirePackage{ifthen}
 \newlength{\overhang}
-\setlength{\overhang}{\marginparwidth+\marginparsep}
+\setlength{\overhang}{\dimexpr\marginparwidth+\marginparsep}
 
 %TODO msg on redefinition ?
 \DeclareDocumentEnvironment { table* } { O{htbp} +b }
@@ -397,16 +393,8 @@
 	}
 }{}
 
-\RequirePackage{pdflscape}
 
 \RequirePackage{tcolorbox}
-\newtcolorbox{titlebox}{
-	colback=white,
-	arc=0pt,
-	outer arc=0pt,
-	colframe=white,
-	left=3mm, right=0mm, top=0mm, bottom=0mm,
-}
 
 \newtcolorbox{abstractbox}{
 	colback=secundarycolor!10,
@@ -768,13 +756,20 @@
 	\newpage
 	\null
 	\vspace*{-\topskip}
-	\begin{titlebox}
+	\leavevmode\llap{
+		\begin{minipage}[t]{\marginparwidth}
+	\null\par\nointerlineskip
+	\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}\par
+	\vskip3\baselineskip
+	\color{oa-orange}
+	\normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
+	
+	\end{minipage}\hskip\marginparsep}\hskip3mm\begin{minipage}[t]{\dimexpr\linewidth-3mm}
+	\null\par\nointerlineskip
 		\raggedright%
 		\setstretch{1.0}%
 		\normalsize\sffamily%
 		{\getfield{articletype}%
-			\marginnote{\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}}%
-			\marginnote{\textcolor{oa-orange}{\normalsize\sffamily\bfseries OPEN \adjustbox{height=2\baselineskip, raise=-.5\baselineskip}{\aiOpenAccess} ACCESS}}[6\baselineskip]%
 			\par}
 		{\LARGE\bfseries \getfield{title} \par}
 		{\Large \getfield{subtitle} \par}
@@ -785,7 +780,7 @@
 		{\footnotesize\printaffiliations}
 		\fi
 		%  \vspace{1\baselineskip}
-	\end{titlebox}
+	\end{minipage}
 	%
 	%
 	% Sidebar
