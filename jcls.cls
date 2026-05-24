@@ -563,7 +563,7 @@
 \RenewDocumentCommand \author { m }
 {
 	\begingroup
-	\global\stepcounter{authors}%
+	\stepcounter{authors}%
 	\setkeys{author}{#1}%
 	\csxdef{@orcid\theauthors}{\expandafter\author@orcid}%
 	\csxdef{@surname\theauthors}{\expandafter\author@surname}%
