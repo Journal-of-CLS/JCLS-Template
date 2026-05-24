@@ -53,26 +53,11 @@
 \ProcessOptions\relax
 \LoadClass{article}
 
-%\RequirePackage{silence}
-%\WarningsOff*
-
 \RequirePackage{amsmath,amssymb}
-\RequirePackage{calc}
 \RequirePackage{setspace}
 \setstretch{1.25}
 
 \RequirePackage{enumitem}
-\RequirePackage{etoolbox}
-\RequirePackage{ifmtarg}
-\RequirePackage{xkeyval}
-
-% Force unicode (https://tex.stackexchange.com/a/663846/29873)
-\AtBeginDocument{%
-	\ifx\Umathchar\undefined\else
-		\def\encodingdefault{TU}%
-		\fontencoding{TU}\selectfont
-	\fi
-}
 
 \RequirePackage[main=english]{babel}
 \babelfont[*cyrillic]{rm}{Domitian}
@@ -225,7 +210,6 @@
 	marginparsep=3mm,
 	marginparwidth=40mm,
 	reversemarginpar=true,
-	% showframe,
 }
 
 
@@ -244,17 +228,9 @@
 ]{caption}
 
 \RequirePackage{subcaption}
-\RequirePackage{sidenotes}
-\DeclareCaptionStyle{base}         {justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
-\DeclareCaptionStyle{sidecaption}  {justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
-\DeclareCaptionStyle{marginfigure} {justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
-\DeclareCaptionStyle{margintable}  {justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
-\DeclareCaptionStyle{widefigure}   {justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
-\DeclareCaptionStyle{widetable}    {justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
 \DeclareCaptionStyle{jcls}         {justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
 
-\captionsetup[table]  {style=jcls}
-\captionsetup[figure] {style=jcls}
+\captionsetup{style=jcls}
 
 % tables
 \RequirePackage{booktabs}
@@ -454,19 +430,16 @@
 
 
 \NewDocumentCommand \setfield   { mO{}m }   {\csgdef{@#1#2}{#3}}
-\NewDocumentCommand \getfield   { mO{} }    {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}}}
+\NewDocumentCommand \getfield   { mO{} }    {\UseName{@#1#2}}
 \NewDocumentCommand \printfield { mO{}O{} } {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}}
 
 \NewDocumentCommand \keywords     { m }     {\setfield{keywords}{#1}}
 \NewDocumentCommand \datereceived { m }     {\setfield{datereceived}{#1}}
 \NewDocumentCommand \dateaccepted { m }     {\setfield{dateaccepted}{#1}}
-
-\let\date\relax
 \NewDocumentCommand \datepublished { m }
 {
 	\setfield{datepublished}{#1}%
 	\setfield{date}{#1}
-	% \date{#1}
 }
 
 \NewDocumentCommand \doi {m}
@@ -750,22 +723,18 @@
 		\input{./appendix.tex}
 	}{}
 }
-
 % headers and footers
 \RequirePackage{fancyhdr}
 
 \fancypagestyle{plain}{% used for the first page
 	\fancyhf{}% clear all header and footer fields 
-	\fancyhead[L]{}
-	\fancyfoot[L]{}
-	\fancyfoot[R]{\sffamily \thepage}
+	\fancyfoot[R]{\sffamily \thepage xx}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
 }
 
 \fancypagestyle{jcls}{% 
 	\fancyhf{}% clear all header and footer fields 
-	\fancyhead[L]{}
 	\fancyhead[R]{\sffamily \getfield{shorttitle}}
 	\fancyfoot[L]{\sffamily \ifpreprint%
 			CCLS\getfield{issueyear} Conference Preprints \else% 
