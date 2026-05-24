@@ -133,10 +133,7 @@
 }
 
 % remove doi + url labels
-\DeclareFieldFormat{url}{%
-	\ifhyperref
-	{\href{#1}{\nolinkurl{#1}}}
-	{\nolinkurl{#1}}}
+\DeclareFieldFormat{url}{\url{#1}}
 
 \DeclareFieldFormat{doi}{%
 	\ifhyperref
