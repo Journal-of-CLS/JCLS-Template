@@ -391,14 +391,16 @@
 }{}
 
 
-\RequirePackage{tcolorbox}
 
-\newtcolorbox{abstractbox}{
-	colback=secundarycolor!10,
-	arc=0pt,
-	outer arc=0pt,
-	colframe=secundarycolor!10,
-	left=3mm, right=3mm, top=2mm, bottom=2mm,
+\NewDocumentEnvironment{abstractbox}{+b}{}{%
+	\par
+	\setlength{\fboxsep}{2mm}%
+	\colorbox{secundarycolor!10}{%
+		\hskip1mm\parbox{\dimexpr\linewidth-6mm}{%
+			#1
+		}%
+	\hskip1mm}%
+	\par
 }
 
 \RequirePackage[
