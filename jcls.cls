@@ -126,11 +126,8 @@
 	}
 }
 
-% remove p./pp.
-\DefineBibliographyStrings{english}{%
-	page={},
-	pages={},
-}
+% remove p./pp. from pages
+\DeclareFieldFormat{pages}{\mkcomprange{#1}}
 
 % remove doi + url labels
 \DeclareFieldFormat{url}{\url{#1}}
@@ -139,8 +136,6 @@
 	\ifhyperref
 	{\href{https://doi.org/#1}{\nolinkurl{#1}}}
 	{\nolinkurl{#1}}}
-
-\RequirePackage{datetime2}
 
 % color
 \RequirePackage[dvipsnames,svgnames]{xcolor}
@@ -224,19 +219,14 @@
 ]{caption}
 
 \RequirePackage{subcaption}
-\DeclareCaptionStyle{jcls}         {justification=RaggedRight, singlelinecheck=off, labelfont=bf, font={small,sf}}
+\DeclareCaptionStyle{jcls}{
+	justification=RaggedRight,
+	singlelinecheck=off,
+	labelfont=bf,
+	font={small,sf}
+}
 
 \captionsetup{style=jcls}
-
-% tables
-\RequirePackage{booktabs}
-
-\RequirePackage{longtable}
-\setlength\LTleft{0pt}
-\setlength\LTright{\fill}
-
-\RequirePackage{tabularx}
-\RequirePackage{makecell}
 
 % orcid
 \NewDocumentCommand \orcidlink { m }
@@ -290,7 +280,7 @@
 
 \newlength{\overhang}
 \setlength{\overhang}{\dimexpr\marginparwidth+\marginparsep}
-\usepackage{scrextend}
+\RequirePackage{scrextend}% for addmargin
 
 \NewDocumentEnvironment{jcls@adjustwidth}{O{-\overhang}}{
 	\begin{addmargin*}[#1]{0pt}
@@ -655,7 +645,7 @@
 
 \fancypagestyle{plain}{% used for the first page
 	\fancyhf{}% clear all header and footer fields 
-	\fancyfoot[R]{\sffamily \thepage xx}
+	\fancyfoot[R]{\sffamily \thepage}
 	\renewcommand{\headrulewidth}{0pt}% 
 	\renewcommand{\footrulewidth}{0pt}%
 }
@@ -685,25 +675,29 @@
 \titleformat{\subsection}{\large\sffamily\bfseries}{\thesubsection}{.5em}{}
 \titleformat{\subsubsection}{\normalsize\sffamily\bfseries}{\thesubsubsection}{.5em}{}
 
-
-
 % title and sidebar
 \def\@maketitle{% 
 	%
 	% title
 	%
-	\newpage
+	\clearpage
 	\null
 	\vspace*{-\topskip}
-	\leavevmode\llap{
-		\begin{minipage}[t]{\marginparwidth}
-	\null\par\nointerlineskip
-	\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}\par
-	\vskip3\baselineskip
-	\color{oa-orange}
-	\normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
-	
-	\end{minipage}\hskip\marginparsep}\hskip3mm\begin{minipage}[t]{\dimexpr\linewidth-3mm}
+	% column including logo + open access info
+	\begingroup
+	\setstretch{1.0}%
+	\leavevmode\llap{%
+		\begin{minipage}[t]{\marginparwidth}%
+			\null\par\nointerlineskip
+			\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}\par
+			\vskip3\baselineskip
+			\color{oa-orange}%
+			\normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
+		\end{minipage}%
+		\hskip\marginparsep
+	}\hskip3mm
+	%
+	\begin{minipage}[t]{\dimexpr\linewidth-3mm}%
 	\null\par\nointerlineskip
 		\raggedright%
 		\setstretch{1.0}%
@@ -719,7 +713,9 @@
 		{\footnotesize\printaffiliations}
 		\fi
 		%  \vspace{1\baselineskip}
-	\end{minipage}
+	\end{minipage}%
+	\par
+	\endgroup
 	%
 	%
 	% Sidebar
@@ -733,8 +729,7 @@
 		\ifpreprint\else\sideinfofield{Reviewers}{reviewers}\fi%
 		\sideinfofield{Note}{issuenote}%   
 	\fi
-	\par
-	\sideinfos\ignorespaces
+	\sideinfos
 }
 
 
@@ -750,7 +745,7 @@
 		\hskip1mm\parbox{\dimexpr\linewidth-6mm}{%
 			\sffamily\normalsize
 			\textbf{\abstractname.}\space
-			#1
+			#1%
 		}%
 	\hskip1mm}%
 	\par
@@ -798,6 +793,21 @@
 }
 \ExplSyntaxOff
 
+
+%%% Additional packages which have been loaded automatically before the refactoring
+\RequirePackage{pdflscape}
+\RequirePackage{datetime2}
+
+
+% tables
+\RequirePackage{booktabs}
+
+\RequirePackage{longtable}
+\setlength\LTleft{0pt}
+\setlength\LTright{\fill}
+
+\RequirePackage{tabularx}
+\RequirePackage{makecell}
 
 \iffinal\else
 	% \RequirePackage[All]{lua-typo}
