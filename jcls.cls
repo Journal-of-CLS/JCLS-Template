@@ -288,110 +288,60 @@
 { \sffamily\footnotesize }
 \RenewDocumentCommand \raggedleftmarginnote { } { }
 
-\RequirePackage{changepage}
 \newlength{\overhang}
 \setlength{\overhang}{\dimexpr\marginparwidth+\marginparsep}
+\usepackage{scrextend}
+
+\NewDocumentEnvironment{jcls@adjustwidth}{O{-\overhang}}{
+	\begin{addmargin*}[#1]{0pt}
+}{
+	\end{addmargin*}	
+}
 
 %TODO msg on redefinition ?
-\DeclareDocumentEnvironment { table* } { O{htbp} +b }
+\DeclareDocumentEnvironment { table* } { O{htbp}}
 {%
-	\ifthenelse{\boolean{@twoside}}
-	{%
-		\begin{table}[#1]
-			\begin{adjustwidth*}{-.5\overhang}{}
-				\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-				#2
-			\end{adjustwidth*}
-		\end{table}
-	}{%
-		\begin{table}[#1]
-			\begin{adjustwidth}{-.5\overhang}{}
-				\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-				#2
-			\end{adjustwidth}
-		\end{table}
-	}
-}{}
+	\begin{table}
+		\begin{jcls@adjustwidth}[-.5\overhang]
+}{
+		\end{jcls@adjustwidth}
+	\end{table}
+}
 
 %TODO msg on redefinition ?
-\DeclareDocumentEnvironment { figure* } { O{htbp} +b }
+\DeclareDocumentEnvironment { figure* } { O{htbp}}
 {%
-	\ifthenelse{\boolean{@twoside}}
-	{%
-		\begin{figure}[#1]
-			\begin{adjustwidth*}{-.5\overhang}{}
-				\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-				#2
-			\end{adjustwidth*}
-		\end{figure}
-	}{%
-		\begin{figure}[#1]
-			\begin{adjustwidth}{-.5\overhang}{}
-				\captionsetup{style=jcls, margin={.5\overhang, 0pt}}
-				#2
-			\end{adjustwidth}
-		\end{figure}
-	}
-}{}
+	\begin{figure}
+		\begin{jcls@adjustwidth}[-.5\overhang]
+}{
+		\end{jcls@adjustwidth}
+	\end{figure}
+}
 
-\NewDocumentEnvironment { fullwidthtable } { O{htbp} +b }
+\NewDocumentEnvironment { fullwidthtable } { O{htbp} }
 {%
-	\ifthenelse{\boolean{@twoside}}
-	{%
-		\begin{table}[#1]
-			\begin{adjustwidth*}{-\overhang}{}
-				\captionsetup{style=jcls, margin={\overhang, 0pt}}
-				#2
-			\end{adjustwidth*}
-		\end{table}
-	}{
-		\begin{table}[#1]
-			\begin{adjustwidth}{-\overhang}{}
-				\captionsetup{style=jcls, margin={\overhang, 0pt}}
-				#2
-			\end{adjustwidth}
-		\end{table}
-	}
-}{}
+	\begin{table}[#1]
+	\begin{jcls@adjustwidth}
+}{
+	\end{jcls@adjustwidth}
+	\end{table}
+}
 
-\NewDocumentEnvironment{ fullwidthfigure } { O{htbp} +b }
+\NewDocumentEnvironment{ fullwidthfigure } { O{htbp} }
 {%
-	\ifthenelse{\boolean{@twoside}}
-	{%
-		\begin{figure}[#1]
-			\begin{adjustwidth*}{-\overhang}{}
-				\captionsetup{style=jcls, margin={\overhang, 0pt}}
-				#2
-			\end{adjustwidth*}
-		\end{figure}
-	}{%
-		\begin{figure}[#1]
-			\begin{adjustwidth}{-\overhang}{}
-				\captionsetup{style=jcls, margin={\overhang, 0pt}}
-				#2
-			\end{adjustwidth}
-		\end{figure}
-	}
-}{}
+	\begin{figure}
+		\begin{jcls@adjustwidth}
+}{
+		\end{jcls@adjustwidth}
+	\end{figure}
+}
 
-\NewDocumentEnvironment { fullwidth } { +b }
+\NewDocumentEnvironment { fullwidth } { }
 {%
-	\ifthenelse{\boolean{@twoside}}
-	{%
-		\begin{adjustwidth*}{-\overhang}{}
-			\captionsetup{style=jcls, margin={\overhang, 0pt}}
-			#1
-		\end{adjustwidth*}
-	}{%
-		\begin{adjustwidth}{-\overhang}{}
-			\captionsetup{style=jcls, margin={\overhang, 0pt}}
-			#1
-		\end{adjustwidth}
-	}
-}{}
-
-
-
+	\begin{jcls@adjustwidth}
+}{
+	\end{jcls@adjustwidth}
+}
 
 \RequirePackage[
 	ragged,
