@@ -748,6 +748,7 @@
 	\noindent
 	\colorbox{secundarycolor!10}{%
 		\hskip1mm\parbox{\dimexpr\linewidth-6mm}{%
+			\sffamily\normalsize
 			\textbf{\abstractname.}\space
 			#1
 		}%
