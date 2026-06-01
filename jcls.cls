@@ -776,17 +776,27 @@
 {\input{./metadata/article.tex}}
 {\ClassWarning{jcls}{./metadata/article.tex not found}\metadatafalse}
 
-\RequirePackage{tikz}
+
+\ExplSyntaxOn
+\box_new:N \g_ptxcd_watermark_box
+\hbox_gset:Nn \g_ptxcd_watermark_box {
+	{\color{primarycolor}
+		\rotatebox[origin=c]{90}{
+			\scalebox{2}{
+				{\sffamily\getfield{articletype}}
+			}
+		}
+	}
+}
 
 \NewDocumentCommand \printwatermark {}
 {
-	\AddToHook{shipout/foreground}
-	{
-		\begin{tikzpicture}[remember picture,overlay]
-			\node[primarycolor,rotate=90,scale=2,opacity=1] at ([xshift=2em]current page.west) {\sffamily\getfield{articletype}};
-		\end{tikzpicture}
+	\AddToHook {shipout/background} {
+		\put(1em,-.5\paperheight){\box_use:N \g_ptxcd_watermark_box}
 	}
 }
+\ExplSyntaxOff
+
 
 \iffinal\else
 	% \RequirePackage[All]{lua-typo}
