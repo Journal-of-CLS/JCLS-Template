@@ -1,0 +1,28 @@
+# GitLab CI configuration to build a LaTeX document using the IoT's full TeX Live docker image (testing)
+# This file is based on the Pipelines created by Marei Peischl for the Island of TeX
+# Original source file:
+# https://gitlab.com/islandoftex/texmf/gitlab-ci-templates/latex-testing
+
+stages:
+  - build
+  - test
+
+test:
+  stage: build
+  image: registry.gitlab.com/islandoftex/images/texlive:latest
+  script:
+    - "latexmk"
+  artifacts:
+    paths:
+    - ./*.pdf
+
+compatibility-test:
+  stage: test
+  image: registry.gitlab.com/islandoftex/images/texlive:$TEXLIVE_VERSION
+  script:
+    - "latexmk --$LATEX_ENGINE"
+  parallel:
+    matrix:
+      - TEXLIVE_VERSION: ['TL2024-historic', 'TL2025-historic', 'latest']
+        LATEX_ENGINE: [pdflatex, xelatex, lualatex]
+  allow_failure: true
