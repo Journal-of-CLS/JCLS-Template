@@ -273,10 +273,6 @@
 	tabsize=2,
 }
 
-\RequirePackage{marginnote}
-\RenewDocumentCommand \marginfont { }
-{ \sffamily\footnotesize }
-\RenewDocumentCommand \raggedleftmarginnote { } { }
 
 \newlength{\overhang}
 \setlength{\overhang}{\dimexpr\marginparwidth+\marginparsep}
@@ -393,9 +389,8 @@
 	\marginpar{\setlength{\baselineskip}{12pt}\vspace*{1\baselineskip}}
 }
 
-\NewDocumentCommand \sideinfo { m+mmm }
-{
-	\gappto\sideinfos{\marginpar{\RaggedRight\sffamily\footnotesize\textbf{#1} #3 #2 \vspace{#4}}}
+\NewDocumentCommand \sideinfo { m+mmm }{%
+	{\textbf{#1} #3 #2 \vspace{#4}}\par
 }
 
 \NewDocumentCommand \sideinfofield { m+mO{\newline}O{1ex} }
@@ -569,11 +564,10 @@
 	\printfield{country}[#1][.]%
 }
 
-\NewDocumentCommand \printcontribution { m }
-{
+\NewDocumentCommand \printcontribution { m }{%
 	\ifcsvoid{@contribution#1}
 	{}
-	{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}
+	{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}%
 }
 
 \NewDocumentCommand \printauthors { }
@@ -691,16 +685,17 @@
 			\null\par\nointerlineskip
 			\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}\par
 			\vskip3\baselineskip
-			\color{oa-orange}%
-			\normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
+			\textcolor{oa-orange}{
+				\normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
+			}
+			\par
 		\end{minipage}%
 		\hskip\marginparsep
 	}\hskip3mm
 	%
 	\begin{minipage}[t]{\dimexpr\linewidth-3mm}%
-	\null\par\nointerlineskip
+		\null\par\nointerlineskip
 		\raggedright%
-		\setstretch{1.0}%
 		\normalsize\sffamily%
 		{\getfield{articletype}%
 			\par}
@@ -712,24 +707,28 @@
 		\vspace{1\baselineskip}
 		{\footnotesize\printaffiliations}
 		\fi
-		%  \vspace{1\baselineskip}
 	\end{minipage}%
 	\par
 	\endgroup
-	%
-	%
-	% Sidebar
 	\ifmetadata
-		\sideinfofield{Citation}{howtocite}%
-		\sideinfofield{Date published}{datepublished}[][0ex]%
-		\sideinfofield{Date accepted}{dateaccepted}[][0ex]%
-		\sideinfofield{Date received}{datereceived}[]%
-		\sideinfofield{Keywords}{keywords}%
-		\sideinfofield{License}{license}%
-		\ifpreprint\else\sideinfofield{Reviewers}{reviewers}\fi%
-		\sideinfofield{Note}{issuenote}%   
+		\leavevmode
+		\marginpar{
+				\marginfont
+				\setlength{\baselineskip}{12pt}
+				\vskip\baselineskip%12pt
+				\RaggedRight
+				\setstretch{1.25}
+					\sideinfofield{Citation}{howtocite}%
+					\sideinfofield{Date published}{datepublished}[][0ex]%
+					\sideinfofield{Date accepted}{dateaccepted}[][0ex]%
+					\sideinfofield{Date received}{datereceived}[]%
+					\sideinfofield{Keywords}{keywords}%
+					\sideinfofield{License}{license}%
+					\ifpreprint\else\sideinfofield{Reviewers}{reviewers}\fi%
+					\sideinfofield{Note}{issuenote}%
+		}
 	\fi
-	\sideinfos
+	\ignorespaces
 }
 
 
@@ -808,6 +807,11 @@
 
 \RequirePackage{tabularx}
 \RequirePackage{makecell}
+
+\RequirePackage{marginnote}
+\RenewDocumentCommand \marginfont { }
+{ \sffamily\footnotesize }
+\RenewDocumentCommand \raggedleftmarginnote { } { }
 
 \iffinal\else
 	% \RequirePackage[All]{lua-typo}
