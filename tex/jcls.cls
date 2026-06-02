@@ -534,25 +534,28 @@
   % \endgroup
 }
 
-\NewDocumentCommand \printauthor { m }
-{
-  \ifcsvoid{@affiliation#1}
-  {}
-  {
-    \ifcsvoid{@affilmarker\csuse{@affiliation#1}}
-    {
+\ExplSyntaxOn
+\clist_new:N \l__ptxcd_affiliations_clist
+\NewDocumentCommand \printauthor { m }{
+  \clist_clear:N \l__ptxcd_affiliations_clist
+  \printfield{givennames}[#1]\space\printfield{surname}[#1]%
+  \clist_map_inline:cn {@affiliation#1} {%
+    \cs_if_exist:cF {@affilmarker##1} {
       \stepcounter{affiliations}%
-      \csxdef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
-      \csxdef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}%
+      \csxdef{@affilmarker##1}{\theaffiliations}%
+      \csxdef{@affilnum\theaffiliations}{##1}%
     }
-    {}
+    \clist_put_right:Ne \l__ptxcd_affiliations_clist {
+      \use:c {@affilmarker##1}
+    }
   }
-  \printfield{givennames}[#1] \printfield{surname}[#1]%
-  \unskip\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
+  \textsuperscript{\clist_use:Nn \l__ptxcd_affiliations_clist {,}}
   \ifcsvoid{@orcid#1}
-  {\unskip}
-  {\unskip\,\orcidlink{\csuse{@orcid#1}}}
+  {}
+  {\,\orcidlink{\csuse{@orcid#1}}}
 }
+\ExplSyntaxOff
+
 
 \NewDocumentCommand \printaffiliation { m }
 {
