@@ -3,23 +3,25 @@
  Structure of this template:
 
 ```
-.
 ├── README.md
+├── .latexmkrc          <-- latexmk config file for compiler setup
 ├── acknowlegements.tex <-- acknowledgements, funding information
 ├── figures             <-- images and pictures
-├── fonts               <-- needed fonts 
-├── jcls.cls            <-- the latex document class
-├── logos               <-- the journal logos
 ├── main.tex            <-- your content
 ├── metadata            
 │   ├── article.tex     <-- metadata provided by the journal editors
 │   ├── self.bib        <-- metadata provided by the journal editors
 │   └── authors.tex     <-- metadata provided by the authors
-└── references.bib      <-- your biblatex bibliography
+├── references.bib      <-- your biblatex bibliography
+└── tex
+    ├── jcls.cls            <-- the LaTeX document class
+    └── logos               <-- the journal logos
 ```
 
 ## Format
 For preparing submissions, authors are expected to use the LaTeX template provided by JCLS (be sure to use the LuaLaTex compiler). For the preparation of the LaTeX document, authors are welcome to use their preferred LaTeX-compatible writing environment or an online, collaborative LaTeX editor (e.g., Overleaf). An up-to-date TeXLive or MiKTeX installation, including biblatex and LuaLaTeX should suffice as LaTeX editor.
+
+The template includes a latexmk config file to ensure correct selection of the compiler by running `latexmk` within the base directory.
 
 ## Author metadata
 Author metadata needs to be provided in the file called “metadata/authors.tex” that is part of the LaTeX template. Please follow the instructions provided there. Relevant metadata includes last name, first name, ORCID, affiliation and email address, as well as a description of the author’s contribution to the submitted paper. These authors’ contributions need to be described using the Contributor Roles Taxonomy (CrediT, see https://credit.niso.org). In case you would like to mention additional contributors to your submission who do not, however, qualify as authors, please use the “Acknowledgements” section to do so.
