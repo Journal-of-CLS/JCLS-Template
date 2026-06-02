@@ -1,24 +1,24 @@
 %
-%                               ,--,              
-%          ,---._             ,---.'|              
-%       .-- -.' \   ,----..  |   | :   .--.--.    
-%       |    |   : /   /   \ :   : |  /  /    '.  
-%       :    ;   ||   :     :|   ' : |  :  /`. /  
-%       :        |.   |  ;. /;   ; ' ;  |  |--`   
-%       |    :   :.   ; /--` '   | |_|  :  ;_     
-%       :         ;   | ;    |   | :.'\  \    `.  
-%       |    ;   ||   : |    '   :    ;`----.   \ 
-%   ___ l         .   | '___ |   |  ./ __ \  \  | 
-%  /    /\    J   :'   ; : .'|;   : ;  /  /`--'  / 
-% /  ../  `..-    ,'   | '/  :|   ,/  '--'.     /  
-% \    \         ; |   :    / '---'     `--'---'   
-%  \    \      ,'   \   \ .'                       
-%   "---....--'      `---`                         
-%                   
-%                                 Journal of 
+%                               ,--,
+%          ,---._             ,---.'|
+%       .-- -.' \   ,----..  |   | :   .--.--.
+%       |    |   : /   /   \ :   : |  /  /    '.
+%       :    ;   ||   :     :|   ' : |  :  /`. /
+%       :        |.   |  ;. /;   ; ' ;  |  |--`
+%       |    :   :.   ; /--` '   | |_|  :  ;_
+%       :         ;   | ;    |   | :.'\  \    `.
+%       |    ;   ||   : |    '   :    ;`----.   \
+%   ___ l         .   | '___ |   |  ./ __ \  \  |
+%  /    /\    J   :'   ; : .'|;   : ;  /  /`--'  /
+% /  ../  `..-    ,'   | '/  :|   ,/  '--'.     /
+% \    \         ; |   :    / '---'     `--'---'
+%  \    \      ,'   \   \ .'
+%   "---....--'      `---`
+%
+%                                 Journal of
 %                                 Computational
 %                                 Literary Studies
-%                                
+%
 %                                 https://jcls.io
 %
 %
@@ -66,44 +66,44 @@
 \RequirePackage{csquotes}
 
 \RequirePackage[
-	style=ext-authoryear-comp,
-	backend=biber,
-	maxbibnames=99,
-	maxcitenames=2,
-	uniquelist=false,
+  style=ext-authoryear-comp,
+  backend=biber,
+  maxbibnames=99,
+  maxcitenames=2,
+  uniquelist=false,
 ]{biblatex}
 
 \DeclareFieldFormat{origdate}{\mkbibbrackets{#1}}
 \renewbibmacro*{cite:labeldate+extradate}{%
-	\iffieldundef{origyear}
-	{}
-	{\printorigdate
-		\setunit{\addspace}}%
-	\iffieldundef{labelyear}
-	{}
-	{\printtext[bibhyperref]{\printlabeldateextra}}}
+  \iffieldundef{origyear}
+  {}
+  {\printorigdate
+    \setunit{\addspace}}%
+  \iffieldundef{labelyear}
+  {}
+  {\printtext[bibhyperref]{\printlabeldateextra}}}
 
 \DeclareCiteCommand{\citeorigyear}
 {\boolfalse{citetracker}%
-	\boolfalse{pagetracker}%
-	\usebibmacro{prenote}}
+  \boolfalse{pagetracker}%
+  \usebibmacro{prenote}}
 {\printfield{origyear}}
 {\multicitedelim}
 {\usebibmacro{postnote}}
 
 \renewbibmacro*{date+extradate}{%
-	\iffieldundef{origyear}
-	{}
-	{\printorigdate
-		\setunit{\addspace}}%
-	\iffieldundef{labelyear}
-	{}
-	{\printtext[parens]{%
-			\iflabeldateisdate
-			{\printdateextra}
-			{\printlabeldateextra}}}}
+  \iffieldundef{origyear}
+  {}
+  {\printorigdate
+    \setunit{\addspace}}%
+  \iffieldundef{labelyear}
+  {}
+  {\printtext[parens]{%
+      \iflabeldateisdate
+      {\printdateextra}
+      {\printlabeldateextra}}}}
 
-% patch \fullcite (https://tex.stackexchange.com/a/126245/29873) 
+% patch \fullcite (https://tex.stackexchange.com/a/126245/29873)
 \DeclareCiteCommand{\fullcite}
 {\defcounter{maxnames}{\blx@maxbibnames}\usebibmacro{prenote}}
 {\usedriver{\DeclareNameAlias{sortname}{default}}{\thefield{entrytype}}}
@@ -118,12 +118,12 @@
 
 % patch language field (https://tex.stackexchange.com/a/141831/29873)
 \DeclareSourcemap{
-	\maps{
-		\map{
-			\step[fieldsource=language, fieldset=langid, origfieldval, final]
-			\step[fieldset=language, null]
-		}
-	}
+  \maps{
+    \map{
+      \step[fieldsource=language, fieldset=langid, origfieldval, final]
+      \step[fieldset=language, null]
+    }
+  }
 }
 
 % remove p./pp. from pages
@@ -134,9 +134,9 @@
 \DeclareFieldFormat{url}{\url{#1}}
 
 \DeclareFieldFormat{doi}{%
-	\ifhyperref
-	{\href{https://doi.org/#1}{\nolinkurl{#1}}}
-	{\nolinkurl{#1}}}
+  \ifhyperref
+  {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+  {\nolinkurl{#1}}}
 
 % color
 \RequirePackage[dvipsnames,svgnames]{xcolor}
@@ -171,14 +171,14 @@
 \RequirePackage{ragged2e}
 
 \directlua{luaotfload.add_fallback
-	("fallbacks",
-	{
-			"Domitian:mode=harf;",
-			"NotoColorEmoji:mode=harf;",
-			"STIX Two Math:mode=harf;",
-			"freeserif:mode=harf;",
-		}
-	)}
+  ("fallbacks",
+  {
+      "Domitian:mode=harf;",
+      "NotoColorEmoji:mode=harf;",
+      "STIX Two Math:mode=harf;",
+      "freeserif:mode=harf;",
+    }
+  )}
 \defaultfontfeatures{RawFeature={fallback=fallbacks}, Scale=MatchLowercase, Ligatures=TeX,Scale=1}
 
 \RequirePackage[osf]{pagella-otf}
@@ -194,15 +194,15 @@
 % layout
 \RequirePackage{geometry}
 \geometry{
-	paper=a4paper,
-	top=25mm,
-	bottom=25mm,
-	right=17mm,
-	left=60mm,
-	footskip=10mm,
-	marginparsep=3mm,
-	marginparwidth=40mm,
-	reversemarginpar=true,
+  paper=a4paper,
+  top=25mm,
+  bottom=25mm,
+  right=17mm,
+  left=60mm,
+  footskip=10mm,
+  marginparsep=3mm,
+  marginparwidth=40mm,
+  reversemarginpar=true,
 }
 
 
@@ -213,18 +213,18 @@
 
 % captions and notes
 \RequirePackage[
-	justification=RaggedRight,
-	singlelinecheck=off,
-	labelfont=bf,
-	font={small,sf}
+  justification=RaggedRight,
+  singlelinecheck=off,
+  labelfont=bf,
+  font={small,sf}
 ]{caption}
 
 \RequirePackage{subcaption}
 \DeclareCaptionStyle{jcls}{
-	justification=RaggedRight,
-	singlelinecheck=off,
-	labelfont=bf,
-	font={small,sf}
+  justification=RaggedRight,
+  singlelinecheck=off,
+  labelfont=bf,
+  font={small,sf}
 }
 
 \captionsetup{style=jcls}
@@ -232,17 +232,17 @@
 % orcid
 \NewDocumentCommand \orcidlink { m }
 {%
-	\texorpdfstring
-	{\href{https://orcid.org/#1}{\textcolor{orcid-green}{\raisebox{-.3ex}{\aiOrcid}}}}
-	{https://orcid.org/#1}%
+  \texorpdfstring
+  {\href{https://orcid.org/#1}{\textcolor{orcid-green}{\raisebox{-.3ex}{\aiOrcid}}}}
+  {https://orcid.org/#1}%
 }
 
 % ror
 \NewDocumentCommand \rorlink { m }
 {%
-	\texorpdfstring
-	{\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}
-	{https://ror.org/#1}%
+  \texorpdfstring
+  {\href{https://ror.org/#1}{\textcolor{ror-green}{\raisebox{-.3ex}{\aiROR}}}}
+  {https://ror.org/#1}%
 }
 
 % code
@@ -252,26 +252,26 @@
 \RequirePackage[right]{lineno}
 \RenewDocumentCommand \linenumberfont { }
 {%
-	\ttfamily\small\color{primarycolor}%
+  \ttfamily\small\color{primarycolor}%
 }
 
 \lstset{
-	style=FiraCodeStyle,
-	basicstyle=\ttfamily,
-	commentstyle=\itshape\color{graycolor},
-	keywordstyle=\bfseries\color{highlightcolor2},
-	numberstyle=\ttfamily\small\color{graycolor},
-	stringstyle=\color{highlightcolor3},
-	breakatwhitespace=false,
-	breaklines=true,
-	captionpos=b,
-	keepspaces=true,
-	numbers=left,
-	numbersep=1em,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	tabsize=2,
+  style=FiraCodeStyle,
+  basicstyle=\ttfamily,
+  commentstyle=\itshape\color{graycolor},
+  keywordstyle=\bfseries\color{highlightcolor2},
+  numberstyle=\ttfamily\small\color{graycolor},
+  stringstyle=\color{highlightcolor3},
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=1em,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
 }
 
 
@@ -280,61 +280,61 @@
 \RequirePackage{scrextend}% for addmargin
 
 \NewDocumentEnvironment{jcls@adjustwidth}{O{-\overhang}}{
-	\begin{addmargin*}[#1]{0pt}
-}{
-	\end{addmargin*}	
+  \begin{addmargin*}[#1]{0pt}
+    }{
+  \end{addmargin*}
 }
 
 %TODO msg on redefinition ?
 \DeclareDocumentEnvironment { table* } { O{htbp}}
 {%
-	\begin{table}
-		\begin{jcls@adjustwidth}[-.5\overhang]
-}{
-		\end{jcls@adjustwidth}
-	\end{table}
+  \begin{table}
+    \begin{jcls@adjustwidth}[-.5\overhang]
+      }{
+    \end{jcls@adjustwidth}
+  \end{table}
 }
 
 %TODO msg on redefinition ?
 \DeclareDocumentEnvironment { figure* } { O{htbp}}
 {%
-	\begin{figure}
-		\begin{jcls@adjustwidth}[-.5\overhang]
-}{
-		\end{jcls@adjustwidth}
-	\end{figure}
+  \begin{figure}
+    \begin{jcls@adjustwidth}[-.5\overhang]
+      }{
+    \end{jcls@adjustwidth}
+  \end{figure}
 }
 
 \NewDocumentEnvironment { fullwidthtable } { O{htbp} }
 {%
-	\begin{table}[#1]
-	\begin{jcls@adjustwidth}
-}{
-	\end{jcls@adjustwidth}
-	\end{table}
+  \begin{table}[#1]
+    \begin{jcls@adjustwidth}
+      }{
+    \end{jcls@adjustwidth}
+  \end{table}
 }
 
 \NewDocumentEnvironment{ fullwidthfigure } { O{htbp} }
 {%
-	\begin{figure}
-		\begin{jcls@adjustwidth}
-}{
-		\end{jcls@adjustwidth}
-	\end{figure}
+  \begin{figure}
+    \begin{jcls@adjustwidth}
+      }{
+    \end{jcls@adjustwidth}
+  \end{figure}
 }
 
 \NewDocumentEnvironment { fullwidth } { }
 {%
-	\begin{jcls@adjustwidth}
-}{
-	\end{jcls@adjustwidth}
+  \begin{jcls@adjustwidth}
+    }{
+  \end{jcls@adjustwidth}
 }
 
 \RequirePackage[
-	ragged,
-	bottom,
-	norule,
-	multiple,
+  ragged,
+  bottom,
+  norule,
+  multiple,
 ]{footmisc}
 
 \RenewDocumentCommand \footnotemargin { } {0em}
@@ -352,15 +352,15 @@
 \NewDocumentCommand \dateaccepted { m }     {\setfield{dateaccepted}{#1}}
 \NewDocumentCommand \datepublished { m }
 {
-	\setfield{datepublished}{#1}%
-	\setfield{date}{#1}
+  \setfield{datepublished}{#1}%
+  \setfield{date}{#1}
 }
 
 \NewDocumentCommand \doi {m}
 {
-	\ifblank{#1}
-	{}
-	{\setfield{doi}{\href{https://doi.org/#1}{#1}}}
+  \ifblank{#1}
+  {}
+  {\setfield{doi}{\href{https://doi.org/#1}{#1}}}
 }
 
 \NewDocumentCommand \subtitle    { m } {\setfield{subtitle}{#1}}
@@ -368,9 +368,9 @@
 \NewDocumentCommand \howtocite   { m } {\setfield{howtocite}{#1}}
 \NewDocumentCommand \articletype { m }
 {
-	\ifblank{#1}
-	{\setfield{articletype}{SUBMITTED}}
-	{\setfield{articletype}{#1}}
+  \ifblank{#1}
+  {\setfield{articletype}{SUBMITTED}}
+  {\setfield{articletype}{#1}}
 }
 
 \NewDocumentCommand \volume      { m } {\setfield{volume}{#1}}
@@ -387,11 +387,11 @@
 
 \NewDocumentCommand \sideinfos { }
 {
-	\marginpar{\setlength{\baselineskip}{12pt}\vspace*{1\baselineskip}}
+  \marginpar{\setlength{\baselineskip}{12pt}\vspace*{1\baselineskip}}
 }
 
 \NewDocumentCommand \sideinfo { m+mmm }{%
-	{\textbf{#1} #3 #2 \vspace{#4}}\par
+  {\textbf{#1} #3 #2 \vspace{#4}}\par
 }
 
 \NewDocumentCommand \sideinfofield { m+mO{\newline}O{1ex} }
@@ -413,15 +413,15 @@
 \define@key{author}{cor-id}{\csdef{author@corid}{#1}}
 \define@key{author}{contribution}{\csdef{author@contribution}{#1}}
 \presetkeys{author}
-{ % Set default values 
-	orcid=,
-	surname=,
-	given-names=,
-	email=,
-	affiliation=,
-	equal-contrib=,
-	cor-id=,
-	contribution=,
+{ % Set default values
+  orcid=,
+  surname=,
+  given-names=,
+  email=,
+  affiliation=,
+  equal-contrib=,
+  cor-id=,
+  contribution=,
 }{}
 
 \define@key{affiliation}{id}{\csdef{aff@id}{#1}}
@@ -437,19 +437,19 @@
 \define@key{affiliation}{country}{\csdef{aff@country}{#1}}
 \define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
 \presetkeys{affiliation}
-{% Set default values 
-	id=,
-	group=,
-	department=\textcolor{jcls-red}{DEPARTMENT},
-	organization=\textcolor{jcls-red}{ORG},
-	isni=,
-	ringgold=,
-	ror=,
-	pid=,
-	street-address=,
-	city=\textcolor{jcls-red}{CITY},
-	country=\textcolor{jcls-red}{COUNTRY},
-	country-code=,
+{% Set default values
+  id=,
+  group=,
+  department=\textcolor{jcls-red}{DEPARTMENT},
+  organization=\textcolor{jcls-red}{ORG},
+  isni=,
+  ringgold=,
+  ror=,
+  pid=,
+  street-address=,
+  city=\textcolor{jcls-red}{CITY},
+  country=\textcolor{jcls-red}{COUNTRY},
+  country-code=,
 }{}
 
 \define@key{article}{title}{\csdef{article@title}{#1}}
@@ -468,202 +468,202 @@
 \define@key{article}{reviewers}{\csdef{article@reviewers}{#1}}
 \define@key{article}{license}{\csdef{article@license}{#1}}
 \presetkeys{article}
-{ % Set default values 
-	title=,
-	subtitle=,
-	shorttitle=,
-	datereceived=,
-	dateaccepted=,
-	datepublished=,
-	doi=,
-	articletype=under review,
-	volume=,
-	issuetitle=,
-	issueyear=,
-	issuenumber=,
-	issuenote=,
-	reviewers=,
-	license=\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby},
+{ % Set default values
+  title=,
+  subtitle=,
+  shorttitle=,
+  datereceived=,
+  dateaccepted=,
+  datepublished=,
+  doi=,
+  articletype=under review,
+  volume=,
+  issuetitle=,
+  issueyear=,
+  issuenumber=,
+  issuenote=,
+  reviewers=,
+  license=\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby},
 }{}
 
 \RenewDocumentCommand \author { m }
 {
-	\begingroup
-	\stepcounter{authors}%
-	\setkeys{author}{#1}%
-	\csxdef{@orcid\theauthors}{\expandafter\author@orcid}%
-	\csxdef{@surname\theauthors}{\expandafter\author@surname}%
-	\csxdef{@givennames\theauthors}{\expandafter\author@givennames}%
-	\csxdef{@email\theauthors}{\expandafter\author@email}%
-	\csxdef{@affiliation\theauthors}{\expandafter\author@affiliation}%
-	\csxdef{@contribution\theauthors}{\expandafter\author@contribution}%
-	\endgroup
+  \begingroup
+  \stepcounter{authors}%
+  \setkeys{author}{#1}%
+  \csxdef{@orcid\theauthors}{\expandafter\author@orcid}%
+  \csxdef{@surname\theauthors}{\expandafter\author@surname}%
+  \csxdef{@givennames\theauthors}{\expandafter\author@givennames}%
+  \csxdef{@email\theauthors}{\expandafter\author@email}%
+  \csxdef{@affiliation\theauthors}{\expandafter\author@affiliation}%
+  \csxdef{@contribution\theauthors}{\expandafter\author@contribution}%
+  \endgroup
 }
 
 \NewDocumentCommand \affiliation { m }
 {
-	\begingroup
-	\setkeys{affiliation}{#1}
-	\csxdef{@department\aff@id}{\expandafter\aff@department}%
-	\csxdef{@organization\aff@id}{\expandafter\aff@organization}%
-	\csxdef{@ror\aff@id}{\expandafter\aff@ror}%
-	\csxdef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
-	\csxdef{@city\aff@id}{\expandafter\aff@city}%
-	\csxdef{@country\aff@id}{\expandafter\aff@country}%
-	\endgroup
+  \begingroup
+  \setkeys{affiliation}{#1}
+  \csxdef{@department\aff@id}{\expandafter\aff@department}%
+  \csxdef{@organization\aff@id}{\expandafter\aff@organization}%
+  \csxdef{@ror\aff@id}{\expandafter\aff@ror}%
+  \csxdef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
+  \csxdef{@city\aff@id}{\expandafter\aff@city}%
+  \csxdef{@country\aff@id}{\expandafter\aff@country}%
+  \endgroup
 }
 
 \NewDocumentCommand \article { m }
 {
-	% \begingroup
-	\setkeys{article}{#1}
-	\title{\expandafter\article@title}
-	\subtitle{\expandafter\article@subtitle}
-	\shorttitle{\expandafter\article@shorttitle}
-	\datereceived{\expandafter\article@datereceived}
-	\dateaccepted{\expandafter\article@dateaccepted}
-	\datepublished{\expandafter\article@datepublished}
-	\doi{\expandafter\article@doi}
-	\articletype{\expandafter\article@articletype}
-	\volume{\expandafter\article@volume}
-	\issueyear{\expandafter\article@issueyear}
-	\issuenumber{\expandafter\article@issuenumber}
-	\issuenote{\expandafter\article@issuenote}
-	\reviewers{\expandafter\article@reviewers}
-	\license{\expandafter\article@license}
-	% \endgroup
+  % \begingroup
+  \setkeys{article}{#1}
+  \title{\expandafter\article@title}
+  \subtitle{\expandafter\article@subtitle}
+  \shorttitle{\expandafter\article@shorttitle}
+  \datereceived{\expandafter\article@datereceived}
+  \dateaccepted{\expandafter\article@dateaccepted}
+  \datepublished{\expandafter\article@datepublished}
+  \doi{\expandafter\article@doi}
+  \articletype{\expandafter\article@articletype}
+  \volume{\expandafter\article@volume}
+  \issueyear{\expandafter\article@issueyear}
+  \issuenumber{\expandafter\article@issuenumber}
+  \issuenote{\expandafter\article@issuenote}
+  \reviewers{\expandafter\article@reviewers}
+  \license{\expandafter\article@license}
+  % \endgroup
 }
 
 \NewDocumentCommand \printauthor { m }
 {
-	\ifcsvoid{@affiliation#1}
-	{}
-	{
-		\ifcsvoid{@affilmarker\csuse{@affiliation#1}}
-		{
-			\stepcounter{affiliations}%
-			\csxdef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
-			\csxdef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}%
-		}
-		{}
-	}
-	\printfield{givennames}[#1] \printfield{surname}[#1]%
-	\unskip\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
-	\ifcsvoid{@orcid#1}
-	{\unskip}
-	{\unskip\,\orcidlink{\csuse{@orcid#1}}}
+  \ifcsvoid{@affiliation#1}
+  {}
+  {
+    \ifcsvoid{@affilmarker\csuse{@affiliation#1}}
+    {
+      \stepcounter{affiliations}%
+      \csxdef{@affilmarker\csuse{@affiliation#1}}{\theaffiliations}%
+      \csxdef{@affilnum\theaffiliations}{\csuse{@affiliation#1}}%
+    }
+    {}
+  }
+  \printfield{givennames}[#1] \printfield{surname}[#1]%
+  \unskip\textsuperscript{\csuse{@affilmarker\csuse{@affiliation#1}}}%
+  \ifcsvoid{@orcid#1}
+  {\unskip}
+  {\unskip\,\orcidlink{\csuse{@orcid#1}}}
 }
 
 \NewDocumentCommand \printaffiliation { m }
 {
-	\item[\csuse{@affilmarker#1}.]
-	\printfield{department}[#1][, ]%
-	\printfield{organization}[#1]%
-	\ifcsvoid{@ror#1}{\unskip,}{\unskip\,\rorlink{\csuse{@ror#1}},}
-	\printfield{streetaddress}[#1][, ]%
-	\printfield{city}[#1][, ]%
-	\printfield{country}[#1][.]%
+  \item[\csuse{@affilmarker#1}.]
+  \printfield{department}[#1][, ]%
+  \printfield{organization}[#1]%
+  \ifcsvoid{@ror#1}{\unskip,}{\unskip\,\rorlink{\csuse{@ror#1}},}
+  \printfield{streetaddress}[#1][, ]%
+  \printfield{city}[#1][, ]%
+  \printfield{country}[#1][.]%
 }
 
 \NewDocumentCommand \printcontribution { m }{%
-	\ifcsvoid{@contribution#1}
-	{}
-	{\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}%
+  \ifcsvoid{@contribution#1}
+  {}
+  {\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}%
 }
 
 \NewDocumentCommand \printauthors { }
 {
-	\setcounter{counter}{0}%
-	\@whilenum\value{counter}<\value{authors}\do{%
-		\stepcounter{counter}\printauthor{\thecounter}\par}
+  \setcounter{counter}{0}%
+  \@whilenum\value{counter}<\value{authors}\do{%
+    \stepcounter{counter}\printauthor{\thecounter}\par}
 }
 
 \NewDocumentCommand \printaffiliations { }
 {
-	\setcounter{counter}{0}%
-	\ifnum\value{affiliations}>0
-		\begin{enumerate}[left=\parindent,labelwidth=1em]
-			\@whilenum\value{counter}<\value{affiliations}\do{%
-				\stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
-		\end{enumerate}
-	\fi
+  \setcounter{counter}{0}%
+  \ifnum\value{affiliations}>0
+    \begin{enumerate}[left=\parindent,labelwidth=1em]
+      \@whilenum\value{counter}<\value{affiliations}\do{%
+        \stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
+    \end{enumerate}
+  \fi
 }
 \NewDocumentCommand \printcontributions {}
 {
-	\section{Author Contributions}
-	\setcounter{counter}{0}%
-	\@whilenum\value{counter}<\value{authors}\do{%
-		\stepcounter{counter}\printcontribution{\thecounter}\par}
+  \section{Author Contributions}
+  \setcounter{counter}{0}%
+  \@whilenum\value{counter}<\value{authors}\do{%
+    \stepcounter{counter}\printcontribution{\thecounter}\par}
 }
 
 \NewDocumentCommand \printacknowledgements {}
 {
-	\IfFileExists{acknowledgements.tex}
-	{
-		\section{Acknowledgements}
-		\input{acknowledgements.tex}
-	}
-	{}
+  \IfFileExists{acknowledgements.tex}
+  {
+    \section{Acknowledgements}
+    \input{acknowledgements.tex}
+  }
+  {}
 }
 
 \NewDocumentCommand \printdataavailability {}
 {
-	\ifcsvoid{@dataavailability}
-	{}
-	{
-		\section{Data Availability}\label{sec:dataavailability}
-		\getfield{dataavailability}
-	}
+  \ifcsvoid{@dataavailability}
+  {}
+  {
+    \section{Data Availability}\label{sec:dataavailability}
+    \getfield{dataavailability}
+  }
 }
 
 \NewDocumentCommand \printsoftwareavailability {}
 {
-	\ifcsvoid{@softwareavailability}{}
-	{
-		\section{Software Availability}\label{sec:softwareavailability}
-		\getfield{softwareavailability}
-	}
+  \ifcsvoid{@softwareavailability}{}
+  {
+    \section{Software Availability}\label{sec:softwareavailability}
+    \getfield{softwareavailability}
+  }
 }
 
 \NewDocumentCommand \printarticletype {} {\ifcsvoid{@doi}{\getfield{articletype}}{\getfield{doi}}}
 
 \NewDocumentCommand \printappendix {}
 {
-	\IfFileExists{./appendix.tex}
-	{
-		\clearpage\appendix
-		\input{./appendix.tex}
-	}{}
+  \IfFileExists{./appendix.tex}
+  {
+    \clearpage\appendix
+    \input{./appendix.tex}
+  }{}
 }
 % headers and footers
 \RequirePackage{fancyhdr}
 
 \fancypagestyle{plain}{% used for the first page
-	\fancyhf{}% clear all header and footer fields 
-	\fancyfoot[R]{\sffamily \thepage}
-	\renewcommand{\headrulewidth}{0pt}% 
-	\renewcommand{\footrulewidth}{0pt}%
+  \fancyhf{}% clear all header and footer fields
+  \fancyfoot[R]{\sffamily \thepage}
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
 }
 
-\fancypagestyle{jcls}{% 
-	\fancyhf{}% clear all header and footer fields 
-	\fancyhead[R]{\sffamily \getfield{shorttitle}}
-	\fancyfoot[L]{\sffamily \ifpreprint%
-			CCLS\getfield{issueyear} Conference Preprints \else% 
-			JCLS \getfield{volume} (\getfield{issuenumber}), \getfield{issueyear}, \printarticletype\fi}
-	\fancyfoot[R]{\sffamily \thepage}
-	\renewcommand{\headrulewidth}{0pt}% 
-	\renewcommand{\footrulewidth}{0pt}%
+\fancypagestyle{jcls}{%
+  \fancyhf{}% clear all header and footer fields
+  \fancyhead[R]{\sffamily \getfield{shorttitle}}
+  \fancyfoot[L]{\sffamily \ifpreprint%
+      CCLS\getfield{issueyear} Conference Preprints \else%
+      JCLS \getfield{volume} (\getfield{issuenumber}), \getfield{issueyear}, \printarticletype\fi}
+  \fancyfoot[R]{\sffamily \thepage}
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
 }
 
 \pagestyle{jcls}
 
 % headings
 \RequirePackage[
-	small,
-	sf,bf,
-	raggedright,
-	clearempty,
+  small,
+  sf,bf,
+  raggedright,
+  clearempty,
 ]{titlesec}
 
 \titleformat{\section}{\Large\sffamily\bfseries}{\thesection.}{.5em}{}
@@ -671,65 +671,65 @@
 \titleformat{\subsubsection}{\normalsize\sffamily\bfseries}{\thesubsubsection}{.5em}{}
 
 % title and sidebar
-\def\@maketitle{% 
-	%
-	% title
-	%
-	\clearpage
-	\null
-	\vspace*{-\topskip}
-	% column including logo + open access info
-	\begingroup
-	\setstretch{1.0}%
-	\leavevmode\llap{%
-		\begin{minipage}[t]{\marginparwidth}%
-			\null\par\nointerlineskip
-			\includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}\par
-			\vskip3\baselineskip
-			\textcolor{oa-orange}{
-				\normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
-			}
-			\par
-		\end{minipage}%
-		\hskip\marginparsep
-	}\hskip3mm
-	%
-	\begin{minipage}[t]{\dimexpr\linewidth-3mm}%
-		\null\par\nointerlineskip
-		\raggedright%
-		\normalsize\sffamily%
-		{\getfield{articletype}%
-			\par}
-		{\LARGE\bfseries \getfield{title} \par}
-		{\Large \getfield{subtitle} \par}
-		\vspace{1\baselineskip}
-		\ifmetadata
-		{\normalsize\printauthors}
-		\vspace{1\baselineskip}
-		{\footnotesize\printaffiliations}
-		\fi
-	\end{minipage}%
-	\par
-	\endgroup
-	\ifmetadata
-		\leavevmode
-		\marginpar{
-				\marginfont
-				\setlength{\baselineskip}{12pt}
-				\vskip\baselineskip%12pt
-				\RaggedRight
-				\setstretch{1.25}
-					\sideinfofield{Citation}{howtocite}%
-					\sideinfofield{Date published}{datepublished}[][0ex]%
-					\sideinfofield{Date accepted}{dateaccepted}[][0ex]%
-					\sideinfofield{Date received}{datereceived}[]%
-					\sideinfofield{Keywords}{keywords}%
-					\sideinfofield{License}{license}%
-					\ifpreprint\else\sideinfofield{Reviewers}{reviewers}\fi%
-					\sideinfofield{Note}{issuenote}%
-		}
-	\fi
-	\ignorespaces
+\def\@maketitle{%
+  %
+  % title
+  %
+  \clearpage
+  \null
+  \vspace*{-\topskip}
+  % column including logo + open access info
+  \begingroup
+  \setstretch{1.0}%
+  \leavevmode\llap{%
+    \begin{minipage}[t]{\marginparwidth}%
+      \null\par\nointerlineskip
+      \includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}\par
+      \vskip3\baselineskip
+      \textcolor{oa-orange}{
+        \normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
+      }
+      \par
+    \end{minipage}%
+    \hskip\marginparsep
+  }\hskip3mm
+  %
+  \begin{minipage}[t]{\dimexpr\linewidth-3mm}%
+    \null\par\nointerlineskip
+    \raggedright%
+    \normalsize\sffamily%
+    {\getfield{articletype}%
+      \par}
+    {\LARGE\bfseries \getfield{title} \par}
+    {\Large \getfield{subtitle} \par}
+    \vspace{1\baselineskip}
+    \ifmetadata
+    {\normalsize\printauthors}
+    \vspace{1\baselineskip}
+    {\footnotesize\printaffiliations}
+    \fi
+  \end{minipage}%
+  \par
+  \endgroup
+  \ifmetadata
+    \leavevmode
+    \marginpar{
+      \marginfont
+      \setlength{\baselineskip}{12pt}
+      \vskip\baselineskip%12pt
+      \RaggedRight
+      \setstretch{1.25}
+      \sideinfofield{Citation}{howtocite}%
+      \sideinfofield{Date published}{datepublished}[][0ex]%
+      \sideinfofield{Date accepted}{dateaccepted}[][0ex]%
+      \sideinfofield{Date received}{datereceived}[]%
+      \sideinfofield{Keywords}{keywords}%
+      \sideinfofield{License}{license}%
+      \ifpreprint\else\sideinfofield{Reviewers}{reviewers}\fi%
+      \sideinfofield{Note}{issuenote}%
+    }
+  \fi
+  \ignorespaces
 }
 
 
@@ -738,26 +738,26 @@
 
 % Abstract
 \RenewDocumentEnvironment{abstract}{+b}{}{%
-	\par
-	\setlength{\fboxsep}{2mm}%
-	\noindent
-	\colorbox{secundarycolor!10}{%
-		\hskip1mm\parbox{\dimexpr\linewidth-6mm}{%
-			\sffamily\normalsize
-			\textbf{\abstractname.}\space
-			#1%
-		}%
-	\hskip1mm}%
-	\par
+  \par
+  \setlength{\fboxsep}{2mm}%
+  \noindent
+  \colorbox{secundarycolor!10}{%
+    \hskip1mm\parbox{\dimexpr\linewidth-6mm}{%
+      \sffamily\normalsize
+      \textbf{\abstractname.}\space
+      #1%
+    }%
+    \hskip1mm}%
+  \par
 }
 
 \RequirePackage{hyperref}
 \hypersetup{
-	colorlinks=true,
-	filecolor=filecolor,
-	linkcolor=linkcolor,
-	urlcolor=urlcolor,
-	citecolor=citecolor,
+  colorlinks=true,
+  filecolor=filecolor,
+  linkcolor=linkcolor,
+  urlcolor=urlcolor,
+  citecolor=citecolor,
 }
 
 \IfFileExists{./metadata/self.bib}
@@ -776,20 +776,20 @@
 \ExplSyntaxOn
 \box_new:N \g_ptxcd_watermark_box
 \hbox_gset:Nn \g_ptxcd_watermark_box {
-	{\color{primarycolor}
-		\rotatebox[origin=c]{90}{
-			\scalebox{2}{
-				{\sffamily\getfield{articletype}}
-			}
-		}
-	}
+  {\color{primarycolor}
+      \rotatebox[origin=c]{90}{
+        \scalebox{2}{
+          {\sffamily\getfield{articletype}}
+        }
+      }
+    }
 }
 
 \NewDocumentCommand \printwatermark {}
 {
-	\AddToHook {shipout/background} {
-		\put(1em,-.5\paperheight){\box_use:N \g_ptxcd_watermark_box}
-	}
+  \AddToHook {shipout/background} {
+    \put(1em,-.5\paperheight){\box_use:N \g_ptxcd_watermark_box}
+  }
 }
 \ExplSyntaxOff
 
@@ -815,15 +815,15 @@
 \RenewDocumentCommand \raggedleftmarginnote { } { }
 
 \iffinal\else
-	% \RequirePackage[All]{lua-typo}
-	\AddToHook{env/abstract/after}{\linenumbers\printwatermark}
+  % \RequirePackage[All]{lua-typo}
+  \AddToHook{env/abstract/after}{\linenumbers\printwatermark}
 \fi
 
 \AtEndEnvironment{document}{
-	\printdataavailability
-	\printsoftwareavailability
-	\printacknowledgements
-	\printcontributions
-	\printbibliography
-	\printappendix
+  \printdataavailability
+  \printsoftwareavailability
+  \printacknowledgements
+  \printcontributions
+  \printbibliography
+  \printappendix
 }
