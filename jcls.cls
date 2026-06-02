@@ -128,6 +128,7 @@
 
 % remove p./pp. from pages
 \DeclareFieldFormat{pages}{\mkcomprange{#1}}
+\DeclareFieldFormat{postnote}{\mknormrange{#1}}
 
 % remove doi + url labels
 \DeclareFieldFormat{url}{\url{#1}}
