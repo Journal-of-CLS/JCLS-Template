@@ -687,7 +687,7 @@
   \leavevmode\llap{%
     \begin{minipage}[t]{\marginparwidth}%
       \null\par\nointerlineskip
-      \includegraphics[width=\linewidth]{./logos/jcls_logo_text.pdf}\par
+      \includegraphics[width=\linewidth]{jcls_logo_text.pdf}\par
       \vskip3\baselineskip
       \textcolor{oa-orange}{
         \normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
