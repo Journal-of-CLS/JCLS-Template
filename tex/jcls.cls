@@ -52,7 +52,22 @@
 \DeclareOption{final}{\finaltrue}
 \DeclareOption{nometadata}{\metadatafalse}
 \DeclareOption{preprint}{\preprinttrue}
+
+\ExplSyntaxOn
+\keys_define:nn {ptxcd/jcls} {
+  image-path .tl_gset:N = \g_ptxcd_graphics_path_tl,
+  image-path .initial:n = ./figures/,
+  metadata-path .tl_gset:N = \g_ptxcd_metadata_path_tl,
+  metadata-path .initial:n = ./metadata/,
+  flatten-paths .meta:n = {
+      metadata-path=,
+      image-path=
+    },
+}
+
+\ExplSyntaxOff
 \ProcessOptions\relax
+\ProcessKeyOptions[ptxcd/jcls]
 \LoadClass{article}
 
 \RequirePackage{amsmath,amssymb}
@@ -207,11 +222,9 @@
   reversemarginpar=true,
 }
 
-
 % graphics
 \RequirePackage{graphicx}
-\graphicspath{ {./figures/} }
-
+\graphicspath{ {\g_ptxcd_graphics_path_tl} }
 
 % captions and notes
 \RequirePackage[
@@ -737,10 +750,6 @@
   \ignorespaces
 }
 
-
-
-
-
 % Abstract
 \RenewDocumentEnvironment{abstract}{+b}{}{%
   \par
@@ -765,44 +774,53 @@
   citecolor=citecolor,
 }
 
-\IfFileExists{./metadata/self.bib}
-{\addbibresource{./metadata/self.bib} \howtocite{\begin{refsection}\fullcite{self}\end{refsection}}}
-{\ClassWarning{jcls}{./metadata/self.bib not found}\metadatafalse}
-
-\IfFileExists{./metadata/authors.tex}
-{\input{./metadata/authors.tex}}
-{\ClassWarning{jcls}{./metadata/authors.tex not found}\metadatafalse}
-
-\IfFileExists{./metadata/article.tex}
-{\input{./metadata/article.tex}}
-{\ClassWarning{jcls}{./metadata/article.tex not found}\metadatafalse}
-
-
 \ExplSyntaxOn
-\box_new:N \g_ptxcd_watermark_box
-\hbox_gset:Nn \g_ptxcd_watermark_box {
-  {\color{primarycolor}
-      \rotatebox[origin=c]{90}{
-        \scalebox{2}{
-          {\sffamily\getfield{articletype}}
-        }
-      }
-    }
+
+\IfFileExists{\g_ptxcd_metadata_path_tl self.bib}{
+  \addbibresource{\g_ptxcd_metadata_path_tl self.bib}
+  \howtocite{\begin{refsection}\fullcite{self}\end{refsection}}
+}{
+  \ClassWarning{jcls}{\g_ptxcd_metadata_path_tl\space self.bib~not~found.\iow_newline: Hiding~all~metadata}
+  \metadatafalse
 }
 
-\NewDocumentCommand \printwatermark {}
-{
+\IfFileExists{\g_ptxcd_metadata_path_tl authors.tex}{
+  \ExplSyntaxOff
+  \input{\g_ptxcd_metadata_path_tl authors.tex}
+  \ExplSyntaxOn
+}{
+  \ClassWarning{jcls}{\g_ptxcd_metadata_path_tl\space self.bib~not~found.\iow_newline: Hiding~all~metadata}
+  \metadatafalse
+}
+
+\IfFileExists{\g_ptxcd_metadata_path_tl article.tex}{
+  \ExplSyntaxOff
+  \input{ \g_ptxcd_metadata_path_tl article.tex}
+  \ExplSyntaxOn
+}{
+  \ClassWarning{jcls}{\g_ptxcd_metadata_path_tl\space article.tex~not~found.\\Hiding all metadata}
+  \metadatafalse
+}
+
+\box_new:N \g_ptxcd_watermark_box
+\hbox_gset:Nn \g_ptxcd_watermark_box {{\color{primarycolor}
+    \rotatebox[origin=c]{90}{
+      \scalebox{2}{{\sffamily\getfield{articletype}}
+      }
+    }
+  }
+}
+
+\NewDocumentCommand \printwatermark {}{
   \AddToHook {shipout/background} {
     \put(1em,-.5\paperheight){\box_use:N \g_ptxcd_watermark_box}
   }
 }
 \ExplSyntaxOff
 
-
 %%% Additional packages which have been loaded automatically before the refactoring
 \RequirePackage{pdflscape}
 \RequirePackage{datetime2}
-
 
 % tables
 \RequirePackage{booktabs}
