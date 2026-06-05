@@ -46,15 +46,33 @@
 \RequirePackage{iftex}
 \RequireLuaTeX
 
-\newif\iffinal\finalfalse
-\newif\ifmetadata\metadatatrue
-\newif\ifpreprint\preprintfalse
-\DeclareOption{final}{\finaltrue}
-\DeclareOption{nometadata}{\metadatafalse}
-\DeclareOption{preprint}{\preprinttrue}
+\newif\iffinal
+\newif\ifmetadata
+\newif\ifpreprint
 
 \ExplSyntaxOn
 \keys_define:nn {ptxcd/jcls} {
+  final .choices:nn = {true,false}{\use:c {final \l_keys_choice_str},
+  final .default:n = true,
+  final .initial:n = false,
+  final .usage:n = load,
+%
+  metadata .choices:nn = {true,false}{\use:c {metadata\l_keys_choice_str},
+  metadata .default:n = true,
+  metadata .initial:n = true,
+  metadata .usage:n = load,
+  nometadata .meta:n = {metadata=false},
+%
+  preprint .choices:nn = {true,false}{\use:c {preprint\l_keys_choice_str},
+  preprint .default:n = true,
+  preprint .initial:n = false,
+  preprint .usage:n = load,
+%
+  final / true  .code:n = \finaltrue, \l_keys_choice_str
+  final / false .code:n = \finalfalse,
+  final .default:n = true,
+%
+% dynamic paths to support more flexible build setups
   image-path .tl_gset:N = \g_ptxcd_graphics_path_tl,
   image-path .initial:n = ./figures/,
   metadata-path .tl_gset:N = \g_ptxcd_metadata_path_tl,
@@ -66,7 +84,6 @@
 }
 
 \ExplSyntaxOff
-\ProcessOptions\relax
 \ProcessKeyOptions[ptxcd/jcls]
 \LoadClass{article}
 
