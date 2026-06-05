@@ -429,7 +429,6 @@
 	unknown .code:n = \exp_args:No  \tl_show:n {\l_keys_key_tl = #1 -- unknown},
  }
 
-
 \DeclareDocumentCommand \JCLSSetup { O{metadata}m }{
 	\keys_set:nn { ptxcd / jcls / #1 } { #2 }
 }
@@ -441,55 +440,13 @@
 	\tl_set:Nn \l_tmpa_tl {#3}
 	\tl_remove_all:Nn \l_tmpa_tl {-}
 
-	% select prefix
- 	\str_case:nnF {#1} {
-		{affiliation} {\str_set:Nn \l_tmpa_str {aff}}
-	} {
-		\str_set:Nn \l_tmpa_str {#1}
-	}
-
-
-%\exp_args:Ne \tl_show:n { ptxcd / jcls / metadata
-%		\tl_if_eq:nnF {#1} {article} {/ #1 }}
-
-
-%	\tl_if_eq:nnTF {#1} {article} {\tl_clear:N \l_tmpb_tl {}} {\tl_set:Nn \l_tmpb_tl {/#1} }
-
 	\exp_args:Ne \keys_define:nn { ptxcd / jcls / metadata \tl_if_empty:nF {#1} {/ #1}
-%		\l_tmpb_tl
 	} {
-		#3 .tl_#2set:c = {\l_tmpa_str @\l_tmpa_tl},
+		#3 .tl_#2set:c = {#1@\l_tmpa_tl},
 		#3 .initial:n = #4
 	}
 }
 
-\keyval_parse:nnn {\__ptxcd_setup_keys:nnn { author} {} } {\__ptxcd_setup_keys:nnnn { author} {} } {
-  orcid=,
-  surname=,
-  given-names=,
-  email=,
-  affiliation=,
-  equal-contrib=,
-  cor-id=,
-  contribution=
-}
-
-\keyval_parse:nnn {\__ptxcd_setup_keys:nnn { affiliation} {} } {\__ptxcd_setup_keys:nnnn { affiliation} {} } {
-  id=,
-  group=,
-  department=\textcolor{jcls-red}{DEPARTMENT},
-  organization=\textcolor{jcls-red}{ORG},
-  isni=,
-  ringgold=,
-  ror=,
-  pid=,
-  street-address=,
-  city=\textcolor{jcls-red}{CITY},
-  country=\textcolor{jcls-red}{COUNTRY},
-  country-code=,
-}
-
-% article -> no prefix
 \keyval_parse:nnn {\__ptxcd_setup_keys:nnn {} {} } {\__ptxcd_setup_keys:nnnn { } {} } {
   title=,
   subtitle=,
@@ -509,6 +466,33 @@
   dataavailability,
   softwareavailability
 }
+
+\msg_new:nnn {jcls} {duplicate-entry} {
+	The~data~entry~(type~#1)~with~#2~has~been~created~before.\\
+	It~will~be~overwritten!
+}
+
+\keys_define:nn { ptxcd / jcls / metadata / add-affiliation  } {
+	id .code:n = {
+		\prop_if_exist:cTF {g_ptxcd_affiliation_ #1 _prop} {
+			\msg_warning:nnnn {jcls} {duplicate-entry} {affiliation} {id=#1}
+		} {
+			\prop_new:c {g_ptxcd_affiliation_ #1 _prop}
+		}
+		\prop_gset_from_keyval:cn {g_ptxcd_affiliation_ #1 _prop} {
+		  department=\textcolor{jcls-red}{DEPARTMENT},
+		  organization=\textcolor{jcls-red}{ORG},
+%  isni=,
+%  ringgold=,
+%  ror=,
+%  pid=,
+%  street-address=,
+		  city=\textcolor{jcls-red}{CITY},
+		  country=\textcolor{jcls-red}{COUNTRY},
+		}
+		\def\aff@id{#1}
+        }
+ }
 
 % special settings for doi + articletype as empty values are treated differently
 \def\@doi{}
@@ -530,23 +514,20 @@
 % compatibility
   \clist_map_inline:nn {orcid,surname,givennames,email,affiliation,contribution} {
 	\cs_set:cpe {@##1\theauthors} {\prop_item:cn {g_ptxcd_author_ \theauthors _prop} {##1}}
-	}
+  }
 }
-
-\ExplSyntaxOff
 
 \NewDocumentCommand \affiliation { m }
 {
-  \begingroup
-  \JCLSSetup[metadata/affiliation]{#1}%
+  \keys_set_known:nn {ptxcd / jcls / metadata / add-affiliation  } {#1}
+  \prop_gput_from_keyval:cn {g_ptxcd_affiliation_ \aff@id _prop} {
+	#1
+  }
+
 % compatibility
-  \csxdef{@department\aff@id}{\expandafter\aff@department}%
-  \csxdef{@organization\aff@id}{\expandafter\aff@organization}%
-  \csxdef{@ror\aff@id}{\expandafter\aff@ror}%
-  \csxdef{@streetaddress\aff@id}{\expandafter\aff@streetaddress}%
-  \csxdef{@city\aff@id}{\expandafter\aff@city}%
-  \csxdef{@country\aff@id}{\expandafter\aff@country}%
-  \endgroup
+  \clist_map_inline:nn {department,organization,ror,streetaddress,city,country} {
+	\cs_set:cpe {@##1\aff@id} {\prop_item:cn {g_ptxcd_affiliation_ \aff@id _prop} {##1}}
+  }
 }
 
 \NewDocumentCommand \article { m }
@@ -554,7 +535,6 @@
   \JCLSSetup[metadata]{#1}%
 }
 
-\ExplSyntaxOn
 \clist_new:N \l__ptxcd_affiliations_clist
 \NewDocumentCommand \printauthor { m }{
   \clist_clear:N \l__ptxcd_affiliations_clist
