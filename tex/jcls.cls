@@ -241,7 +241,8 @@
 
 % graphics
 \RequirePackage{graphicx}
-\graphicspath{ {\g_ptxcd_graphics_path_tl} }
+
+\graphicspath{ {\UseName{g_ptxcd_graphics_path_tl}} }
 
 % captions and notes
 \RequirePackage[
