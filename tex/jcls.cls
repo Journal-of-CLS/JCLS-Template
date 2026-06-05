@@ -52,18 +52,18 @@
 
 \ExplSyntaxOn
 \keys_define:nn {ptxcd/jcls} {
-  final .choices:nn = {true,false}{\use:c {final \l_keys_choice_str},
+  final .choices:nn = {true,false}{\use:c {final \l_keys_choice_str}},
   final .default:n = true,
   final .initial:n = false,
   final .usage:n = load,
 %
-  metadata .choices:nn = {true,false}{\use:c {metadata\l_keys_choice_str},
+  metadata .choices:nn = {true,false}{\use:c {metadata\l_keys_choice_str}},
   metadata .default:n = true,
   metadata .initial:n = true,
   metadata .usage:n = load,
   nometadata .meta:n = {metadata=false},
 %
-  preprint .choices:nn = {true,false}{\use:c {preprint\l_keys_choice_str},
+  preprint .choices:nn = {true,false}{\use:c {preprint\l_keys_choice_str}},
   preprint .default:n = true,
   preprint .initial:n = false,
   preprint .usage:n = load,
@@ -378,32 +378,6 @@
 \NewDocumentCommand \printfield { mO{}O{} } {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}}
 
 
-\ExplSyntaxOn
-\clist_map_inline:nn  {
-  keywords,
-  datereceived,
-  dateaccepted,
-  datepublished,
-  subtitle,
-  shorttitle,
-  howtocite,
-  volume,
-  issuetitle,
-  issueyear,
-  issuenumber,
-  issuenote,
-  reviewers,
-  articletype,
-  dataavailability,
-  softwareavailability,
-  license
-} {
-  \exp_args:Nc \NewDocumentCommand {#1} {m} {
-    \JCLSSetup { #1 = {##1}}
-  }
-}
-\ExplSyntaxOff
-
 \NewDocumentCommand \sideinfos { }
 {
   \marginpar{\setlength{\baselineskip}{12pt}\vspace*{1\baselineskip}}
@@ -445,6 +419,10 @@
     #3 .tl_#2set:c = {#1@\l_tmpa_tl},
     #3 .initial:n = #4
   }
+
+  \exp_args:Nc \ProvideDocumentCommand {\l_tmpa_tl} {m} {
+    \JCLSSetup { #3 = {##1}}
+  }
 }
 
 \keyval_parse:nnn {\__ptxcd_setup_keys:nnn {} {} } {\__ptxcd_setup_keys:nnnn { } {} } {
@@ -463,7 +441,9 @@
   license=\href{https://creativecommons.org/licenses/by/4.0/}{CC~BY~4.0~\ccby},
   howtocite,
   dataavailability,
-  softwareavailability
+  softwareavailability,
+  keywords,
+  reviewers
 }
 
 % special settings for doi + articletype as empty values are treated differently
@@ -477,11 +457,15 @@
   },
   % 
   special-issuetitle .meta:n = {issuetitle={Special Issue “#1”}},
-
 }
 \msg_new:nnn {jcls} {duplicate-entry} {
   The~data~entry~(type~#1)~with~#2~has~been~created~before.\\
   It~will~be~overwritten!
+}
+
+\msg_new:nnn {jcls} {missing-entry} {
+  The~data~entry~(type~#1)~is missing.
+  It~will~be~ignored!
 }
 
 \keys_define:nn { ptxcd / jcls / metadata / add-affiliation  } {
