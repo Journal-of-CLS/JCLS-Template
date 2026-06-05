@@ -455,7 +455,8 @@
   dataavailability,
   softwareavailability,
   keywords,
-  reviewers
+  reviewers,
+  guest-editors
 }
 
 % special settings for doi + articletype as empty values are treated differently
@@ -476,7 +477,7 @@
 }
 
 \msg_new:nnn {jcls} {missing-entry} {
-  The~data~entry~(type~#1)~is missing.
+  The~data~entry~(type~#1)~with~#2~is~missing.
   It~will~be~ignored!
 }
 
@@ -727,6 +728,7 @@
       \sideinfofield{License}{license}%
       \ifpreprint\else
         \printNamesOrcid{Reviewers}{reviewers}
+        \printNamesOrcid{Guest~Editors}{guesteditors}
       \fi
       \sideinfofield{Note}{issuenote}%
     }
