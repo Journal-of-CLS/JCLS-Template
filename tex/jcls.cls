@@ -80,7 +80,7 @@
   flatten-paths .meta:n = {
       metadata-path=,
       image-path=
-    },
+  },
 }
 
 \ExplSyntaxOff
@@ -380,27 +380,27 @@
 
 \ExplSyntaxOn
 \clist_map_inline:nn  {
-	keywords,
-	datereceived,
-	dateaccepted,
-	datepublished,
-	subtitle,
-	shorttitle,
-	howtocite,
-	volume,
-	issuetitle,
-	issueyear,
-	issuenumber,
-	issuenote,
-	reviewers,
-	articletype,
-	dataavailability,
-	softwareavailability,
-	license
+  keywords,
+  datereceived,
+  dateaccepted,
+  datepublished,
+  subtitle,
+  shorttitle,
+  howtocite,
+  volume,
+  issuetitle,
+  issueyear,
+  issuenumber,
+  issuenote,
+  reviewers,
+  articletype,
+  dataavailability,
+  softwareavailability,
+  license
 } {
-	\exp_args:Nc \NewDocumentCommand {#1} {m} {
-		\JCLSSetup { #1 = {##1}}
-	}
+  \exp_args:Nc \NewDocumentCommand {#1} {m} {
+    \JCLSSetup { #1 = {##1}}
+  }
 }
 \ExplSyntaxOff
 
@@ -415,7 +415,7 @@
 
 \NewDocumentCommand \sideinfofield { m+mO{\newline}O{1ex} }
 {
-\ifcsvoid{@#2}{}{\sideinfo{#1}{\csuse{@#2}}{#3}{#4}}
+  \ifcsvoid{@#2}{}{\sideinfo{#1}{\csuse{@#2}}{#3}{#4}}
 }
 
 % authors, affiliations, and article
@@ -426,25 +426,25 @@
 \ExplSyntaxOn
 
 \keys_define:nn { ptxcd / jcls / metadata } {
-	unknown .code:n = \exp_args:No  \tl_show:n {\l_keys_key_tl = #1 -- unknown},
- }
+  unknown .code:n = \exp_args:No  \tl_show:n {\l_keys_key_tl = #1 -- unknown},
+}
 
 \DeclareDocumentCommand \JCLSSetup { O{metadata}m }{
-	\keys_set:nn { ptxcd / jcls / #1 } { #2 }
+  \keys_set:nn { ptxcd / jcls / #1 } { #2 }
 }
 
 \cs_new:Nn \__ptxcd_setup_keys:nnn {
-	\__ptxcd_setup_keys:nnnn {#1} {#2} {#3} {}
+  \__ptxcd_setup_keys:nnnn {#1} {#2} {#3} {}
 }
 \cs_new:Nn \__ptxcd_setup_keys:nnnn {
-	\tl_set:Nn \l_tmpa_tl {#3}
-	\tl_remove_all:Nn \l_tmpa_tl {-}
+  \tl_set:Nn \l_tmpa_tl {#3}
+  \tl_remove_all:Nn \l_tmpa_tl {-}
 
-	\exp_args:Ne \keys_define:nn { ptxcd / jcls / metadata \tl_if_empty:nF {#1} {/ #1}
-	} {
-		#3 .tl_#2set:c = {#1@\l_tmpa_tl},
-		#3 .initial:n = #4
-	}
+  \exp_args:Ne \keys_define:nn { ptxcd / jcls / metadata \tl_if_empty:nF {#1} {/ #1}
+  } {
+    #3 .tl_#2set:c = {#1@\l_tmpa_tl},
+    #3 .initial:n = #4
+  }
 }
 
 \keyval_parse:nnn {\__ptxcd_setup_keys:nnn {} {} } {\__ptxcd_setup_keys:nnnn { } {} } {
@@ -460,60 +460,63 @@
   issueyear=,
   issuenumber=,
   issuenote=,
-  reviewers=,
   license=\href{https://creativecommons.org/licenses/by/4.0/}{CC~BY~4.0~\ccby},
   howtocite,
   dataavailability,
   softwareavailability
 }
 
-\msg_new:nnn {jcls} {duplicate-entry} {
-	The~data~entry~(type~#1)~with~#2~has~been~created~before.\\
-	It~will~be~overwritten!
-}
-
-\keys_define:nn { ptxcd / jcls / metadata / add-affiliation  } {
-	id .code:n = {
-		\prop_if_exist:cTF {g_ptxcd_affiliation_ #1 _prop} {
-			\msg_warning:nnnn {jcls} {duplicate-entry} {affiliation} {id=#1}
-		} {
-			\prop_new:c {g_ptxcd_affiliation_ #1 _prop}
-		}
-		\prop_gset_from_keyval:cn {g_ptxcd_affiliation_ #1 _prop} {
-		  department=\textcolor{jcls-red}{DEPARTMENT},
-		  organization=\textcolor{jcls-red}{ORG},
-%  isni=,
-%  ringgold=,
-%  ror=,
-%  pid=,
-%  street-address=,
-		  city=\textcolor{jcls-red}{CITY},
-		  country=\textcolor{jcls-red}{COUNTRY},
-		}
-		\def\aff@id{#1}
-        }
- }
-
 % special settings for doi + articletype as empty values are treated differently
 \def\@doi{}
 \keys_define:nn { ptxcd / jcls / metadata } {
-	articletype .default:n = SUBMITTED,
-	doi .code:n = \tl_if_blank:nTF {#1} {
-		\setfield{doi}{}
-	}{
-  		\setfield{doi}{\href{https://doi.org/#1}{#1}}
-	},
+  articletype .default:n = SUBMITTED,
+  doi .code:n = \tl_if_blank:nTF {#1} {
+    \setfield{doi}{}
+  }{
+    \setfield{doi}{\href{https://doi.org/#1}{#1}}
+  },
+  % 
+  special-issuetitle .meta:n = {issuetitle={Special Issue “#1”}},
+
 }
+\msg_new:nnn {jcls} {duplicate-entry} {
+  The~data~entry~(type~#1)~with~#2~has~been~created~before.\\
+  It~will~be~overwritten!
+}
+
+\keys_define:nn { ptxcd / jcls / metadata / add-affiliation  } {
+  id .code:n = {
+      \prop_if_exist:cTF {g_ptxcd_affiliation_ #1 _prop} {
+        \msg_warning:nnnn {jcls} {duplicate-entry} {affiliation} {id=#1}
+      } {
+        \prop_new:c {g_ptxcd_affiliation_ #1 _prop}
+      }
+      \prop_gset_from_keyval:cn {g_ptxcd_affiliation_ #1 _prop} {
+        department=\textcolor{jcls-red}{DEPARTMENT},
+        organization=\textcolor{jcls-red}{ORG},
+        %  isni=,
+        %  ringgold=,
+        %  ror=,
+        %  pid=,
+        %  street-address=,
+        city=\textcolor{jcls-red}{CITY},
+        country=\textcolor{jcls-red}{COUNTRY},
+      }
+      \def\aff@id{#1}
+    }
+}
+
+
 
 \RenewDocumentCommand \author { m } {
   \stepcounter{authors}%
   \prop_new:c {g_ptxcd_author_\theauthors _prop}
   \prop_gset_from_keyval:cn {g_ptxcd_author_ \theauthors _prop} {
-	#1
+    #1
   }
-% compatibility
+  % compatibility
   \clist_map_inline:nn {orcid,surname,givennames,email,affiliation,contribution} {
-	\cs_set:cpe {@##1\theauthors} {\prop_item:cn {g_ptxcd_author_ \theauthors _prop} {##1}}
+    \cs_set:cpe {@##1\theauthors} {\prop_item:cn {g_ptxcd_author_ \theauthors _prop} {##1}}
   }
 }
 
@@ -521,12 +524,12 @@
 {
   \keys_set_known:nn {ptxcd / jcls / metadata / add-affiliation  } {#1}
   \prop_gput_from_keyval:cn {g_ptxcd_affiliation_ \aff@id _prop} {
-	#1
+    #1
   }
 
-% compatibility
+  % compatibility
   \clist_map_inline:nn {department,organization,ror,streetaddress,city,country} {
-	\cs_set:cpe {@##1\aff@id} {\prop_item:cn {g_ptxcd_affiliation_ \aff@id _prop} {##1}}
+    \cs_set:cpe {@##1\aff@id} {\prop_item:cn {g_ptxcd_affiliation_ \aff@id _prop} {##1}}
   }
 }
 
@@ -554,7 +557,6 @@
   {}
   {\,\orcidlink{\csuse{@orcid#1}}}
 }
-\ExplSyntaxOff
 
 \NewDocumentCommand \printaffiliation { m }
 {
