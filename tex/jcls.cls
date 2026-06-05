@@ -23,6 +23,8 @@
 %
 %
 % This is file jcls.cls
+% Copyright (C) 2021-2026 Dominik Gerstorfer,
+%               2026 Marei Peischl <jcls@peitex.de>
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3c
@@ -34,7 +36,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainer of this work is Dominik Gerstorfer.
+% The Current Maintainer of this work is Evelyn Gius <info@jcls.io>
 %
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{jcls}[2024/05/17 v1.0.6 LaTeX class for JCLS]
