@@ -392,12 +392,24 @@
   \ifcsvoid{@#2}{}{\sideinfo{#1}{\csuse{@#2}}{#3}{#4}}
 }
 
+\ExplSyntaxOn
+
+\cs_set:Nn \__ptxcd_print_name:n {#1\par}
+\cs_set:Nn \__ptxcd_print_name_orcid:nn {#1\,\orcidlink{#2}\par}
+\NewDocumentCommand \printNamesOrcid {mm}{
+	\tl_if_blank:eF {\use:c {@#2}} {
+		\sideinfo{#1}{
+			\keyval_parse:nnv {\__ptxcd_print_name:n} {\__ptxcd_print_name_orcid:nn} {@#2}
+		}{\newline}{1ex}
+	}
+}
+
 % authors, affiliations, and article
 \newcounter{authors}
 \newcounter{affiliations}
 \newcounter{counter}
 
-\ExplSyntaxOn
+
 
 \keys_define:nn { ptxcd / jcls / metadata } {
   unknown .code:n = \exp_args:No  \tl_show:n {\l_keys_key_tl = #1 -- unknown},
@@ -713,7 +725,9 @@
       \sideinfofield{Date received}{datereceived}[]%
       \sideinfofield{Keywords}{keywords}%
       \sideinfofield{License}{license}%
-      \ifpreprint\else\sideinfofield{Reviewers}{reviewers}\fi%
+      \ifpreprint\else
+        \printNamesOrcid{Reviewers}{reviewers}
+      \fi
       \sideinfofield{Note}{issuenote}%
     }
   \fi
