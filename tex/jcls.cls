@@ -780,7 +780,7 @@
   \addbibresource{\g_ptxcd_metadata_path_tl self.bib}
   \howtocite{\begin{refsection}\fullcite{self}\end{refsection}}
 }{
-  \ClassWarning{jcls}{\g_ptxcd_metadata_path_tl\space self.bib~not~found.\iow_newline: Hiding~all~metadata}
+  \ClassWarningNoLine{jcls}{\g_ptxcd_metadata_path_tl\space self.bib~not~found.\iow_newline: Hiding~all~metadata}
   \metadatafalse
 }
 
@@ -789,7 +789,7 @@
   \input{\g_ptxcd_metadata_path_tl authors.tex}
   \ExplSyntaxOn
 }{
-  \ClassWarning{jcls}{\g_ptxcd_metadata_path_tl\space self.bib~not~found.\iow_newline: Hiding~all~metadata}
+  \ClassWarningNoLine{jcls}{\g_ptxcd_metadata_path_tl\space self.bib~not~found.\iow_newline: Hiding~all~metadata}
   \metadatafalse
 }
 
@@ -798,7 +798,7 @@
   \input{ \g_ptxcd_metadata_path_tl article.tex}
   \ExplSyntaxOn
 }{
-  \ClassWarning{jcls}{\g_ptxcd_metadata_path_tl\space article.tex~not~found.\\Hiding all metadata}
+  \ClassWarningNoLine{jcls}{\g_ptxcd_metadata_path_tl\space article.tex~not~found.\\Hiding all metadata}
   \metadatafalse
 }
 
