@@ -536,14 +536,20 @@
 }
 
 \clist_new:N \l__ptxcd_affiliations_clist
+\seq_new:N \g_ptxcd_affiliations_seq
 \NewDocumentCommand \printauthor { m }{
   \clist_clear:N \l__ptxcd_affiliations_clist
   \printfield{givennames}[#1]\space\printfield{surname}[#1]%
   \clist_map_inline:cn {@affiliation#1} {%
-    \cs_if_exist:cF {@affilmarker##1} {
-      \stepcounter{affiliations}%
-      \csxdef{@affilmarker##1}{\theaffiliations}%
-      \csxdef{@affilnum\theaffiliations}{##1}%
+    \prop_if_exist:cTF {g_ptxcd_affiliation_ ##1 _prop} {
+      \prop_if_in:cnF {g_ptxcd_affiliation_ ##1 _prop} {marker} {
+        \stepcounter{affiliations}%
+        \prop_gput:cne {g_ptxcd_affiliation_ ##1 _prop} {marker} {\theaffiliations}
+        \csxdef{@affilmarker##1}{\theaffiliations}%
+        \seq_gput_right:Nn \g_ptxcd_affiliations_seq {##1}
+      }
+    } {
+       \msg_warning:nnnn {jcls} {missing-entry} {affiliation} {id=#1}
     }
     \clist_put_right:Ne \l__ptxcd_affiliations_clist {
       \use:c {@affilmarker##1}
@@ -558,11 +564,11 @@
 \NewDocumentCommand \printaffiliation { m }
 {
   \item[\csuse{@affilmarker#1}.]
-  \printfield{department}[#1][, ]%
+  \printfield{department}[#1][,~]%
   \printfield{organization}[#1]%
   \ifcsvoid{@ror#1}{\unskip,}{\unskip\,\rorlink{\csuse{@ror#1}},}
-  \printfield{streetaddress}[#1][, ]%
-  \printfield{city}[#1][, ]%
+  \printfield{streetaddress}[#1][,~]%
+  \printfield{city}[#1][,~]%
   \printfield{country}[#1][.]%
 }
 
@@ -579,15 +585,12 @@
     \stepcounter{counter}\printauthor{\thecounter}\par}
 }
 
-\NewDocumentCommand \printaffiliations { }
-{
-  \setcounter{counter}{0}%
-  \ifnum\value{affiliations}>0
+\NewDocumentCommand \printaffiliations { } {
+  \seq_if_empty:NF \g_ptxcd_affiliations_seq {
     \begin{enumerate}[left=\parindent,labelwidth=1em]
-      \@whilenum\value{counter}<\value{affiliations}\do{%
-        \stepcounter{counter}\printaffiliation{\csuse{@affilnum\thecounter}}\par}
+       \seq_map_function:NN \g_ptxcd_affiliations_seq \printaffiliation
     \end{enumerate}
-  \fi
+  }
 }
 \NewDocumentCommand \printcontributions {}
 {
@@ -651,7 +654,7 @@
   \fancyhead[R]{\sffamily \getfield{shorttitle}}
   \fancyfoot[L]{\sffamily \ifpreprint%
       CCLS\getfield{issueyear} Conference Preprints \else%
-      JCLS \getfield{volume} (\getfield{issuenumber}), \getfield{issueyear}, \printarticletype\fi}
+      JCLS \getfield{volume} (\getfield{issuenumber}),~\getfield{issueyear},~\printarticletype\fi}
   \fancyfoot[R]{\sffamily \thepage}
   \renewcommand{\headrulewidth}{0pt}%
   \renewcommand{\footrulewidth}{0pt}%
