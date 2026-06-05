@@ -289,7 +289,6 @@
   tabsize=2,
 }
 
-
 \newlength{\overhang}
 \setlength{\overhang}{\dimexpr\marginparwidth+\marginparsep}
 \RequirePackage{scrextend}% for addmargin
@@ -357,48 +356,36 @@
 \RenewDocumentCommand \@makefntext { m } {\noindent{\@thefnmark}. #1}
 \interfootnotelinepenalty=10000
 
-
 \NewDocumentCommand \setfield   { mO{}m }   {\csgdef{@#1#2}{#3}}
 \NewDocumentCommand \getfield   { mO{} }    {\UseName{@#1#2}}
 \NewDocumentCommand \printfield { mO{}O{} } {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}}
 
-\NewDocumentCommand \keywords     { m }     {\setfield{keywords}{#1}}
-\NewDocumentCommand \datereceived { m }     {\setfield{datereceived}{#1}}
-\NewDocumentCommand \dateaccepted { m }     {\setfield{dateaccepted}{#1}}
-\NewDocumentCommand \datepublished { m }
-{
-  \setfield{datepublished}{#1}%
-  \setfield{date}{#1}
+
+\ExplSyntaxOn
+\clist_map_inline:nn  {
+	keywords,
+	datereceived,
+	dateaccepted,
+	datepublished,
+	subtitle,
+	shorttitle,
+	howtocite,
+	volume,
+	issuetitle,
+	issueyear,
+	issuenumber,
+	issuenote,
+	reviewers,
+	articletype,
+	dataavailability,
+	softwareavailability,
+	license
+} {
+	\exp_args:Nc \NewDocumentCommand {#1} {m} {
+		\JCLSSetup { #1 = {##1}}
+	}
 }
-
-\NewDocumentCommand \doi {m}
-{
-  \ifblank{#1}
-  {}
-  {\setfield{doi}{\href{https://doi.org/#1}{#1}}}
-}
-
-\NewDocumentCommand \subtitle    { m } {\setfield{subtitle}{#1}}
-\NewDocumentCommand \shorttitle  { m } {\setfield{shorttitle}{#1}}
-\NewDocumentCommand \howtocite   { m } {\setfield{howtocite}{#1}}
-\NewDocumentCommand \articletype { m }
-{
-  \ifblank{#1}
-  {\setfield{articletype}{SUBMITTED}}
-  {\setfield{articletype}{#1}}
-}
-
-\NewDocumentCommand \volume      { m } {\setfield{volume}{#1}}
-\NewDocumentCommand \issuetitle  { m } {\setfield{issuetitle}{#1}}
-\NewDocumentCommand \issueyear   { m } {\setfield{issueyear}{#1}}
-\NewDocumentCommand \issuenumber { m } {\setfield{issuenumber}{#1}}
-\NewDocumentCommand \issuenote   { m } {\setfield{issuenote}{#1}}
-\NewDocumentCommand \reviewers   { m } {\setfield{reviewers}{#1}}
-
-\NewDocumentCommand \dataavailability     { m } {\setfield{dataavailability}{#1}}
-\NewDocumentCommand \softwareavailability { m } {\setfield{softwareavailability}{#1}}
-
-\NewDocumentCommand \license { m } {\setfield{license}{#1}}
+\ExplSyntaxOff
 
 \NewDocumentCommand \sideinfos { }
 {
@@ -419,16 +406,47 @@
 \newcounter{affiliations}
 \newcounter{counter}
 
-\define@key{author}{orcid}{\csdef{author@orcid}{#1}}
-\define@key{author}{surname}{\csdef{author@surname}{#1}}
-\define@key{author}{given-names}{\csdef{author@givennames}{#1}}
-\define@key{author}{email}{\csdef{author@email}{#1}}
-\define@key{author}{affiliation}{\csdef{author@affiliation}{#1}}
-\define@key{author}{equal-contrib}{\csdef{author@equalcontrib}{#1}}
-\define@key{author}{cor-id}{\csdef{author@corid}{#1}}
-\define@key{author}{contribution}{\csdef{author@contribution}{#1}}
-\presetkeys{author}
-{ % Set default values
+\ExplSyntaxOn
+
+\keys_define:nn { ptxcd / jcls / metadata } {
+	unknown .code:n = \exp_args:No  \tl_show:n {\l_keys_key_tl = #1 -- unknown},
+ }
+
+
+\DeclareDocumentCommand \JCLSSetup { O{metadata}m }{
+	\keys_set:nn { ptxcd / jcls / #1 } { #2 }
+}
+
+\cs_new:Nn \__ptxcd_setup_keys:nnn {
+	\__ptxcd_setup_keys:nnnn {#1} {#2} {#3} {}
+}
+\cs_new:Nn \__ptxcd_setup_keys:nnnn {
+	\tl_set:Nn \l_tmpa_tl {#3}
+	\tl_remove_all:Nn \l_tmpa_tl {-}
+
+	% select prefix
+ 	\str_case:nnF {#1} {
+		{affiliation} {\str_set:Nn \l_tmpa_str {aff}}
+	} {
+		\str_set:Nn \l_tmpa_str {#1}
+	}
+
+
+%\exp_args:Ne \tl_show:n { ptxcd / jcls / metadata
+%		\tl_if_eq:nnF {#1} {article} {/ #1 }}
+
+
+%	\tl_if_eq:nnTF {#1} {article} {\tl_clear:N \l_tmpb_tl {}} {\tl_set:Nn \l_tmpb_tl {/#1} }
+
+	\exp_args:Ne \keys_define:nn { ptxcd / jcls / metadata \tl_if_empty:nF {#1} {/ #1}
+%		\l_tmpb_tl
+	} {
+		#3 .tl_#2set:c = {\l_tmpa_str @\l_tmpa_tl},
+		#3 .initial:n = #4
+	}
+}
+
+\keyval_parse:nnn {\__ptxcd_setup_keys:nnn { author} {} } {\__ptxcd_setup_keys:nnnn { author} {} } {
   orcid=,
   surname=,
   given-names=,
@@ -436,23 +454,10 @@
   affiliation=,
   equal-contrib=,
   cor-id=,
-  contribution=,
-}{}
+  contribution=
+}
 
-\define@key{affiliation}{id}{\csdef{aff@id}{#1}}
-\define@key{affiliation}{group}{\csdef{aff@group}{#1}}
-\define@key{affiliation}{department}{\csdef{aff@department}{#1}}
-\define@key{affiliation}{organization}{\csdef{aff@organization}{#1}}
-\define@key{affiliation}{isni}{\csdef{aff@isni}{#1}}
-\define@key{affiliation}{ringgold}{\csdef{aff@ringgold}{#1}}
-\define@key{affiliation}{ror}{\csdef{aff@ror}{#1}}
-\define@key{affiliation}{pid}{\csdef{aff@pid}{#1}}
-\define@key{affiliation}{street-address}{\csdef{aff@streetaddress}{#1}}
-\define@key{affiliation}{city}{\csdef{aff@city}{#1}}
-\define@key{affiliation}{country}{\csdef{aff@country}{#1}}
-\define@key{affiliation}{country-code}{\csdef{aff@countrycode}{#1}}
-\presetkeys{affiliation}
-{% Set default values
+\keyval_parse:nnn {\__ptxcd_setup_keys:nnn { affiliation} {} } {\__ptxcd_setup_keys:nnnn { affiliation} {} } {
   id=,
   group=,
   department=\textcolor{jcls-red}{DEPARTMENT},
@@ -465,60 +470,59 @@
   city=\textcolor{jcls-red}{CITY},
   country=\textcolor{jcls-red}{COUNTRY},
   country-code=,
-}{}
+}
 
-\define@key{article}{title}{\csdef{article@title}{#1}}
-\define@key{article}{subtitle}{\csdef{article@subtitle}{#1}}
-\define@key{article}{shorttitle}{\csdef{article@shorttitle}{#1}}
-\define@key{article}{datereceived}{\csdef{article@datereceived}{#1}}
-\define@key{article}{dateaccepted}{\csdef{article@dateaccepted}{#1}}
-\define@key{article}{datepublished}{\csdef{article@datepublished}{#1}}
-\define@key{article}{doi}{\csdef{article@doi}{#1}}
-\define@key{article}{articletype}{\csdef{article@articletype}{#1}}
-\define@key{article}{volume}{\csdef{article@volume}{#1}}
-\define@key{article}{issuetitle}{\csdef{article@issuetitle}{#1}}
-\define@key{article}{issueyear}{\csdef{article@issueyear}{#1}}
-\define@key{article}{issuenumber}{\csdef{article@issuenumber}{#1}}
-\define@key{article}{issuenote}{\csdef{article@issuenote}{#1}}
-\define@key{article}{reviewers}{\csdef{article@reviewers}{#1}}
-\define@key{article}{license}{\csdef{article@license}{#1}}
-\presetkeys{article}
-{ % Set default values
+% article -> no prefix
+\keyval_parse:nnn {\__ptxcd_setup_keys:nnn {} {} } {\__ptxcd_setup_keys:nnnn { } {} } {
   title=,
   subtitle=,
   shorttitle=,
   datereceived=,
   dateaccepted=,
   datepublished=,
-  doi=,
-  articletype=under review,
+  articletype=under~review,
   volume=,
   issuetitle=,
   issueyear=,
   issuenumber=,
   issuenote=,
   reviewers=,
-  license=\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 \ccby},
-}{}
-
-\RenewDocumentCommand \author { m }
-{
-  \begingroup
-  \stepcounter{authors}%
-  \setkeys{author}{#1}%
-  \csxdef{@orcid\theauthors}{\expandafter\author@orcid}%
-  \csxdef{@surname\theauthors}{\expandafter\author@surname}%
-  \csxdef{@givennames\theauthors}{\expandafter\author@givennames}%
-  \csxdef{@email\theauthors}{\expandafter\author@email}%
-  \csxdef{@affiliation\theauthors}{\expandafter\author@affiliation}%
-  \csxdef{@contribution\theauthors}{\expandafter\author@contribution}%
-  \endgroup
+  license=\href{https://creativecommons.org/licenses/by/4.0/}{CC~BY~4.0~\ccby},
+  howtocite,
+  dataavailability,
+  softwareavailability
 }
+
+% special settings for doi + articletype as empty values are treated differently
+\def\@doi{}
+\keys_define:nn { ptxcd / jcls / metadata } {
+	articletype .default:n = SUBMITTED,
+	doi .code:n = \tl_if_blank:nTF {#1} {
+		\setfield{doi}{}
+	}{
+  		\setfield{doi}{\href{https://doi.org/#1}{#1}}
+	},
+}
+
+\RenewDocumentCommand \author { m } {
+  \stepcounter{authors}%
+  \prop_new:c {g_ptxcd_author_\theauthors _prop}
+  \prop_gset_from_keyval:cn {g_ptxcd_author_ \theauthors _prop} {
+	#1
+  }
+% compatibility
+  \clist_map_inline:nn {orcid,surname,givennames,email,affiliation,contribution} {
+	\cs_set:cpe {@##1\theauthors} {\prop_item:cn {g_ptxcd_author_ \theauthors _prop} {##1}}
+	}
+}
+
+\ExplSyntaxOff
 
 \NewDocumentCommand \affiliation { m }
 {
   \begingroup
-  \setkeys{affiliation}{#1}
+  \JCLSSetup[metadata/affiliation]{#1}%
+% compatibility
   \csxdef{@department\aff@id}{\expandafter\aff@department}%
   \csxdef{@organization\aff@id}{\expandafter\aff@organization}%
   \csxdef{@ror\aff@id}{\expandafter\aff@ror}%
@@ -530,23 +534,7 @@
 
 \NewDocumentCommand \article { m }
 {
-  % \begingroup
-  \setkeys{article}{#1}
-  \title{\expandafter\article@title}
-  \subtitle{\expandafter\article@subtitle}
-  \shorttitle{\expandafter\article@shorttitle}
-  \datereceived{\expandafter\article@datereceived}
-  \dateaccepted{\expandafter\article@dateaccepted}
-  \datepublished{\expandafter\article@datepublished}
-  \doi{\expandafter\article@doi}
-  \articletype{\expandafter\article@articletype}
-  \volume{\expandafter\article@volume}
-  \issueyear{\expandafter\article@issueyear}
-  \issuenumber{\expandafter\article@issuenumber}
-  \issuenote{\expandafter\article@issuenote}
-  \reviewers{\expandafter\article@reviewers}
-  \license{\expandafter\article@license}
-  % \endgroup
+  \JCLSSetup[metadata]{#1}%
 }
 
 \ExplSyntaxOn
@@ -570,7 +558,6 @@
   {\,\orcidlink{\csuse{@orcid#1}}}
 }
 \ExplSyntaxOff
-
 
 \NewDocumentCommand \printaffiliation { m }
 {
