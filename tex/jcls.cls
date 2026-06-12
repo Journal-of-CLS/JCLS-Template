@@ -607,7 +607,7 @@
 {
   \IfFileExists{acknowledgements.tex}
   {
-    \section{Acknowledgements}
+    \section{Acknowledgements and Declarations}
     \input{acknowledgements.tex}
   }
   {}
