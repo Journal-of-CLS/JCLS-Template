@@ -451,7 +451,7 @@
   issueyear=,
   issuenumber=,
   issuenote=,
-  license=\href{https://creativecommons.org/licenses/by/4.0/}{CC~BY~4.0~\ccby},
+  license=\href{https\c_colon_str//creativecommons.org/licenses/by/4.0/}{CC~BY~4.0~\ccby},% colon shoul not be a letter
   howtocite,
   dataavailability,
   softwareavailability,
