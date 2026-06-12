@@ -694,7 +694,7 @@
       \includegraphics[width=\linewidth]{jcls_logo_text.pdf}\par
       \vskip3\baselineskip
       \textcolor{oa-orange}{
-        \normalsize\sffamily\bfseries OPEN \raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}} ACCESS
+        \normalsize\sffamily\bfseries OPEN\space\raisebox{-.5\baselineskip}{\resizebox{!}{2\baselineskip}{\aiOpenAccess}}\space ACCESS
       }
       \par
     \end{minipage}%
