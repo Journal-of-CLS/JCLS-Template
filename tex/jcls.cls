@@ -654,11 +654,11 @@
 
 \fancypagestyle{jcls}{%
   \fancyhf{}% clear all header and footer fields
-  \fancyhead[R]{\sffamily \getfield{shorttitle}}
-  \fancyfoot[L]{\sffamily \ifpreprint%
-      CCLS\getfield{issueyear} Conference Preprints \else%
-      JCLS \getfield{volume} (\getfield{issuenumber}),~\getfield{issueyear},~\printarticletype\fi}
-  \fancyfoot[R]{\sffamily \thepage}
+  \fancyhead[R]{\sffamily\getfield{shorttitle}}
+  \fancyfoot[L]{\sffamily\ifpreprint%
+      CCLS\getfield{issueyear}~Conference~Preprints \else%
+      JCLS~\getfield{volume}~(\getfield{issuenumber}),~\getfield{issueyear},~\printarticletype\fi}
+  \fancyfoot[R]{\sffamily\thepage}
   \renewcommand{\headrulewidth}{0pt}%
   \renewcommand{\footrulewidth}{0pt}%
 }
