@@ -513,7 +513,7 @@
     #1
   }
   % compatibility
-  \clist_map_inline:nn {orcid,surname,givennames,email,affiliation,contribution} {
+  \clist_map_inline:nn {orcid,surname,given-names,email,affiliation,contribution} {
     \cs_set:cpe {@##1\theauthors} {\prop_item:cn {g_ptxcd_author_ \theauthors _prop} {##1}}
   }
 }
@@ -540,7 +540,7 @@
 \seq_new:N \g_ptxcd_affiliations_seq
 \NewDocumentCommand \printauthor { m }{
   \clist_clear:N \l__ptxcd_affiliations_clist
-  \printfield{givennames}[#1]\space\printfield{surname}[#1]%
+  \printfield{given-names}[#1]\space\printfield{surname}[#1]%
   \clist_map_inline:cn {@affiliation#1} {%
     \prop_if_exist:cTF {g_ptxcd_affiliation_ ##1 _prop} {
       \prop_if_in:cnF {g_ptxcd_affiliation_ ##1 _prop} {marker} {
@@ -576,7 +576,7 @@
 \NewDocumentCommand \printcontribution { m }{%
   \ifcsvoid{@contribution#1}
   {}
-  {\textbf{\printfield{givennames}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}%
+  {\textbf{\printfield{given-names}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}%
 }
 
 \NewDocumentCommand \printauthors { }
