@@ -593,6 +593,8 @@
     \end{enumerate}
   }
 }
+
+\ExplSyntaxOff
 \NewDocumentCommand \printcontributions {}
 {
   \section{Author Contributions}
