@@ -567,7 +567,7 @@
   \item[\csuse{@affilmarker#1}.]
   \printfield{department}[#1][,~]%
   \printfield{organization}[#1]%
-  \ifcsvoid{@ror#1}{\unskip,}{\unskip\,\rorlink{\csuse{@ror#1}},}
+  \ifcsvoid{@ror#1}{}{\,\rorlink{\csuse{@ror#1}}},~
   \printfield{streetaddress}[#1][,~]%
   \printfield{city}[#1][,~]%
   \printfield{country}[#1][.]%
@@ -576,7 +576,7 @@
 \NewDocumentCommand \printcontribution { m }{%
   \ifcsvoid{@contribution#1}
   {}
-  {\textbf{\printfield{given-names}[#1] \printfield{surname}[#1]:} \printfield{contribution}[#1]}%
+  {\textbf{\printfield{given-names}[#1]~\printfield{surname}[#1]:}~\printfield{contribution}[#1]}%
 }
 
 \NewDocumentCommand \printauthors { }
