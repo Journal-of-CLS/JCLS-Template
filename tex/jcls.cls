@@ -220,7 +220,7 @@
 \RequirePackage[medium, scaled=0.85]{FiraMono}
 
 \RequirePackage{microtype}
-\RequirePackage{lua-widow-control}
+%\RequirePackage{lua-widow-control}% Buggy on Overleaf
 \RequirePackage{upquote}
 \RequirePackage{xurl}
 \RequirePackage[numbered]{bookmark}
