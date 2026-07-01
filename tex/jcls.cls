@@ -453,12 +453,41 @@
   issuenote=,
   license=\href{https\c_colon_str//creativecommons.org/licenses/by/4.0/}{CC~BY~4.0~\ccby},% colon shoul not be a letter
   howtocite,
-  dataavailability,
-  softwareavailability,
   keywords,
   reviewers,
-  guest-editors
+  guest-editors,
 }
+
+\prop_new:N \g_ptxcd_resources_prop
+\keys_define:nn {ptxcd / jcls / metadata} {
+	resources .code:n = \tl_if_in:nnTF {#1} {=} {
+		\prop_gput_from_keyval:Nn \g_ptxcd_resources_prop {#1}
+	} {
+		\keys_set:nn {ptxcd / jcls / metadata} {resources / data+software = {#1}}
+	},
+	resources / data .meta:n = {resources = {data = #1}},
+	resources / software .meta:n = {resources = {software = #1}},
+	resources / data+software .meta:n = {resources = {data+software = #1}},
+	% TODO variant to only include URL?
+}
+
+\clist_map_inline:nn {data, software} {
+	\keys_define:nn {ptxcd / jcls / metadata} {
+		#1availability .meta:n = {resources = {#1 = {##1}}},
+	}
+	\exp_args:Nc \NewDocumentCommand {#1availability} { m } {
+		\resources{#1={##1}}
+	}
+	% compatibility
+	\cs_new:cpn {@#1availability} {
+		\prop_item:Nn \g_ptxcd_resources_prop {#1}
+	}
+}
+
+\NewDocumentCommand \resources {m} {
+	\keys_set:nn {ptxcd / jcls / metadata} {resources = {#1}}
+}
+
 
 % special settings for doi + articletype as empty values are treated differently
 \def\@doi{}
@@ -613,24 +642,28 @@
   {}
 }
 
-\NewDocumentCommand \printdataavailability {}
-{
-  \ifcsvoid{@dataavailability}
-  {}
-  {
-    \section{Data Availability}\label{sec:dataavailability}
-    \getfield{dataavailability}
-  }
+\ExplSyntaxOn
+\NewDocumentCommand \printresources {} {
+	\prop_if_empty:NF \g_ptxcd_resources_prop {
+		%TODO maybe compare URLS?
+		%\str_if_eq:eeTF {\prop_item:Nn \g_ptxcd_resources_prop {data-url}} {\prop_item:Nn \g_ptxcd_resources_prop {software-url}}
+		\prop_if_in:NnTF \g_ptxcd_resources_prop {data+software} {
+			\section{Data~and~Software~Availability}\label{sec:data+softwareavailability}
+			\prop_item:Nn \g_ptxcd_resources_prop {data+software}
+		} {
+			\prop_if_in:NnT \g_ptxcd_resources_prop {data} {
+				\section{Data~Availability}\label{sec:dataavailability}
+				\prop_item:Nn \g_ptxcd_resources_prop {data}
+			}
+			\prop_if_in:NnT \g_ptxcd_resources_prop {software} {
+				\section{Software~Availability}\label{sec:softwareavailability}
+				\prop_item:Nn \g_ptxcd_resources_prop {software}
+			}
+		}
+	}
 }
+\ExplSyntaxOff
 
-\NewDocumentCommand \printsoftwareavailability {}
-{
-  \ifcsvoid{@softwareavailability}{}
-  {
-    \section{Software Availability}\label{sec:softwareavailability}
-    \getfield{softwareavailability}
-  }
-}
 
 \NewDocumentCommand \printarticletype {} {\ifcsvoid{@doi}{\getfield{articletype}}{\getfield{doi}}}
 
@@ -835,8 +868,7 @@
 \fi
 
 \AtEndEnvironment{document}{
-  \printdataavailability
-  \printsoftwareavailability
+  \printresources
   \printacknowledgements
   \printcontributions
   \printbibliography
