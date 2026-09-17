@@ -1,0 +1,52 @@
+name: Deployment
+
+env:
+  package_name: "{{ github.event.repository.name }}"
+
+on:
+  # Only triggers for new tags
+  push:
+    tags: "*"
+
+
+jobs:
+  # Mostly the same as the main.yaml workflow, but we only use a single job
+  bundle:
+    runs-on: ubuntu-22.04
+    container:
+      image: registry.gitlab.com/islandoftex/images/texlive:latest
+    steps:
+      - name: install NodeJS
+        run: apt-get update && apt-get install -y nodejs
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run l3build
+        run: l3build ctan bundle
+      - name: rename zip
+        run: mv *.tds.zip "jcls_${GITHUB_REF#refs/tags/}-bundle.zip"
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: JCLS LaTeX Template
+          path: |
+            jcls_*-bundle.zip
+
+  github:
+    runs-on: ubuntu-22.04
+    needs:
+      - bundle
+    # permissions required to create the release
+    permissions:
+      contents: write
+    steps:
+      - name: Download package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: JCLS LaTeX Template
+      - name: Create GitHub release
+        uses: ncipollo/release-action@v1
+        id: release
+        with:
+          artifacts: "jcls_*-bundle.zip"
+          prerelease: ${{ endsWith(github.ref, '-dev') }}
+          token: ${{ secrets.GITHUB_TOKEN }}
