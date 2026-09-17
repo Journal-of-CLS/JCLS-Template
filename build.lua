@@ -32,6 +32,12 @@ typesetcmds="\\PassOptionsToClass{flatten-paths=true}{jcls}"
 supportdir="."
 typesetsuppfiles={"*.bib", "*.tex", "metadata/*.tex","metadata/*.bib"}
 
+for i, v in ipairs(options["names"]) do
+	if v == "bundle" then
+		require("tools/bundle.lua")
+	end
+end
+
 -- allow to tag the build.lua file by only excluding it for other targets
 if not options["target"] == "tag" then
 	excludefiles={table.unpack(excludefiles),"build.lua","config-*.lua"}
