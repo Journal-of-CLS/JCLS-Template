@@ -853,6 +853,22 @@
 
 \ExplSyntaxOn
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% self.bib example
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%@article{self,
+%  author = {},
+%  date = {2023},
+%  doi = {10.48694/jcls.xxx},
+%  volume = {1},
+%  issue = {1},
+%  journaltitle = {Journal of Computational Literary Studies},
+%  issuetitle={Special Issue “Special Issue tite”},
+%  title = {Unnecessarily Complicated Research Title},
+%  subtitle = {},
+%  options = {skipbib=true},
+%}
+
 \IfFileExists{\g_ptxcd_metadata_path_tl self.bib}{
   \addbibresource{\g_ptxcd_metadata_path_tl self.bib}
   \howtocite{\begin{refsection}\fullcite{self}\end{refsection}}
