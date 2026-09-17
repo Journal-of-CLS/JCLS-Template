@@ -543,6 +543,17 @@
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \author usage example
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\author{
+%  orcid = 0000-0000-0000-000n,
+%  surname = lastname,
+%  given-names = firstname,
+%  affiliation = id, % this may be kept empty. for multiple affiliations group the ids, e.g. {id1,id2}
+%  email = firstname.name@anotheruni.edu,
+%  contribution = {Type of contribution}
+%}
 \RenewDocumentCommand \author { m } {
   \stepcounter{authors}%
   \prop_new:c {g_ptxcd_author_\theauthors _prop}
@@ -554,7 +565,15 @@
     \cs_set:cpe {@##1\theauthors} {\prop_item:cn {g_ptxcd_author_ \theauthors _prop} {##1}}
   }
 }
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \affiliation usage example
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\affiliation{
+%  id = au,
+%  department =,% to clear the default settings you have to ensure to pass empty values. {} is not empty!
+%  organization =,
+%  city = city
+%}
 \NewDocumentCommand \affiliation { m }
 {
   \keys_set_known:nn {ptxcd / jcls / metadata / add-affiliation  } {#1}
@@ -568,6 +587,29 @@
   }
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \article usage example
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\article{
+%	datereceived = xxxx-xx-xx,
+%	dateaccepted = xxxx-xx-xx,
+%	datepublished = xxxx-xx-xx,
+%	doi = {10.48694/jcls.xxx},
+%	articletype = under review,
+%	volume = tba,
+%	issueyear = xxxx,
+%	issuenumber = x,
+%	issuenote = {This paper has been submitted to the conference or journal track of JCLS. },
+%	special-issuetitle = “Special-issue-title”,
+%	reviewers = {
+%		<Name1> = <ORCID1>,
+%		<Name2> % ORCID is optional
+%	},
+%	guest-editors = {
+%		<Name1> = <ORCID1>,
+%		<Name2> % ORCID is optional
+%	}
+%}
 \NewDocumentCommand \article { m }
 {
   \JCLSSetup[metadata]{#1}%
