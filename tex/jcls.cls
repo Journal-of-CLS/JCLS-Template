@@ -375,7 +375,16 @@
 
 \NewDocumentCommand \setfield   { mO{}m }   {\csgdef{@#1#2}{#3}}
 \NewDocumentCommand \getfield   { mO{} }    {\UseName{@#1#2}}
-\NewDocumentCommand \printfield { mO{}O{} } {\ifcsvoid{@#1#2}{}{\csuse{@#1#2}\unskip#3}}
+
+\def\ptxcd@nextsep{}
+\def\ptxcd@usenextsep{\ptxcd@nextsep\def\ptxcd@nextsep{}}
+\def\ptxcd@setnextsep#1{\def\ptxcd@nextsep{#1}}
+
+\NewDocumentCommand \printfield { smO{}O{} } {\ifcsvoid{@#2#3}{}{%
+	\IfBooleanT{#1}{\ptxcd@usenextsep}%
+	\csuse{@#2#3}\unskip
+	\IfBooleanTF{#1}{\ptxcd@setnextsep{#4}}{#4}}%
+}
 
 
 \NewDocumentCommand \sideinfos { }
@@ -593,12 +602,14 @@
 \NewDocumentCommand \printaffiliation { m }
 {
   \item[\csuse{@affilmarker#1}.]
-  \printfield{department}[#1][,~]%
-  \printfield{organization}[#1]%
-  \ifcsvoid{@ror#1}{}{\,\rorlink{\csuse{@ror#1}}},~
-  \printfield{streetaddress}[#1][,~]%
-  \printfield{city}[#1][,~]%
-  \printfield{country}[#1][.]%
+  \printfield*{department}[#1][,~]%
+  \printfield*{organization}[#1][,~]%
+  \ifcsvoid{@ror#1}{}{\,\rorlink{\csuse{@ror#1}}\ptxcd@setnextsep{,~}}%
+  \printfield*{streetaddress}[#1][,~]%
+  \printfield*{city}[#1][,~]%
+  \printfield*{country}[#1]%
+	.%
+	\ptxcd@setnextsep{}%
 }
 
 \NewDocumentCommand \printcontribution { m }{%
