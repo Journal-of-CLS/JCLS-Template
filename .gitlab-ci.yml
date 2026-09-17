@@ -23,9 +23,10 @@ compatibility-test:
   image: registry.gitlab.com/islandoftex/images/texlive:$TEXLIVE_VERSION
   script:
     - "latexmk --$LATEX_ENGINE"
+  # TL 2024 will always fail because of a bug in a font package, so there is no use of testing further than TL2025
   parallel:
     matrix:
-      - TEXLIVE_VERSION: ['TL2024-historic', 'TL2025-historic', 'latest']
+      - TEXLIVE_VERSION: ['TL2025-historic', 'latest']
         LATEX_ENGINE: [lualatex]
   allow_failure: true
 
@@ -49,7 +50,7 @@ bundle:
 publish_release:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_TAG =~ /-dev$/
       when: never
   image: registry.gitlab.com/gitlab-org/release-cli:latest
