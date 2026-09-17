@@ -6,6 +6,8 @@
 stages:
   - build
   - test
+  - bundle
+  - deploy
 
 test:
   stage: build
@@ -26,3 +28,46 @@ compatibility-test:
       - TEXLIVE_VERSION: ['TL2024-historic', 'TL2025-historic', 'latest']
         LATEX_ENGINE: [lualatex]
   allow_failure: true
+
+bundle:
+  stage: bundle
+  #image: registry.gitlab.com/islandoftex/images/texlive:latest
+  rules:
+   - if: $CI_COMMIT_TAG
+   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - l3build ctan bundle
+    - mv *.tds.zip "jcls_${CI_COMMIT_TAG}-bundle.zip"
+  after_script:
+    - echo "JOB_ID=$CI_JOB_ID" >> job.env
+  artifacts:
+    paths:
+      - "jcls_${CI_COMMIT_TAG}-bundle.zip"
+    expire_in: never
+    reports:
+      dotenv: job.env
+
+publish_release:
+  stage: deploy
+  rules:
+   - if: $CI_COMMIT_TAG
+  variables:
+    GIT_SUBMODULE_STRATEGY: normal
+  rules:
+    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG =~ /-dev$/
+      when: never
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - job: bundle
+      artifacts: true
+  script:
+    - echo "Create Release $CI_COMMIT_TAG"
+    - echo $JOB_ID
+  release:
+    tag_name: '$CI_COMMIT_TAG'
+    description: 'Release $CI_COMMIT_TAG'
+    assets:
+      links:
+      - name: 'Template bundle to be used without installation'
+        url:  '$CI_SERVER_URL/$CI_PROJECT_PATH/-/jobs/$JOB_ID/artifacts/raw/jcls_${CI_COMMIT_TAG}-bundle.zip'
