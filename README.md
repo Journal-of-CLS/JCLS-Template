@@ -3,6 +3,7 @@
  Structure of this template:
 
 ```
+.
 ├── README.md
 ├── .latexmkrc          <-- latexmk config file for compiler setup
 ├── acknowlegements.tex <-- acknowledgements, funding information
