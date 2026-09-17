@@ -1,3 +1,21 @@
+# JCLS – LaTeX class for submissions to the “Journal of Computational Literary Studies”
+
+jcls v1.1.0 (2026-09-17)
+
+Copyright (C) 2021-2026 Dominik Gerstorfer,
+							2026 Marei Peischl <jcls@peitex.de>
+
+***************************************************************************
+
+This material is subject to the LaTeX Project Public License version 1.3c
+or later. See http://www.latex-project.org/lppl.txt for details.
+
+This work has the LPPL maintenance status `maintained'.
+
+The Current Maintainer of this work is Evelyn Gius <info@jcls.io>
+
+***************************************************************************
+
 # Preparing your submission
 
  Structure of this template:

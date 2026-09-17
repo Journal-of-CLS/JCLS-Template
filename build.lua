@@ -14,7 +14,7 @@
 
 module="jcls"
 
-packageversion="1.0.2"
+packageversion="1.1.0"
 packagedate="2026-09-17"
 
 sourcefiledir="tex"
