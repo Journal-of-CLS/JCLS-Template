@@ -34,7 +34,11 @@ bundle:
   stage: bundle
   #image: registry.gitlab.com/islandoftex/images/texlive:latest
   rules:
-   - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+   - if: $CI_COMMIT_TAG
+   - if: $CI_COMMIT_TAG =~ /-dev$/
+     when: never
+   - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+     when: never
   script:
     - l3build ctan bundle
     - mv *.tds.zip "jcls_${CI_COMMIT_TAG}-bundle.zip"
@@ -50,8 +54,10 @@ bundle:
 publish_release:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_TAG =~ /-dev$/
+      when: never
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
       when: never
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   needs:
