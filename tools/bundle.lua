@@ -1,7 +1,7 @@
 -- hacky l3build config to use tds building mechanism to create a demo bundle
 packtdszip=true
 sourcefiledir="."
-sourcefiles={"**/*.cls","**/*.pdf","**/*.tex","**/*.bib","README.md"}
+sourcefiles={"**/*.cls","**/*.pdf","**/*.tex","**/*.bib","README.md",".latexmkrc"}
 installfiles=sourcefiles
 docfiles={}
 textfiles={}
@@ -18,6 +18,7 @@ tdslocations =	{
 	"metadata/self.bib",
 	"acknowledgements.tex",
 	"main.*",
+	".latexmkrc",
 	--"main.pdf",
 	"references.bib",
 	"README.md",
