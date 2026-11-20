@@ -499,6 +499,7 @@
 
 % special settings for doi + articletype as empty values are treated differently
 \def\@doi{}
+\ProvideDocumentCommand{\doi}{m}{\keys_set:nn { ptxcd / jcls / metadata } {doi={#1}}}
 \keys_define:nn { ptxcd / jcls / metadata } {
   articletype .default:n = SUBMITTED,
   doi .code:n = \tl_if_blank:nTF {#1} {
