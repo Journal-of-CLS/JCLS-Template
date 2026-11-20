@@ -14,8 +14,8 @@
 
 module="jcls"
 
-packageversion="1.1.0"
-packagedate="2026-09-17"
+packageversion="1.1.1"
+packagedate="2026-11-20"
 
 sourcefiledir="tex"
 sourcefiles={"*.cls","**/*.pdf"}
@@ -32,10 +32,12 @@ typesetcmds="\\PassOptionsToClass{flatten-paths=true}{jcls}"
 supportdir="."
 typesetsuppfiles={"*.bib", "*.tex", "metadata/*.tex","metadata/*.bib"}
 
-for i, v in ipairs(options["names"]) do
-	if v == "bundle" then
-		require("tools/bundle.lua")
-	end
+if options["names"] then
+  for i, v in ipairs(options["names"]) do
+	  if v == "bundle" then
+		  require("tools/bundle.lua")
+	  end
+  end
 end
 
 -- allow to tag the build.lua file by only excluding it for other targets

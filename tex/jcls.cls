@@ -39,7 +39,7 @@
 % The Current Maintainer of this work is Evelyn Gius <info@jcls.io>
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jcls}[2026-09-17 v1.1.0 LaTeX class for JCLS]
+\ProvidesClass{jcls}[2026-11-20 v1.1.1 LaTeX class for JCLS]
 
 % Check for lualatex
 \RequirePackage{iftex}

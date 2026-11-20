@@ -1,6 +1,6 @@
 # JCLS – LaTeX class for submissions to the “Journal of Computational Literary Studies”
 
-jcls v1.1.0 (2026-09-17)
+jcls v1.1.1 (2026-11-20)
 
 Copyright (C) 2021-2026 Dominik Gerstorfer,
 							2026 Marei Peischl <jcls@peitex.de>
